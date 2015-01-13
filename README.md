@@ -1,3 +1,3 @@
 # Spend Publishing Dashboard
 
-View nand manage published spend data.
+View and manage published spend data.
