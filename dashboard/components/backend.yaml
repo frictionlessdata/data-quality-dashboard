@@ -1,0 +1,213 @@
+overview:
+  - stat: 10
+    title: Publishers
+  - stat: 20
+    title: Sources
+  - stat: 53%
+    title: Timely sources
+  - stat: 79%
+    title: Has past data
+
+publishers:
+  - id: 1
+    title: Department of Roads
+    url: http://www.example.com/
+    score: 7
+  - id: 2
+    title: Department of Culture
+    url: http://www.example.com/
+    score: 6
+  - id: 3
+    title: Department of Family Services
+    url: http://www.example.com/
+    score: 9
+  - id: 4
+    title: Department of Pensioner Services
+    url: http://www.example.com/
+    score: 4
+  - id: 5
+    title: Department of Defence
+    url: http://www.example.com/
+    score: 9
+  - id: 6
+    title: Department of Sports
+    url: http://www.example.com/
+    score: 6
+  - id: 7
+    title: Department of Education
+    url: http://www.example.com/
+    score: 6
+  - id: 8
+    title: Department of Internal Affairs
+    url: http://www.example.com/
+    score: 2
+  - id: 9
+    title: Department of Social Security
+    url: http://www.example.com/
+    score: 9
+  - id: 10
+    title: Department of Finance
+    url: http://www.example.com/
+    score: 8
+
+sources:
+  - id: 1
+    publisher_id: 1
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/1/
+    report: http://www.example.com/sources/1/report.html
+    last_updated: 2014-01-03
+  - id: 2
+    publisher_id: 1
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/2/
+    report: http://www.example.com/sources/2/report.html
+    last_updated: 2014-01-03
+  - id: 3
+    publisher_id: 2
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/3/
+    report: http://www.example.com/sources/3/report.html
+    last_updated: 2014-01-03
+  - id: 4
+    publisher_id: 2
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/4/
+    report: http://www.example.com/sources/4/report.html
+    last_updated: 2014-01-03
+  - id: 5
+    publisher_id: 3
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/5/
+    report: http://www.example.com/sources/5/report.html
+    last_updated: 2014-01-03
+  - id: 6
+    publisher_id: 3
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/6/
+    report: http://www.example.com/sources/6/report.html
+    last_updated: 2014-01-03
+  - id: 7
+    publisher_id: 4
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/7/
+    report: http://www.example.com/sources/7/report.html
+    last_updated: 2014-01-03
+  - id: 8
+    publisher_id: 4
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/8/
+    report: http://www.example.com/sources/8/report.html
+    last_updated: 2014-01-03
+  - id: 9
+    publisher_id: 5
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/9/
+    report: http://www.example.com/sources/9/report.html
+    last_updated: 2014-01-03
+  - id: 10
+    publisher_id: 5
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/10/
+    report: http://www.example.com/sources/10/report.html
+    last_updated: 2014-01-03
+  - id: 11
+    publisher_id: 6
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/11/
+    report: http://www.example.com/sources/11/report.html
+    last_updated: 2014-01-03
+  - id: 12
+    publisher_id: 6
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/12/
+    report: http://www.example.com/sources/12/report.html
+    last_updated: 2014-01-03
+  - id: 13
+    publisher_id: 7
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/13/
+    report: http://www.example.com/sources/13/report.html
+    last_updated: 2014-01-03
+  - id: 14
+    publisher_id: 7
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/14/
+    report: http://www.example.com/sources/14/report.html
+    last_updated: 2014-01-03
+  - id: 15
+    publisher_id: 8
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/15/
+    report: http://www.example.com/sources/15/report.html
+    last_updated: 2014-01-03
+  - id: 16
+    publisher_id: 8
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/16/
+    report: http://www.example.com/sources/16/report.html
+    last_updated: 2014-01-03
+  - id: 17
+    publisher_id: 9
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/17/
+    report: http://www.example.com/sources/17/report.html
+    last_updated: 2014-01-03
+  - id: 18
+    publisher_id: 9
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/18/
+    report: http://www.example.com/sources/18/report.html
+    last_updated: 2014-01-03
+  - id: 19
+    publisher_id: 10
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/19/
+    report: http://www.example.com/sources/19/report.html
+    last_updated: 2014-01-03
+  - id: 20
+    publisher_id: 10
+    url: http://www.example.com/
+    score: 7
+    revision: 2
+    directory: http://www.example.com/sources/20/
+    report: http://www.example.com/sources/20/report.html
+    last_updated: 2014-01-03

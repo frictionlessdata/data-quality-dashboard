@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="components/app.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.10/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="vendor/js-yaml.min.js"></script>
+    <script src="components/app.js"></script>
+    <script src="components/controllers.js"></script>
+    <script>
+      $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
+  </head>
+  <body name="#top" ng-app="dashboard">
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed"
+                  data-toggle="collapse" data-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Spend Publishing Dashboard</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse pull-right">
+          <ul class="nav navbar-nav">
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container">
+    <div class="row">
+    <section id="overview" class="col-md-6" ng-controller="OverviewCtrl">
+        <h2>Overview</h2>
+        <div class="">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <td>Stat</td>
+                <td>Title</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in data">
+                <td>{{ item.stat }}</td>
+                <td>{{ item.title }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </section>
+    <section id="actions" class="col-md-6" ng-controller="ActionCtrl">
+      <div class="wrapper">
+        <h2>Actions</h2>
+        <p>
+          Login to add new data sources.
+        </p>
+        <button type="button" class="btn btn-primary" data-toggle="modal"
+                data-target="#addSources">Add New Sources</button>
+      </div>
+    </section>
+    </div>
+    <div class="row">
+    <section id="publishers" class="col-md-12" ng-controller="PublisherCtrl">
+      <div class="wrapper">
+        <h2>Publishers
+          <span class="pull-right">
+            <form class="form-inline">
+              <div class="form-group">
+                <label class="sr-only"
+                       for="publishers-search">Search Publishers</label>
+                <input id="publishers-search" class="form-control"
+                       type="text" placeholder="Search Publishers"
+                       data-toggle="tooltip" data-placement="top"
+                       title="User-driven action to filter the publisher list"/>
+          </span>
+        </h2>
+        <div class="">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>Title</td>
+                <td>URL</td>
+                <td>Score</td>
+                <td>Source count</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in data">
+                <td>{{ item.id }}</td>
+                <td>{{ item.title }}</td>
+                <td><a href="{{ item.url }}">URL</a></td>
+                <td>{{ item.score }}</td>
+                <td>2</td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <span class="pull-left">
+              Showing {{ data_length }} of {{ data_length }} publishers.
+            </span>
+            <span class="pull-right">
+              <a href="#" data-toggle="tooltip" data-placement="top"
+                 title="User-driven action to extend the result table">Show more</a> |
+              <a href="#" data-toggle="tooltip" data-placement="top"
+                 title="User-driven action to close the result table, if open">Collapse</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="sources" class="col-md-12" ng-controller="SourceCtrl">
+      <div class="wrapper">
+        <h2>Sources
+          <span class="pull-right">
+            <form class="form-inline">
+              <div class="form-group">
+                <label class="sr-only"
+                       for="source-search">Search sources</label>
+                <input id="sources-search" class="form-control"
+                       type="text" placeholder="Search sources" data-toggle="tooltip"
+                       data-placement="top" title="User-driven action to filter the sources list" />
+              </div>
+            </form>
+          </span>
+        </h2>
+        <div class="">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <td>ID</td>
+                <td>Publisher ID</td>
+                <td>URL</td>
+                <td>Score</td>
+                <td>Revision</td>
+                <td>Directory</td>
+                <td>Report</td>
+                <td>Last Updated</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in data">
+                <td>{{ item.id }}</td>
+                <td>{{ item.publisher_id }}</td>
+                <td><a href="{{ item.url }}">Source location</a></td>
+                <td>{{ item.score }}</td>
+                <td>{{ item.revision }}</td>
+                <td><a href="{{ item.directory }}">Data</a></td>
+                <td><a href="{{ item.report }}">Report</a></td>
+                <td>{{ item.last_updated }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <span class="pull-left">
+              Showing {{ data_length }} of {{ data_length }} sources.
+            </span>
+            <span class="pull-right">
+              <a href="#" data-toggle="tooltip" data-placement="top"
+                 title="User-driven action to extend the result table">Show more</a> |
+              <a href="#" data-toggle="tooltip" data-placement="top"
+                 title="User-driven action to close the result table, if open">Collapse</a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">
+          <a href="https://okfn.org/" title="Open Knowledge">
+            An Open Knowledge Project
+          </a>
+        </p>
+      </div>
+    </footer>
+
+    <div class="modal fade" id="addSources" tabindex="-1" role="dialog"
+         aria-labelledby="addSourcesLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+                    aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="addSourcesLabel">Add a new source</h4>
+          </div>
+          <div class="modal-body">
+            <p>Here there should be some interface to auth and submit data for processing.</p>
+            <ul>
+              <li>AUTH THAT USER CAN SUBMIT</li>
+              <li>USER FILLS FORM TO SUBMIT</li>
+              <li>SUBMIT FOR PROCESSING</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">
+              Process
+            </button>
+          </div>
+        </div>
+      </div>
+      </div>
+
+  </body>
+</html>
