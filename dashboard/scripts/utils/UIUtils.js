@@ -1,6 +1,6 @@
 var React = require('react');
 var _ = require('lodash');
-var Router = require('rrouter');
+var Router = require('react-router-component');
 var Link = Router.Link;
 var CalcUtils = require('./CalcUtils.js');
 
@@ -20,7 +20,7 @@ function makeTableRow(obj, options) {
 
         if (key === 'id') {
 
-            _cell = <td key={key}><Link to={options.route} route_id={value}>{value}</Link></td>;
+            _cell = <td key={key}><Link href={options.route + '/' + value}>{value}</Link></td>;
 
         } else if (key === 'url') {
 

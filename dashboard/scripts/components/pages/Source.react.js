@@ -11,18 +11,20 @@ var SourceActions = require('../SourceActions.react.js');
 var SourceReport = require('../SourceReport.react.js');
 
 
-function getStateFromStores() {
+function getStateFromStores(lookup) {
+    var _source =  Store.get('sources', lookup);
     return {
         instance: Store.query('instance'),
-        source: Store.query('sources', '1'),
-        results: Store.query('results') // filter by source
+        publisher: Store.get('publishers', _source.publisher_id),
+        source: Store.get('sources', lookup),
+        results: Store.query('results', {'source_id': lookup})
     };
 }
 
 var Source = React.createClass({
 
     getInitialState: function() {
-        return getStateFromStores();
+        return getStateFromStores(this.props.lookup);
     },
 
     componentDidMount: function() {
@@ -72,7 +74,7 @@ var Source = React.createClass({
     },
 
     _onChange: function() {
-        this.setState(getStateFromStores());
+        this.setState(getStateFromStores(this.props.lookup));
     }
 
 });

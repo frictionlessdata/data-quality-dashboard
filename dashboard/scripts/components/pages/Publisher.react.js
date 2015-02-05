@@ -25,7 +25,7 @@ function getStateFromStores(lookup) {
 var Publisher = React.createClass({
 
     getInitialState: function() {
-        return getStateFromStores(this.props.route_id);
+        return getStateFromStores(this.props.lookup);
     },
 
     componentDidMount: function() {
@@ -70,7 +70,7 @@ var Publisher = React.createClass({
     },
 
     _onChange: function() {
-        this.setState(getStateFromStores(this.props.route_id));
+        this.setState(getStateFromStores(this.props.lookup));
     }
 
 });

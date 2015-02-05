@@ -25,7 +25,7 @@ var SourceTable = React.createClass({
                 </thead>
                 <tbody>
                     {_.map(this.props.sources, function(obj) {
-                        var _options = {'route': '/sources'};
+                        var _options = {'route': 'sources'};
                         return <tr key={obj.id}>{UIUtils.makeTableRow(obj, _options)}</tr>;
                     })}
                 </tbody>
