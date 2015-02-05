@@ -1,0 +1,41 @@
+{
+  "name": "spend-publishing-dashboard",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dashboard/scripts/app.js",
+  "dependencies": {
+      "react": "*",
+      "react-tools": "*",
+      "rrouter": "*",
+      "react-bootstrap": "*",
+      "react-bootstrap-async-autocomplete": "*",
+      "react-chartjs": "*",
+      "flux": "*",
+      "lodash": "*",
+      "object-assign": "*",
+      "csv": "*",
+      "superagent": "*"
+  },
+  "devDependencies": {
+      "gulp": "*",
+      "gulp-concat": "*",
+      "vinyl-source-stream": "*",
+      "browserify": "*",
+      "jest-cli": "*",
+      "reactify": "*",
+      "statics": "*",
+      "uglify-js": "*",
+      "watchify": "*",
+      "connect-history-api-fallback": "*",
+      "gulp-uglify": "*",
+      "browser-sync": "*"
+  },
+  "scripts": {
+      "test": "jest"
+  },
+  "author": "Open Knowledge",
+  "license": "AGPL",
+  "jest": {
+      "rootDir": "./dashboard/scripts"
+  }
+}
