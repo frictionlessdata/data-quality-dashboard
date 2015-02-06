@@ -1,6 +1,5 @@
 var React = require('react');
 var Store = require('../../stores/Store');
-
 var Row = require('react-bootstrap/Row');
 var Col = require('react-bootstrap/Col');
 var HeaderPanel = require('../panels/Header.react');

@@ -1,6 +1,6 @@
 var React = require('react');
 var Store = require('../../stores/Store');
-
+var Router = require('react-router');
 var Row = require('react-bootstrap/Row');
 var Col = require('react-bootstrap/Col');
 var HeaderPanel = require('../panels/Header.react.js');
@@ -16,15 +16,17 @@ function getStateFromStores(lookup) {
     return {
         instance: Store.query('instance'),
         publisher: Store.get('publishers', _source.publisher_id),
-        source: Store.get('sources', lookup),
+        source: _source,
         results: Store.query('results', {'source_id': lookup})
     };
 }
 
 var Source = React.createClass({
 
+    mixins: [Router.State],
+
     getInitialState: function() {
-        return getStateFromStores(this.props.lookup);
+        return getStateFromStores(this.getParams().lookup);
     },
 
     componentDidMount: function() {
@@ -74,7 +76,7 @@ var Source = React.createClass({
     },
 
     _onChange: function() {
-        this.setState(getStateFromStores(this.props.lookup));
+        this.setState(getStateFromStores(this.getParams().lookup));
     }
 
 });

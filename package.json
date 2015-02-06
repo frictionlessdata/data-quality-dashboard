@@ -6,7 +6,7 @@
   "dependencies": {
       "react": "*",
       "react-tools": "*",
-      "react-router-component": "*",
+      "react-router": "*",
       "react-bootstrap": "*",
       "react-bootstrap-async-autocomplete": "*",
       "react-chartjs": "*",
