@@ -5,6 +5,14 @@ var Link = Router.Link;
 var CalcUtils = require('./CalcUtils.js');
 
 
+function searchIn(objects, field, query) {
+        var lookup = _.map(objects, field);
+        var matches = _.filter(lookup, function(candidate) {
+            return candidate.toLowerCase().indexOf(query.toLowerCase()) > -1;
+        });
+        return matches;
+}
+
 function makeTableHeader(obj) {
     var _header = [];
     _.forEach(obj, function(value, key) {
@@ -143,5 +151,6 @@ module.exports = {
     makeTableRow: makeTableRow,
     filterTable: filterTable,
     makeScoreLinePayload: makeScoreLinePayload,
-    makeScorePiePayload: makeScorePiePayload
+    makeScorePiePayload: makeScorePiePayload,
+    searchIn: searchIn
 };

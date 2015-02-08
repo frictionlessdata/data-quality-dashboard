@@ -11,6 +11,7 @@ var Header = require('./components/panels/Header.react');
 var Footer = require('./components/panels/Footer.react');
 var AppNode = document.getElementById('application');
 
+
 var App = React.createClass({
     render: function () {
         return (

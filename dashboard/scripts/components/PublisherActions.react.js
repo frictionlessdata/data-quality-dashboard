@@ -9,7 +9,7 @@ var PublisherActions = React.createClass({
         return (
             <Row>
                 <Col md={12}>
-                    <Button bsStyle="primary">Download data</Button>
+                    <Button bsStyle="primary" className="disabled">Download data</Button>
                 </Col>
             </Row>
         );

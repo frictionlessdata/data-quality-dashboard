@@ -40,12 +40,12 @@ var Source = React.createClass({
                 <section id="main" className="container">
                     <Row>
                         <Col md={12}>
-                            <h2>Overview</h2>
+                            <h2>{this.state.source.name} Overview ({this.state.publisher.name})</h2>
                         </Col>
                     </Row>
                     <Row>
                         <Col md={6}>
-                            <SourceOverview results={this.state.results} />
+                            <SourceOverview results={this.state.results} source={this.state.source} />
                         </Col>
                         <Col md={6}>
                             <SourceChart results={this.state.results} />
@@ -56,7 +56,7 @@ var Source = React.createClass({
                             <h2>Actions</h2>
                         </Col>
                         <Col md={12}>
-                            <SourceActions />
+                            <SourceActions instance={this.state.instance} source={this.state.source} />
                         </Col>
                     </Row>
                     <Row>
@@ -66,7 +66,7 @@ var Source = React.createClass({
                     </Row>
                     <Row>
                         <Col md={12}>
-                            <SourceReport source={this.state.source} />
+                            {/*<SourceReport instance={this.state.instance} source={this.state.source} />*/}
                         </Col>
                     </Row>
                 </section>
