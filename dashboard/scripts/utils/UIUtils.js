@@ -103,22 +103,22 @@ function makeScoreLinePayload(results) {
             datasets: [
                 {
                     label: "Valid %",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
+                    fillColor: "rgba(70,191,189,0.2)",
+                    strokeColor: "rgba(70,191,189,1)",
+                    pointColor: "rgba(70,191,189,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    pointHighlightStroke: "rgba(70,191,189,1)",
                     data: [35, 31, 29, 36, 46, 45, 51, 55, 61, 69, 58, 67]
                 },
                 {
                     label: "Invalid %",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
+                    fillColor: "rgba(247,70,74,0.2)",
+                    strokeColor: "rgba(247,70,74,1)",
+                    pointColor: "rgba(247,70,74,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    pointHighlightStroke: "rgba(247,70,74,1)",
                     data: [65, 69, 71, 64, 54, 55, 49, 45, 39, 31, 42, 33]
                 }
             ]

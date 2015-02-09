@@ -3,34 +3,41 @@ var Store = require('../../stores/Store');
 var Router = require('react-router');
 var Row = require('react-bootstrap/Row');
 var Col = require('react-bootstrap/Col');
-var HeaderPanel = require('../panels/Header.react.js');
-var FooterPanel = require('../panels/Footer.react.js');
-var SourceChart = require('../charts/SourceChart.react.js');
-var SourceOverview = require('../SourceOverview.react.js');
-var SourceActions = require('../SourceActions.react.js');
-var SourceReport = require('../SourceReport.react.js');
+var HeaderPanel = require('../panels/Header.react');
+var FooterPanel = require('../panels/Footer.react');
+var SourceChart = require('../charts/SourceChart.react');
+var SourceOverview = require('../SourceOverview.react');
+var SourceActions = require('../SourceActions.react');
+var SourceReport = require('../SourceReport.react');
+var APIUtils = require('../../utils/APIUtils');
+var Mixins = require('./Mixins.react');
 
 
-function getStateFromStores(lookup) {
-    var _source =  Store.get('sources', lookup);
+function getStateFromStores(getParams) {
+    var _source =  Store.get('sources', getParams.lookup);
     return {
         instance: Store.query('instance'),
         publisher: Store.get('publishers', _source.publisher_id),
         source: _source,
-        results: Store.query('results', {'source_id': lookup})
+        results: Store.query('results', {'source_id': getParams.lookup})
     };
 }
 
 var Source = React.createClass({
 
-    mixins: [Router.State],
+    mixins: [Router.State, Mixins.DataFetchingMixin],
 
-    getInitialState: function() {
-        return getStateFromStores(this.getParams().lookup);
+    statics: {
+        bootstrap: APIUtils.getData,
+        getStateFromStores: getStateFromStores
     },
 
     componentDidMount: function() {
         Store.addChangeListener(this._onChange);
+    },
+
+    _onChange: function() {
+        this.setState(this.constructor.getStateFromStores(this.getParams()));
     },
 
     render: function() {
@@ -73,10 +80,6 @@ var Source = React.createClass({
                 <FooterPanel instance={this.props.instance} />
             </div>
         );
-    },
-
-    _onChange: function() {
-        this.setState(getStateFromStores(this.getParams().lookup));
     }
 
 });

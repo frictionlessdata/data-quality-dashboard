@@ -10,28 +10,34 @@ var PublisherOverview = require('../PublisherOverview.react');
 var PublisherActions = require('../PublisherActions.react');
 var PublisherTable = require('../tables/PublisherTable.react');
 var SourceTable = require('../tables/SourceTable.react');
+var APIUtils = require('../../utils/APIUtils');
+var Mixins = require('./Mixins.react');
 
 
-function getStateFromStores(lookup) {
+function getStateFromStores(getParams) {
     return {
         instance: Store.query('instance'),
-        publisher: Store.get('publishers', lookup),
-        results: Store.query('results', {'publisher_id': lookup}),
-        sources: Store.query('sources', {'publisher_id': lookup})
+        publisher: Store.get('publishers', getParams.lookup),
+        results: Store.query('results', {'publisher_id': getParams.lookup}),
+        sources: Store.query('sources', {'publisher_id': getParams.lookup})
     };
 }
 
-
 var Publisher = React.createClass({
 
-    mixins: [Router.State],
+    mixins: [Router.State, Mixins.DataFetchingMixin],
 
-    getInitialState: function() {
-        return getStateFromStores(this.getParams().lookup);
+    statics: {
+        bootstrap: APIUtils.getData,
+        getStateFromStores: getStateFromStores
     },
 
     componentDidMount: function() {
         Store.addChangeListener(this._onChange);
+    },
+
+    _onChange: function() {
+        this.setState(this.constructor.getStateFromStores(this.getParams()));
     },
 
     render: function() {
@@ -69,10 +75,6 @@ var Publisher = React.createClass({
                 <FooterPanel instance={this.state.instance} />
             </div>
         );
-    },
-
-    _onChange: function() {
-        this.setState(getStateFromStores(this.getParams().lookup));
     }
 
 });
