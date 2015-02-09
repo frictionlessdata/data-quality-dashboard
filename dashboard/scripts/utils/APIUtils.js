@@ -19,7 +19,7 @@ var _publishers = [
     "email":"dept1-admin@example.com",
     "address":"",
     "contact":"Dept1 Admin",
-    "score":8,
+    "score":2,
     "source_count":2
   },
   {
@@ -32,7 +32,7 @@ var _publishers = [
     "email":"dept2-admin@example.com",
     "address":"",
     "contact":"Dept2 Admin",
-    "score":8,
+    "score":4,
     "source_count":2
   },
   {
@@ -45,7 +45,7 @@ var _publishers = [
     "email":"dept3-admin@example.com",
     "address":"",
     "contact":"Dept3 Admin",
-    "score":8,
+    "score":6,
     "source_count":2
   },
   {
@@ -71,7 +71,7 @@ var _publishers = [
     "email":"dept5-admin@example.com",
     "address":"",
     "contact":"Dept5 Admin",
-    "score":8,
+    "score":10,
     "source_count":2
   },
   {
@@ -84,7 +84,7 @@ var _publishers = [
     "email":"dept6-admin@example.com",
     "address":"",
     "contact":"Dept6 Admin",
-    "score":8,
+    "score":2,
     "source_count":1
   },
   {
@@ -97,7 +97,7 @@ var _publishers = [
     "email":"dept7-admin@example.com",
     "address":"",
     "contact":"Dept7 Admin",
-    "score":8,
+    "score":4,
     "source_count":1
   },
   {
@@ -110,7 +110,7 @@ var _publishers = [
     "email":"dept8-admin@example.com",
     "address":"",
     "contact":"Dept8 Admin",
-    "score":8,
+    "score":6,
     "source_count":1
   },
   {
@@ -136,7 +136,7 @@ var _publishers = [
     "email":"dept10-admin@example.com",
     "address":"",
     "contact":"Dept10 Admin",
-    "score":8,
+    "score":10,
     "source_count":1
   },
   {
@@ -211,7 +211,7 @@ var _sources = [
     "publisher_id":"xx_dept1",
     "name":"Source 1",
     "url":"https://raw.githubusercontent.com/okfn/tabular-validator/master/examples/valid.csv",
-    "score":8,
+    "score":2,
     "revision":"1",
     "schema":"",
     "period_id":"2015-01-01",
@@ -222,7 +222,7 @@ var _sources = [
     "publisher_id":"xx_dept2",
     "name":"Source 2",
     "url":"https://raw.githubusercontent.com/okfn/tabular-validator/master/examples/valid.csv",
-    "score":8,
+    "score":4,
     "revision":"1",
     "schema":"",
     "period_id":"2015-01-01",
@@ -233,7 +233,7 @@ var _sources = [
     "publisher_id":"xx_dept3",
     "name":"Source 3",
     "url":"https://raw.githubusercontent.com/okfn/tabular-validator/master/examples/valid.csv",
-    "score":8,
+    "score":6,
     "revision":"1",
     "schema":"",
     "period_id":"2015-01-01",
@@ -255,7 +255,7 @@ var _sources = [
     "publisher_id":"xx_dept5",
     "name":"Source 5",
     "url":"https://raw.githubusercontent.com/okfn/tabular-validator/master/examples/valid.csv",
-    "score":8,
+    "score":10,
     "revision":"1",
     "schema":"",
     "period_id":"2015-01-01",
@@ -266,7 +266,7 @@ var _sources = [
     "publisher_id":"xx_dept6",
     "name":"Source 6",
     "url":"https://raw.githubusercontent.com/okfn/tabular-validator/master/examples/valid.csv",
-    "score":8,
+    "score":2,
     "revision":"1",
     "schema":"",
     "period_id":"2015-01-01",
@@ -277,7 +277,7 @@ var _sources = [
     "publisher_id":"xx_dept7",
     "name":"Source 7",
     "url":"https://raw.githubusercontent.com/okfn/tabular-validator/master/examples/valid.csv",
-    "score":8,
+    "score":4,
     "revision":"1",
     "schema":"",
     "period_id":"2015-01-01",
@@ -288,7 +288,7 @@ var _sources = [
     "publisher_id":"xx_dept8",
     "name":"Source 8",
     "url":"https://raw.githubusercontent.com/okfn/tabular-validator/master/examples/valid.csv",
-    "score":8,
+    "score":6,
     "revision":"1",
     "schema":"",
     "period_id":"2015-01-01",
@@ -310,7 +310,7 @@ var _sources = [
     "publisher_id":"xx_dept10",
     "name":"Source 10",
     "url":"https://raw.githubusercontent.com/okfn/tabular-validator/master/examples/valid.csv",
-    "score":8,
+    "score":10,
     "revision":"1",
     "schema":"",
     "period_id":"2015-01-01",
@@ -377,21 +377,21 @@ var _results = [
     "source_id":"source1",
     "publisher_id":"xx_dept1",
     "period_id":"2015-01-01",
-    "score":8,
+    "score":2,
     "timestamp":"2015-01-01"
   },
   {
     "source_id":"source2",
     "publisher_id":"xx_dept2",
     "period_id":"2015-01-01",
-    "score":8,
+    "score":4,
     "timestamp":"2015-01-01"
   },
   {
     "source_id":"source3",
     "publisher_id":"xx_dept3",
     "period_id":"2015-01-01",
-    "score":8,
+    "score":6,
     "timestamp":"2015-01-01"
   },
   {
@@ -405,28 +405,28 @@ var _results = [
     "source_id":"source5",
     "publisher_id":"xx_dept5",
     "period_id":"2015-01-01",
-    "score":8,
+    "score":10,
     "timestamp":"2015-01-01"
   },
   {
     "source_id":"source6",
     "publisher_id":"xx_dept6",
     "period_id":"2015-01-01",
-    "score":8,
+    "score":2,
     "timestamp":"2015-01-01"
   },
   {
     "source_id":"source7",
     "publisher_id":"xx_dept7",
     "period_id":"2015-01-01",
-    "score":8,
+    "score":4,
     "timestamp":"2015-01-01"
   },
   {
     "source_id":"source8",
     "publisher_id":"xx_dept8",
     "period_id":"2015-01-01",
-    "score":8,
+    "score":6,
     "timestamp":"2015-01-01"
   },
   {
@@ -440,7 +440,7 @@ var _results = [
     "source_id":"source10",
     "publisher_id":"xx_dept10",
     "period_id":"2015-01-01",
-    "score":8,
+    "score":10,
     "timestamp":"2015-01-01"
   },
   {
