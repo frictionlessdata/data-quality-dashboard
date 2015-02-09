@@ -1,5 +1,8 @@
 # Spend Publishing Dashboard
 
+[![Build Status](https://travis-ci.org/okfn/spend-publishing-dashboard.svg)](https://travis-ci.org/okfn/spend-publishing-dashboard)
+[![Coverage Status](https://coveralls.io/repos/okfn/spend-publishing-dashboard/badge.svg)](https://coveralls.io/r/okfn/spend-publishing-dashboard)
+
 View and manage published spend data.
 
 # Get started
