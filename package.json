@@ -28,7 +28,8 @@
       "watchify": "*",
       "connect-history-api-fallback": "*",
       "gulp-uglify": "*",
-      "browser-sync": "*"
+      "browser-sync": "*",
+      "coveralls": "*"
   },
   "scripts": {
       "test": "jest"
