@@ -4,39 +4,40 @@
   "description": "",
   "main": "dashboard/scripts/app.js",
   "dependencies": {
-      "react": "*",
-      "react-tools": "*",
-      "react-router": "*",
-      "react-bootstrap": "*",
-      "react-bootstrap-async-autocomplete": "*",
-      "react-chartjs": "*",
-      "flux": "*",
-      "lodash": "*",
-      "object-assign": "*",
-      "csv": "*",
-      "superagent": "*"
+    "bootstrap": "^3.3.2",
+    "csv": "*",
+    "flux": "*",
+    "lodash": "*",
+    "object-assign": "*",
+    "react": "*",
+    "react-bootstrap": "*",
+    "react-bootstrap-async-autocomplete": "*",
+    "react-chartjs": "*",
+    "react-router": "*",
+    "react-tools": "*",
+    "superagent": "*"
   },
   "devDependencies": {
-      "gulp": "*",
-      "gulp-concat": "*",
-      "vinyl-source-stream": "*",
-      "browserify": "*",
-      "jest-cli": "*",
-      "reactify": "*",
-      "statics": "*",
-      "uglify-js": "*",
-      "watchify": "*",
-      "connect-history-api-fallback": "*",
-      "gulp-uglify": "*",
-      "browser-sync": "*",
-      "coveralls": "*"
+    "gulp": "*",
+    "gulp-concat": "*",
+    "vinyl-source-stream": "*",
+    "browserify": "*",
+    "jest-cli": "*",
+    "reactify": "*",
+    "statics": "*",
+    "uglify-js": "*",
+    "watchify": "*",
+    "connect-history-api-fallback": "*",
+    "gulp-uglify": "*",
+    "browser-sync": "*",
+    "coveralls": "*"
   },
   "scripts": {
-      "test": "jest"
+    "test": "jest"
   },
   "author": "Open Knowledge",
   "license": "AGPL",
   "jest": {
-      "rootDir": "./dashboard/scripts"
+    "rootDir": "./dashboard/scripts"
   }
 }

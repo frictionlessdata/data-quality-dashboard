@@ -5,18 +5,32 @@
 
 View and manage published spend data.
 
-# Get started
+## Get started
 
 ```
-cd dashboard
+# get the code
+git clone https://github.com/okfn/spend-publishing-dashboard.git .
 
-python -m SimpleHTTPServer
+# install the dependencies
+npm install
+
+# run the server
+gulp
+
 ```
 
-### User stories
+## What we've got
 
-The [user stories document](https://docs.google.com/document/d/1Rz0v091YOH6rEv-B0Dhe--x9R-Fwfgh0Zyd45jwhdwc/edit) is here.
+Spend Publishing dashboard presents data on a collection of published spend data.
 
-### Technical design
+## Data
 
-<img src="https://docs.google.com/drawings/d/1j2p1ocBoyBQtd-OeKDYlcEBLRdcRZtDS9ZJsw6C4_WA/pub?w=960&h=720" />
+Data is managed in a set of CSV files.
+
+These files are served from a separate git repository.
+
+Use SPD Admin to generate the files.
+
+### SPD Admin
+
+[SPD Admin](https://github.com/okfn/spd-admin)
