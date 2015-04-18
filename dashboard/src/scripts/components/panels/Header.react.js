@@ -21,12 +21,12 @@ var Header = React.createClass({
 
     render: function() {
         return (
-            <Navbar fixedTop>
-                <Nav>
-                <NavItem eventKey={1} href="/">{this.props.instance.name}</NavItem>
+            <Navbar>
+                <Nav className="pull-left">
+                    <NavItem eventKey={1} href="/">{this.props.instance.name}</NavItem>
                 </Nav>
                 <Nav className="pull-right">
-                <AutoCompleteInput placeholder="Go to publisher ..." onSearch={this.publisherSearch} onItemSelect={this.publisherSearchSelected} />
+                    <AutoCompleteInput placeholder="Go to publisher ..." onSearch={this.publisherSearch} onItemSelect={this.publisherSearchSelected} />
                 </Nav>
             </Navbar>
         );

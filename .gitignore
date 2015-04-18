@@ -9,4 +9,6 @@ __pycache__/
 bower_components/*
 node_modules/*
 dashboard/scripts/bundle.js
-dashboard/dist/
+dashboard/dist/*
+!dashboard/dist/index.html
+!dashboard/dist/CNAME

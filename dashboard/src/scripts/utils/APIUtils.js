@@ -1,11 +1,8 @@
 var ServerActionCreators = require('../actions/ServerActionCreators');
 var CSVUtils = require('./CSVUtils');
 var request = require('superagent');
-var backend = 'https://rawgit.com/pwalsh/spd-example/master';
-var publishers = backend + '/publishers.csv';
-var sources = backend + '/sources.csv';
-var results = backend + '/results.csv';
-var instance = backend + '/instance.json';
+var Config = require('../config.js');
+
 
 // temp!!
 var _publishers = [
@@ -483,7 +480,7 @@ var _instance = {
     name: 'Spend Publishing Dashboard',
     admin: 'paulywalsh@gmail.com',
     backend: 'https://rawgit.com/pwalsh/spd-example/master',
-    validator_url: 'http://tabulator.herokuapp.com/jobs'
+    validator_url: 'http://goodtables.okfnlabs.org/api/run'
 };
 
 var _data = {

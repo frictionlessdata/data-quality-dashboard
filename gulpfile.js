@@ -1,33 +1,39 @@
 var gulp = require('gulp');
 var source = require('vinyl-source-stream');
+var rename = require('gulp-rename');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var reactify = require('reactify');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var minifyCss = require('gulp-minify-css');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var historyApiFallback = require('connect-history-api-fallback');
+var sass = require('gulp-sass');
 var baseDir = './dashboard';
 var srcDir = baseDir + '/src';
+var distDir = baseDir + '/dist';
 var stylesDir = srcDir + '/styles';
 var scriptsDir = srcDir + '/scripts';
-var distDir = baseDir + '/dist';
 
 
-gulp.task('browser-sync', function() {
+gulp.task('serve', function() {
+    // Run a development server that reloads on changes
     browserSync({
         browser: "google chrome",
         server: {
-            baseDir: baseDir,
+            baseDir: distDir,
             middleware: [historyApiFallback]
         }
     });
 });
 
-gulp.task('browserify', function() {
+
+gulp.task('scripts', function() {
+    // Transforms scripts into a bundle for the browser
     var bundler = browserify({
-        entries: ['./dashboard/scripts/app.js'],
+        entries: [scriptsDir + '/app.js'],
         transform: [reactify],
         debug: true,
         cache: {},
@@ -41,22 +47,24 @@ gulp.task('browserify', function() {
         var updateStart = Date.now();
         console.log('Updating!');
         watcher.bundle()
-        .pipe(source('bundle.js'))
-        .pipe(gulp.dest('./dashboard/scripts/'));
+        .pipe(source('app.min.js'))
+        .pipe(gulp.dest(distDir));
         console.log('Updated!', (Date.now() - updateStart) + 'ms');
     })
     .bundle()
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest('./dashboard/scripts/'))
+    .pipe(source('app.min.js'))
+    .pipe(gulp.dest(distDir))
     .pipe(reload({stream:true}));
 });
 
-gulp.task('css', function () {
-    gulp.watch('styles/**/*.css', function () {
-        return gulp.src('styles/**/*.css')
-        .pipe(concat('main.css'))
-        .pipe(gulp.dest('build/'));
-    });
+
+gulp.task('styles', function () {
+    gulp.src(stylesDir + '/app.scss')
+        .pipe(sass())
+        .pipe(minifyCss({compatibility: 'ie8'}))
+        .pipe(rename('app.min.css'))
+        .pipe(gulp.dest(distDir));
 });
 
-gulp.task('default', ['browserify', 'css', 'browser-sync']);
+
+gulp.task('default', ['scripts', 'styles', 'serve']);

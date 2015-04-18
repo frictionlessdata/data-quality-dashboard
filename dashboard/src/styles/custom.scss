@@ -1,0 +1,123 @@
+thead td {text-transform: uppercase;}
+
+#sources, #publishers {
+    margin-bottom: 2em;
+}
+
+code {
+    font-size: 80%;
+}
+#main {
+  margin-top: 60px;
+}
+
+.overview {
+    @include make-row();
+    padding:0;
+    
+    li {
+      @include make-md-column(3);
+      display:block;
+      text-align:center;
+      @extend .counter;
+      
+      .value {
+        display:block;
+      }
+    }
+  }
+  
+  .line-chart {
+    padding-bottom:30px;
+    
+    .intro {
+      @include make-row();
+      position:relative;
+      
+      .text {
+        @include make-md-column(8);
+      }
+      
+      .more {
+        @include make-md-column(4);
+        
+        @media (min-width: $screen-md-min) {
+          text-align:right;
+          position:absolute;
+          bottom:20px;
+          right:0;
+        }
+      }
+    }
+  }
+  
+  .publishers {
+    background-color:$gray-lighter;
+    padding-top:30px;
+    
+    .intro {
+      @include make-row();
+      padding-bottom:10px;
+      position:relative;
+      
+      .text {
+        @include make-md-column(8);
+      }
+      
+      .more {
+        @include make-md-column(4);
+        
+        @media (min-width: $screen-md-min) {
+          text-align:right;
+          position:absolute;
+          bottom:20px;
+          right:0;
+        }
+      }
+    }
+    
+    table {
+      background-color:#fff;
+      margin-bottom:0;
+      overflow:hidden;
+      border-radius:$border-radius-base $border-radius-base 0 0;
+
+      & > thead > tr > th:first-child {
+        border-radius:$border-radius-base 0 0 0;
+      }
+      & > thead > tr > th:last-child {
+        border-radius:0 $border-radius-base 0 0;
+      }
+      
+      & > tbody > tr > td,
+      & > tbody > tr > th {
+        background-color:transparent;
+      }
+      .score {
+        text-align:center;
+      }
+      tr.success {
+        .score {
+          background-color:$brand-success;
+          color:#fff;
+        }
+      }
+      tr.warning {
+        .score {
+          background-color:$brand-warning;
+        }
+      }
+      tr.danger {
+        .score {
+          background-color:$brand-danger;
+          color:#fff;
+        }
+      }
+      .glyphicon {
+        color:$gray-lighter;
+      }
+      a .glyphicon {
+        color:$gray-dark;
+      }
+    }
+  }
