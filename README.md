@@ -12,7 +12,7 @@ of departments.
 
 We have an example dashboard deployed with dummy data:
 
-[Example Spend Publishing Dashboard](example.dashboards.okfnlabs.org/)
+[Example Spend Publishing Dashboard](http://example.dashboards.okfnlabs.org/)
 
 ## Get started
 
