@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var rename = require('gulp-rename');
+var ghPages = require('gulp-gh-pages');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var reactify = require('reactify');
@@ -18,10 +19,18 @@ var stylesDir = srcDir + '/styles';
 var scriptsDir = srcDir + '/scripts';
 
 
+gulp.task('deploy', function() {
+    return gulp.src(distDir + '/*')
+        .pipe(ghPages({
+            message: "Dashboard update." + Date.now()
+        }));
+});
+
+
 gulp.task('serve', function() {
     // Run a development server that reloads on changes
     browserSync({
-        browser: "google chrome",
+        open: false,
         server: {
             baseDir: distDir,
             middleware: [historyApiFallback]

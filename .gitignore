@@ -8,7 +8,4 @@ __pycache__/
 *.py[cod]
 bower_components/*
 node_modules/*
-dashboard/scripts/bundle.js
-dashboard/dist/*
-!dashboard/dist/index.html
-!dashboard/dist/CNAME
+.publish/

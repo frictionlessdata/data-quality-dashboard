@@ -25,6 +25,7 @@
     "gulp-minify-css": "*",
     "gulp-sourcemaps": "*",
     "gulp-rename": "*",
+    "gulp-gh-pages": "*",
     "vinyl-source-stream": "*",
     "browserify": "*",
     "jest-cli": "*",
