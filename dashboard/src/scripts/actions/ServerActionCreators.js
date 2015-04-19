@@ -1,11 +1,16 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
+var Dispatcher = require('../dispatcher/Dispatcher');
+var Constants = require('../constants/Constants');
+var APIUtils = require('../utils/APIUtils');
 
+var ActionTypes = Constants.ActionTypes;
 
 module.exports = {
-    dataReady: function(data) {
-        AppDispatcher.handleServerAction({
-            type: 'RECEIVE_DATA',
+
+    receiveAll: function(data, name) {
+        Dispatcher.dispatch({
+            type: ActionTypes.RECEIVE[name],
             data: data
         });
-    }
+  }
+
 };

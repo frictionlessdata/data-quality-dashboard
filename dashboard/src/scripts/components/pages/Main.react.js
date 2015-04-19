@@ -1,6 +1,10 @@
 var React = require('react');
 var Router = require('react-router');
-var Store = require('../../stores/Store');
+var InstanceStore = require('../../stores/instanceStore');
+var PublisherStore = require('../../stores/publisherStore');
+var SourceStore = require('../../stores/sourceStore');
+var ResultStore = require('../../stores/resultStore');
+var RunStore = require('../../stores/runStore');
 var Row = require('react-bootstrap/Row');
 var Col = require('react-bootstrap/Col');
 var HeaderPanel = require('../panels/Header.react');
@@ -12,8 +16,14 @@ var APIUtils = require('../../utils/APIUtils');
 var Mixins = require('./Mixins.react');
 
 
-function getStateFromStores(getParams) {
-    return Store.all();
+function getStateFromStores() {
+    return {
+        instance: InstanceStore.get(),
+        publishers: PublisherStore.all(),
+        sources: SourceStore.all(),
+        results: ResultStore.all(),
+        runs: RunStore.all()
+    };
 }
 
 var Main = React.createClass({
@@ -21,23 +31,29 @@ var Main = React.createClass({
     mixins: [Router.State, Mixins.DataFetchingMixin],
 
     statics: {
-        bootstrap: APIUtils.getData,
         getStateFromStores: getStateFromStores
     },
 
-    componentDidMount: function() {
-        Store.addChangeListener(this._onChange);
+    componentWillUnmount: function () {
+        InstanceStore.removeChangeListener(this._onChange);
+        PublisherStore.removeChangeListener(this._onChange);
+        SourceStore.removeChangeListener(this._onChange);
+        ResultStore.removeChangeListener(this._onChange);
+        RunStore.removeChangeListener(this._onChange);
     },
 
-    _onChange: function() {
-        this.setState(this.constructor.getStateFromStores(this.getParams()));
+    componentDidMount: function() {
+        InstanceStore.addChangeListener(this._onChange);
+        PublisherStore.addChangeListener(this._onChange);
+        SourceStore.addChangeListener(this._onChange);
+        ResultStore.addChangeListener(this._onChange);
+        RunStore.addChangeListener(this._onChange);
     },
 
     render: function() {
-        console.log(this.state);
         return (
             <div>
-                <HeaderPanel instance={this._waiting ? {}:this.state.instance} publishers={this._waiting ? []:this.state.publishers} />
+                <HeaderPanel instance={this.state.instance} publishers={this.state.publishers} />
                 <section id="main" className="container">
                     <Row>
                         <Col md={12}>
@@ -46,19 +62,19 @@ var Main = React.createClass({
                     </Row>
                     <Row>
                         <Col md={6}>
-                            <MainOverview results={this._waiting ? []:this.state.results} />
+                            <MainOverview results={this.state.results} />
                         </Col>
                         <Col md={6}>
-                            <MainChart results={this._waiting ? []:this.state.results} />
+                            <MainChart results={this.state.results} />
                         </Col>
                     </Row>
                     <Row>
                         <Col md={12}>
-                            <PublisherTable publishers={this._waiting ? []:this.state.publishers} />
+                            <PublisherTable publishers={this.state.publishers} />
                         </Col>
                     </Row>
                 </section>
-                <FooterPanel instance={this._waiting ? {}:this.state.instance} />
+                <FooterPanel instance={this.state.instance} />
             </div>
         );
     }

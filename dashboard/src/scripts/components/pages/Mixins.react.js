@@ -9,19 +9,11 @@ var DataFetchingMixin = {
 
     getDefaultProps: function() {
         return {_waiting: true};
+    },
+
+    _onChange: function () {
+        this.setState(this.constructor.getStateFromStores(this.getParams()));
     }
-
-//    componentWillMount: function() {
-//         if (this.props._waiting) {
-//             this.fetch(this.props);
-//        }
-//    },
-
-//    fetch: function(getParams) {
-//        this.constructor.bootstrap(getParams, function(data) {
-//            this.setState(data);
-//        }.bind(this));
-//    }
 
 };
 

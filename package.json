@@ -16,7 +16,9 @@
     "react-chartjs": "*",
     "react-router": "*",
     "react-tools": "*",
-    "superagent": "*"
+    "superagent": "*",
+    "bluebird": "*",
+    "csv-parse": "*"
   },
   "devDependencies": {
     "gulp": "*",

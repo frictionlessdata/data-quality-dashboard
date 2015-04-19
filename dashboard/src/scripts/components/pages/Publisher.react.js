@@ -1,6 +1,10 @@
 var React = require('react');
-var Store = require('../../stores/Store');
 var Router = require('react-router');
+var InstanceStore = require('../../stores/instanceStore');
+var PublisherStore = require('../../stores/publisherStore');
+var SourceStore = require('../../stores/sourceStore');
+var ResultStore = require('../../stores/resultStore');
+var RunStore = require('../../stores/runStore');
 var Row = require('react-bootstrap/Row');
 var Col = require('react-bootstrap/Col');
 var HeaderPanel = require('../panels/Header.react');
@@ -16,10 +20,10 @@ var Mixins = require('./Mixins.react');
 
 function getStateFromStores(getParams) {
     return {
-        instance: Store.query('instance'),
-        publisher: Store.get('publishers', getParams.lookup),
-        results: Store.query('results', {'publisher_id': getParams.lookup}),
-        sources: Store.query('sources', {'publisher_id': getParams.lookup})
+        instance: InstanceStore.get(),
+        publisher: PublisherStore.get(getParams.lookup),
+        results: ResultStore.query({'publisher_id': getParams.lookup}),
+        sources: SourceStore.query({'publisher_id': getParams.lookup})
     };
 }
 
@@ -28,19 +32,27 @@ var Publisher = React.createClass({
     mixins: [Router.State, Mixins.DataFetchingMixin],
 
     statics: {
-        bootstrap: APIUtils.getData,
         getStateFromStores: getStateFromStores
     },
 
-    componentDidMount: function() {
-        Store.addChangeListener(this._onChange);
+    componentWillUnmount: function () {
+        InstanceStore.removeChangeListener(this._onChange);
+        PublisherStore.removeChangeListener(this._onChange);
+        SourceStore.removeChangeListener(this._onChange);
+        ResultStore.removeChangeListener(this._onChange);
+        RunStore.removeChangeListener(this._onChange);
     },
 
-    _onChange: function() {
-        this.setState(this.constructor.getStateFromStores(this.getParams()));
+    componentDidMount: function() {
+        InstanceStore.addChangeListener(this._onChange);
+        PublisherStore.addChangeListener(this._onChange);
+        SourceStore.addChangeListener(this._onChange);
+        ResultStore.addChangeListener(this._onChange);
+        RunStore.addChangeListener(this._onChange);
     },
 
     render: function() {
+
         return (
             <div>
                 <HeaderPanel instance={this.state.instance} />
