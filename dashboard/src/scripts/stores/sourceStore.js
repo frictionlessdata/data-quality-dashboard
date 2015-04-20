@@ -37,8 +37,6 @@ var Store = assign({}, EventEmitter.prototype, {
       if (typeof(options) === 'undefined') {
           return _sources;
       } else {
-          console.log(options);
-          console.log(_sources);
           return _.where(_sources, options);
       }
   },

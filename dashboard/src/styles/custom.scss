@@ -11,6 +11,10 @@ code {
   margin-top: 60px;
 }
 
+.auto-complete-container {
+  margin-top: 18px;                        
+}
+
 .overview {
     @include make-row();
     padding:0;

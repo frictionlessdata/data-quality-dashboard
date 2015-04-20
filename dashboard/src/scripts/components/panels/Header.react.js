@@ -21,14 +21,28 @@ var Header = React.createClass({
 
     render: function() {
         return (
-            <Navbar>
-                <Nav className="pull-left">
-                    <NavItem eventKey={1} href="/">{this.props.instance.name}</NavItem>
-                </Nav>
-                <Nav className="pull-right">
-                    <AutoCompleteInput placeholder="Go to publisher ..." onSearch={this.publisherSearch} onItemSelect={this.publisherSearchSelected} />
-                </Nav>
-            </Navbar>
+                      <nav className="navbar  navbar-default navbar-static-top">
+        <div className="container">
+          <div className="navbar-header">
+            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <a className="navbar-brand" href="/">
+                <span className="text">{this.props.instance.name}</span>
+            </a>
+          </div>
+          <div id="navbar" className="collapse navbar-collapse">
+            <ul className="nav navbar-nav pull-right">
+                <li>
+                <div className="auto-complete-container"><AutoCompleteInput placeholder="Go to publisher ..." onSearch={this.publisherSearch} onItemSelect={this.publisherSearchSelected} /></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
         );
     }
 });

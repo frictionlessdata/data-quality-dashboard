@@ -31,7 +31,7 @@ var Store = assign({}, EventEmitter.prototype, {
   },
 
   get: function(id) {
-      return _.find(_publishers, {'id': id});
+    return _.find(_publishers, {'id': id});
   },
 
   query: function(options) {
