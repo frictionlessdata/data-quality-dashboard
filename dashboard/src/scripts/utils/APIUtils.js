@@ -2,7 +2,6 @@ var ActionCreators = require('../actions/ServerActionCreators');
 var Config = require('../config.js');
 var request = require('superagent');
 var parse = require('csv-parse');
-var parseParams = {columns: true};
 
 function getJSONEndpoint(endpoint, name) {
     request
@@ -17,7 +16,7 @@ function getCSVEndpoint(endpoint, name) {
     request
         .get(endpoint)
         .end(function(error, response) {
-            parse(response.text, parseParams, function(error, output) {
+            parse(response.text, {columns: true}, function(error, output) {
                 var raw = output;
                 ActionCreators.receiveAll(raw, name);
             });
