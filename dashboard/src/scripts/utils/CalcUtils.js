@@ -35,11 +35,50 @@ function totalScore(results) {
     return Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / results.length);
 }
 
+function publisherScore(publisher, results) {
+    var scores = [],
+        publisherScore = 'n/a';
+    // get all scores for this publisher from results
+    _.forEach(results, function(obj) {
+        if (obj.publisher_id === publisher) {
+            var score = obj.score ? obj.score : 0;
+            scores.push(parseInt(score));
+        }
+    });
+    // set the publisher score to: sum of scores / number of scores
+    if (scores.length > 0) {
+        publisherScore = Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / scores.length);
+    }
+    return publisherScore;
+}
+
+function sourceScore(source, results) {
+    var scores = [],
+        sourceScore = 'n/a';
+    // get all scores and timestamps for this source from results
+    _.forEach(results, function(obj) {
+        if (obj.source_id === source) {
+            var score = obj.score ? obj.score : 0;
+            var timestamp = Date.parse(obj.timestamp);
+            scores.push({'score': parseInt(score), 'timestamp': timestamp});
+        }
+    });
+    // set the source score to: the latest score
+    if (scores.length > 0) {
+        var latestScore = _.max(scores, function(elt) {
+            return elt.timestamp;
+        });
+        sourceScore = latestScore.score;
+    }
+    return sourceScore;
+}
 
 module.exports = {
     publisherCount: publisherCount,
     sourceCount: sourceCount,
     timelyPercent: timelyPercent,
     validPercent: validPercent,
-    totalScore: totalScore
+    totalScore: totalScore,
+    publisherScore: publisherScore,
+    sourceScore: sourceScore
 };

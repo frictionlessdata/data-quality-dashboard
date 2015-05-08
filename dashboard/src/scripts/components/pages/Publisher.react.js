@@ -60,7 +60,7 @@ var Publisher = React.createClass({
                         <PublisherChart results={this.state.results} publisher={this.state.publisher} />
                     </div>
                     <section className="publishers">
-                        <SourceTable sources={this.state.sources}/>
+                        <SourceTable sources={this.state.sources}  results={this.state.results} />
                     </section>
                 </div>
                 <FooterPanel instance={this.state.instance} />
