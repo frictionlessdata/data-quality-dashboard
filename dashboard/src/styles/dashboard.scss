@@ -87,22 +87,16 @@
       .score {
         text-align:center;
       }
-      tr.success {
-        .score {
-          background-color:$brand-success;
-          color:#fff;
-        }
+      td.success.score {
+        background-color:$brand-success;
+        color:#fff;
       }
-      tr.warning {
-        .score {
-          background-color:$brand-warning;
-        }
+      td.warning.score {
+        background-color:$brand-warning;
       }
-      tr.danger {
-        .score {
-          background-color:$brand-danger;
-          color:#fff;
-        }
+      td.danger.score {
+        background-color:$brand-danger;
+        color:#fff;
       }
       .glyphicon {
         color:$gray-lighter;
