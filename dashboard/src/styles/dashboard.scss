@@ -1,21 +1,9 @@
-thead td {text-transform: uppercase;}
+@import "variables";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+//spend publishing dashboard
 
-#sources, #publishers {
-    margin-bottom: 2em;
-}
-
-code {
-    font-size: 80%;
-}
-#main {
-  margin-top: 60px;
-}
-
-.auto-complete-container {
-  margin-top: 18px;                        
-}
-
-.overview {
+.dashboard {
+  .overview {
     @include make-row();
     padding:0;
     
@@ -23,7 +11,6 @@ code {
       @include make-md-column(3);
       display:block;
       text-align:center;
-      @extend .counter;
       
       .value {
         display:block;
@@ -125,3 +112,4 @@ code {
       }
     }
   }
+}

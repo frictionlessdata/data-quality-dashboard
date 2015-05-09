@@ -3,13 +3,15 @@
 // # TODO: it is __VERY__ annoying that sass doesn't support string interpolation in @imports!!!
 // https://github.com/sass/sass/issues/49 is there another solution we can use?
 
-// $lato-font-path: '/static/vendor/lato/font';
-// @import "../../node_modules/lato/scss/lato";
+// Fonts
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900,400italic);
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
 
 // Our variables
-@import "theme-base";
+@import "variables";
 
-// Bootstrap
+//Bootstrap
+
 // Core variables and mixins
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
@@ -17,7 +19,7 @@
 // Reset and dependencies
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/normalize";
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/print";
-@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
+//@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/glyphicons";
 
 // Core CSS
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
@@ -52,7 +54,7 @@
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/close";
 
 // Components w/ JavaScript
-// @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/modals";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/modals";
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/tooltip";
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/popovers";
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/carousel";
@@ -61,9 +63,11 @@
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/utilities";
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
+
 // Theme
-$base-spacing: 15px;
-@import "theme-layout";
+$base-spacing: 20px;
+$header-gradient: radial-gradient(circle at 50% top, rgba($green,0.6) 0%,rgba($green,0) 75%),radial-gradient(circle at right top, $green 0%,rgba($green,0) 57%);
+@import "theme";
 
 // Custom
-@import "custom";
+@import "dashboard";
