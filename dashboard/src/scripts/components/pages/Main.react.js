@@ -5,8 +5,6 @@ var PublisherStore = require('../../stores/publisherStore');
 var SourceStore = require('../../stores/sourceStore');
 var ResultStore = require('../../stores/resultStore');
 var RunStore = require('../../stores/runStore');
-var Row = require('react-bootstrap/Row');
-var Col = require('react-bootstrap/Col');
 var HeaderPanel = require('../panels/Header.react');
 var FooterPanel = require('../panels/Footer.react');
 var PublisherTable = require('../tables/PublisherTable.react');
@@ -54,26 +52,17 @@ var Main = React.createClass({
         return (
             <div>
                 <HeaderPanel instance={this.state.instance} publishers={this.state.publishers} />
-                <section id="main" className="container">
-                    <Row>
-                        <Col md={12}>
-                            <h2>Overview</h2>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
-                            <MainOverview results={this.state.results} />
-                        </Col>
-                        <Col md={6}>
-                            <MainChart results={this.state.results} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
-                            <PublisherTable publishers={this.state.publishers} />
-                        </Col>
-                    </Row>
-                </section>
+                <div className="dashboard">
+                    <div className="jumbotron">
+                        <MainOverview results={this.state.results} />
+                    </div>
+                    <div className="container">
+                        <MainChart results={this.state.results} />
+                    </div>
+                    <section className="publishers">
+                        <PublisherTable publishers={this.state.publishers} />
+                    </section>
+                </div>
                 <FooterPanel instance={this.state.instance} />
             </div>
         );

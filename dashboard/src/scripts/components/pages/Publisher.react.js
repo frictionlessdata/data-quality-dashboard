@@ -5,8 +5,6 @@ var PublisherStore = require('../../stores/publisherStore');
 var SourceStore = require('../../stores/sourceStore');
 var ResultStore = require('../../stores/resultStore');
 var RunStore = require('../../stores/runStore');
-var Row = require('react-bootstrap/Row');
-var Col = require('react-bootstrap/Col');
 var HeaderPanel = require('../panels/Header.react');
 var FooterPanel = require('../panels/Footer.react');
 var PublisherChart = require('../charts/PublisherChart.react');
@@ -56,34 +54,24 @@ var Publisher = React.createClass({
         return (
             <div>
                 <HeaderPanel instance={this.state.instance} />
-                <section id="main" className="container">
-                    <Row>
-                        <Col md={12}>
-                <h2>{this.state.publisher.name} Overview</h2>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
-                            <PublisherOverview results={this.state.results} />
-                        </Col>
-                        <Col md={6}>
-                            <PublisherChart results={this.state.results} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
-                            <h2>Actions</h2>
-                        </Col>
-                        <Col md={12}>
-                            <PublisherActions />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
-                            <SourceTable sources={this.state.sources}/>
-                        </Col>
-                    </Row>
-                </section>
+                <div className="dashboard">
+                    <div className="jumbotron">
+                        <div className="container">
+                            <h2>{this.state.publisher.name}</h2>
+                        </div>
+                        <PublisherOverview results={this.state.results} />
+                    </div>
+                    <div className="container">
+                        <PublisherChart results={this.state.results} />
+                    </div>
+                    <div className="container">
+                        <h2>Actions</h2>
+                        <PublisherActions />
+                    </div>
+                    <section className="publishers">
+                        <SourceTable sources={this.state.sources}/>
+                    </section>
+                </div>
                 <FooterPanel instance={this.state.instance} />
             </div>
         );

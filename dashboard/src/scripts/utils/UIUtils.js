@@ -13,10 +13,52 @@ function searchIn(objects, field, query) {
         return matches;
 }
 
+function makeOverviewNumber(number) {
+    var num = number + '',
+        spans = [];
+    _.forEach(num, function(c) {
+        spans.push(<span>{c}</span>);
+    });
+    return spans;
+}
+
 function makeTableHeader(obj) {
     var _header = [];
     _.forEach(obj, function(value, key) {
-        _header.push(<th key={key}>{key}</th>);
+        switch(key) {
+            case 'id':
+                _header.push(<th key={key}>ID</th>);
+            break;
+
+            case 'name':
+            case 'description':
+            case 'contact':
+            case 'revision':
+            case 'timestamp':
+                _header.push(<th key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</th>);
+            break;
+
+            case 'url':
+            case 'data':
+                _header.push(<th key={key}></th>);
+            break;
+
+            case 'jurisdiction_code':
+                _header.push(<th key={key}>Jurisdiction</th>);
+            break;
+
+            case 'publisher_id':
+                _header.push(<th key={key}>Publisher ID</th>);
+            break;
+
+            case 'period_id':
+                _header.push(<th key={key}>Period ID</th>);
+            break;
+
+            case 'score':
+                _header.push(<th key={key} className="score">Score</th>);
+            break;
+        }
     });
     return _header;
 }
@@ -28,11 +70,11 @@ function makeTableRow(obj, options) {
 
         if (key === 'id') {
 
-            _cell = <td key={key}><Link to={options.route} params={{lookup: value}}>{value}</Link></td>;
+            _cell = <td key={key}><Link to={options.route} params={{lookup: value}} className="label label-default">{value}</Link></td>;
 
-        } else if (key === 'url') {
+        } else if (key === 'url' || key === 'data') {
 
-            _cell = <td key={key}><a href={value}>Home Page</a></td>;
+            _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
 
         } else if (key === 'score') {
 
@@ -44,9 +86,9 @@ function makeTableRow(obj, options) {
             } else {
                 _c = 'success';
             }
-            _cell = <td key={key} className={_c}>{value}</td>;
+            _cell = <td key={key} className={'score ' + _c}>{value}</td>;
 
-        } else {
+        } else if (key === 'name' || key === 'description' || key == 'contact' || key === 'jurisdiction_code' || key === 'revision' || key === 'timestamp' || key === 'publisher_id' || key === 'period_id') {
 
             _cell = <td key={key}>{value}</td>;
 
@@ -67,14 +109,14 @@ function makeScorePiePayload(results) {
     var data = [
         {
             value: invalidPercent,
-            color:"#F7464A",
-            highlight: "#FF5A5E",
+            color: "rgba(119,119,119,0.3)",
+            highlight: "rgba(119,119,119,0.2)",
             label: "Invalid %"
         },
         {
             value: validPercent,
-            color: "#46BFBD",
-            highlight: "#5AD3D1",
+            color: "rgba(122, 184, 0,0.3)",
+            highlight: "rgba(122, 184, 0,0.2)",
            label: "Valid %"
         }
     ];
@@ -103,22 +145,22 @@ function makeScoreLinePayload(results) {
             datasets: [
                 {
                     label: "Valid %",
-                    fillColor: "rgba(70,191,189,0.2)",
-                    strokeColor: "rgba(70,191,189,1)",
-                    pointColor: "rgba(70,191,189,1)",
+                    fillColor: "rgba(122, 184, 0,0.2)",
+                    strokeColor: "rgba(122, 184, 0,1)",
+                    pointColor: "rgba(122, 184, 0,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(70,191,189,1)",
+                    pointHighlightStroke: "rgba(122, 184, 0,1)",
                     data: [35, 31, 29, 36, 46, 45, 51, 55, 61, 69, 58, 67]
                 },
                 {
                     label: "Invalid %",
-                    fillColor: "rgba(247,70,74,0.2)",
-                    strokeColor: "rgba(247,70,74,1)",
-                    pointColor: "rgba(247,70,74,1)",
+                    fillColor: "rgba(119,119,119,0.2)",
+                    strokeColor: "rgba(119,119,119,1)",
+                    pointColor: "rgba(119,119,119,1)",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(247,70,74,1)",
+                    pointHighlightStroke: "rgba(119,119,119,1)",
                     data: [65, 69, 71, 64, 54, 55, 49, 45, 39, 31, 42, 33]
                 }
             ]
@@ -147,6 +189,7 @@ var options = {
 }
 
 module.exports = {
+    makeOverviewNumber: makeOverviewNumber,
     makeTableHeader: makeTableHeader,
     makeTableRow: makeTableRow,
     filterTable: filterTable,

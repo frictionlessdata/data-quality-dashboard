@@ -5,8 +5,6 @@ var PublisherStore = require('../../stores/publisherStore');
 var SourceStore = require('../../stores/sourceStore');
 var ResultStore = require('../../stores/resultStore');
 var RunStore = require('../../stores/runStore');
-var Row = require('react-bootstrap/Row');
-var Col = require('react-bootstrap/Col');
 var HeaderPanel = require('../panels/Header.react');
 var FooterPanel = require('../panels/Footer.react');
 var SourceChart = require('../charts/SourceChart.react');
@@ -55,40 +53,26 @@ var Source = React.createClass({
         return (
             <div>
                 <HeaderPanel instance={this.state.instance} />
-                <section id="main" className="container">
-                    <Row>
-                        <Col md={12}>
-                            <h2>{this.state.source.name} Overview ({this.state.publisher.name})</h2>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
-                            <SourceOverview results={this.state.results} source={this.state.source} />
-                        </Col>
-                        <Col md={6}>
-                            <SourceChart results={this.state.results} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
-                            <h2>Actions</h2>
-                        </Col>
-                        <Col md={12}>
-                            <SourceActions instance={this.state.instance} source={this.state.source} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
-                            <h2>Report</h2>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
-                            {/*<SourceReport instance={this.state.instance} source={this.state.source} />*/}
-                        </Col>
-                    </Row>
-                </section>
-                <FooterPanel instance={this.props.instance} />
+                <div className="dashboard">
+                    <div className="jumbotron">
+                        <div className="container">
+                            <h2>{this.state.source.name} ({this.state.publisher.name})</h2>
+                        </div>
+                        <SourceOverview results={this.state.results} source={this.state.source} />
+                    </div>
+                    <div className="container">
+                        <SourceChart results={this.state.results} />
+                    </div>
+                    <div className="container">
+                        <h2>Actions</h2>
+                        <SourceActions instance={this.state.instance} source={this.state.source} />
+                    </div>
+                    <div className="container">
+                        <h2>Report</h2>
+                        {/*<SourceReport instance={this.state.instance} source={this.state.source} />*/}
+                    </div>
+                </div>
+                <FooterPanel instance={this.state.instance} />
             </div>
         );
     }

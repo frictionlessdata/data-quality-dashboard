@@ -1,22 +1,24 @@
 var React = require('react');
-var Panel = require('react-bootstrap/Panel');
 var Router = require('react-router');
 var Link = Router.Link;
 var CalcUtils = require('../utils/CalcUtils');
+var UIUtils = require('../utils/UIUtils');
 
 
 var SourceOverview = React.createClass({
     render: function() {
+        var totalScore = UIUtils.makeOverviewNumber(CalcUtils.totalScore(this.props.results)),
+            revision = UIUtils.makeOverviewNumber(this.props.source.revision);
         return (
-            <Panel>
-                <ul>
-                    <li>Score: {CalcUtils.totalScore(this.props.results)}</li>
-                    <li>Revision: {this.props.source.revision}</li>
-                    <li>Period: {}</li>
-                    <li>Timestamp: {}</li>
-                    <li>Publisher: <Link to="publishers" params={{lookup: this.props.source.publisher_id}}>{this.props.source.publisher_id}</Link></li>
+            <div className="container">
+                <ul className="overview">
+                    <li className="counter"><span className="value">{totalScore}</span><span className="label">Score</span></li>
+                    <li className="counter"><span className="value">{revision}</span><span className="label">Revision</span></li>
+                    <li className="counter"><span className="value">{}</span><span className="label">Period</span></li>
+                    <li className="counter"><span className="value">{}</span><span className="label">Timestamp</span></li>
+                    <li className="counter"><span className="value"><Link to="publishers" params={{lookup: this.props.source.publisher_id}}>{this.props.source.publisher_id}</Link></span><span className="label">Publisher</span></li>
                 </ul>
-            </Panel>
+            </div>
         );
     }
 });
