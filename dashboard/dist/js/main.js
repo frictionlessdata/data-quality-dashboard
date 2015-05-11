@@ -1,3 +1,6 @@
+/*
+ * This is now included in Header.react.js
+ *
 (function($) {
   // disable ribbon clickthrough
   if ( $(document).width() > 767) { 
@@ -7,6 +10,6 @@
   // default class
   $('.navbar .open-knowledge').addClass('collapsed');
   
-})(jQuery);
+})(jQuery);*/
 
 $('.pricing-panels').equalize({children: '.pricing-panel > div > div', equalize: 'outerHeight'});

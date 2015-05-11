@@ -27,7 +27,7 @@ var Header = React.createClass({
             </div>
             <nav className="navbar navbar-static-top">
               <div className="container">
-                <a href="http://okfn.org/" className="open-knowledge" title="An Open Knowledge Project" data-toggle="collapse" data-target="#okf-panel"><span className="text">An Open Knowledge Project</span></a>
+                <a href="http://okfn.org/" className="open-knowledge collapsed" title="An Open Knowledge Project" data-toggle="collapse" data-target="#okf-panel" onClick={this._onClick}><span className="text">An Open Knowledge Project</span></a>
                 <div className="navbar-header">
                   <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span className="sr-only">Toggle navigation</span>
@@ -52,6 +52,12 @@ var Header = React.createClass({
             </nav>
           </div>
         );
+    },
+
+    _onClick: function(event) {
+      if (document.body.clientWidth > 767) {
+        event.preventDefault();
+      }
     }
 });
 
