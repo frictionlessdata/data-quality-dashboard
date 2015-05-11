@@ -6,11 +6,16 @@
   .overview {
     @include make-row();
     padding:0;
+    text-align:center;
     
     li {
-      @include make-md-column(3);
+      //@include make-md-column(3);
       display:block;
       text-align:center;
+
+      @media (min-width: $screen-md-min) {
+        display: inline-block;
+      }
       
       .value {
         display:block;
@@ -39,6 +44,12 @@
           right:0;
         }
       }
+    }
+
+    #lineChart {
+      width: 100% !important;
+      max-width: 1140px !important;
+      height: 300px !important;
     }
   }
   

@@ -13,13 +13,97 @@ function searchIn(objects, field, query) {
         return matches;
 }
 
-function makeOverviewNumber(number) {
-    var num = number + '',
-        spans = [];
-    _.forEach(num, function(c) {
-        spans.push(<span>{c}</span>);
+function makeOverviewNumber(number, digitWidth) {
+    var spans = [],
+        spanStyle = {
+            width: Math.floor(digitWidth) + 'px',
+            height: Math.floor(1.6 * digitWidth) + 'px',
+            fontSize: Math.floor(1.425 * digitWidth) + 'px',
+            lineHeight: Math.floor(1.55 * digitWidth) + 'px'
+        };
+    _.forEach(number, function(c) {
+        spans.push(<span style={spanStyle}>{c}</span>);
     });
     return spans;
+}
+
+function makeOverviewCounter(label, number, counterPadding, digitWidth) {
+    if (counterPadding > 0) {
+        var digitCount = number.length;
+        var counterWidth = (digitCount * (digitWidth + 6)) + (2 * counterPadding);
+        var counterStyle = {
+            width: counterWidth + 'px',
+            paddingLeft: counterPadding + 'px',
+            paddingRight: counterPadding + 'px'
+        };
+    } else {
+        var counterStyle = {
+            width: '100%',
+            paddingLeft: '0',
+            paddingRight: '0'
+        };
+    }
+    return <li className="counter" style={counterStyle}><span className="value">{makeOverviewNumber(number, digitWidth)}</span> <span className="label">{label}</span></li>;
+}
+
+function makeOverview(results) {
+    var documentWidth = document.body.clientWidth,
+        availableWidth = 0,
+        counters = [],
+        digitMargins = 6,
+        digitCount = 0,
+        spacePerDigit, digitMaxWidth, digitWidth, counterPadding;
+
+    var values = {
+        publisherCount: {
+            label: 'publishers',
+            value: CalcUtils.publisherCount(results) + ''
+        },
+        sourceCount: {
+            label: 'sources',
+            value: CalcUtils.sourceCount(results) + ''
+        },
+        validPercent: {
+            label: '% valid',
+            value: CalcUtils.validPercent(results) + ''
+        },
+        timelyPercent: {
+            label: '% timely',
+            value: CalcUtils.timelyPercent(results) + ''
+        }
+    };
+
+    if (documentWidth >= 980 && documentWidth < 1180) {
+        availableWidth = 980;
+    } else if (documentWidth >= 1180) {
+        availableWidth = 1180;
+    }
+
+    if (availableWidth > 0) {
+        _.forEach(values, function(obj) {
+            digitCount += obj.value.length;
+        });
+        spacePerDigit = availableWidth / (digitCount + 4);
+        digitMaxWidth = spacePerDigit - digitMargins;
+        digitWidth = digitMaxWidth >= 80 ? 80 : digitMaxWidth;
+        allDigitWidth = digitCount * (digitWidth + digitMargins);
+        counterPadding = (availableWidth - allDigitWidth) / 8;
+        _.forEach(values, function(obj) {
+            counters.push(makeOverviewCounter(obj.label, obj.value, counterPadding, digitWidth));
+        });
+    } else {
+        _.forEach(values, function(obj) {
+            digitCount = obj.value.length;
+            spacePerDigit = documentWidth / (digitCount + 2);
+            digitMaxWidth = spacePerDigit - digitMargins;
+            digitWidth = digitMaxWidth >= 80 ? 80 : digitMaxWidth;
+            allDigitWidth = digitCount * (digitWidth + digitMargins);
+            counterPadding = 0;
+            counters.push(makeOverviewCounter(obj.label, obj.value, counterPadding, digitWidth));
+        });
+    }
+
+    return counters;
 }
 
 function makeTableHeader(obj) {
@@ -190,6 +274,7 @@ var options = {
 
 module.exports = {
     makeOverviewNumber: makeOverviewNumber,
+    makeOverview: makeOverview,
     makeTableHeader: makeTableHeader,
     makeTableRow: makeTableRow,
     filterTable: filterTable,

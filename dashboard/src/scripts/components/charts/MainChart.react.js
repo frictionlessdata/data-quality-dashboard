@@ -6,7 +6,6 @@ var CalcUtils = require('../../utils/CalcUtils');
 
 var MainChart = React.createClass({
     render: function() {
-        var piePayload = UIUtils.makeScorePiePayload(this.props.results);
         var linePayload = UIUtils.makeScoreLinePayload(this.props.results);
         return (
             <section className="line-chart">
@@ -20,6 +19,7 @@ var MainChart = React.createClass({
                     </div>
                 </div>
                 <LineChart
+                    id="lineChart"
                     data={linePayload.data}
                     options={linePayload.options}
                     width={1140}

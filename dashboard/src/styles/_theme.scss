@@ -79,25 +79,25 @@ html {
 
 .counter {
   margin-top:20px;
-  
+
   .value > span {
     background-color:$gray-dark;
     font-weight:bold;
-    font-size:114px;
+    /*font-size:114px;*/
     display:inline-block;
-    width:80px;
-    height:128px;
+    /*width:80px;
+    height:128px;*/
     text-align:center;
     margin-left:3px;
     margin-right:3px;
-    line-height:124px;
+    /*line-height:124px;*/
     border-radius:1px;
     position:relative;
     color:#fff;
     
     &:after {
       content:'';
-      width:80px;
+      width: 100%;
       height:2px;
       display:block;
       position:absolute;
