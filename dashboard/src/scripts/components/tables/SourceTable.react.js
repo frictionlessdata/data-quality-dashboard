@@ -1,11 +1,9 @@
 var React = require('react');
 var _ = require('lodash');
 var UIUtils = require('../../utils/UIUtils.js');
-var Col = require('react-bootstrap/Col');
 var Table = require('react-bootstrap/Table');
 var TableFilter = require('./TableFilter.react');
-var TableInfo = require('./TableInfo.react');
-var TableResize = require('./TableResize.react');
+var Button = require('react-bootstrap/Button');
 
 
 var SourceTable = React.createClass({
@@ -19,11 +17,12 @@ var SourceTable = React.createClass({
                     </div>
                     <div className="more">
                         <a className="btn btn-default" href="#" role="button">More</a>
+                        <Button bsStyle="primary" className="download disabled">Download data</Button>
                     </div>
                 </div>
-                <div>
+                {/*<div>
                     <span className="pull-right"><TableFilter /></span>
-                </div>
+                </div>*/}
                 <Table className="table">
                     <thead>
                         <tr>
@@ -37,10 +36,6 @@ var SourceTable = React.createClass({
                         })}
                     </tbody>
                 </Table>
-                <Col>
-                    <TableInfo />
-                    <TableResize />
-                </Col>
             </div>
         );
     }

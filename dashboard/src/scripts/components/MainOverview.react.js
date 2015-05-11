@@ -8,8 +8,7 @@ var MainOverview = React.createClass({
         var publisherCount = UIUtils.makeOverviewNumber(CalcUtils.publisherCount(this.props.results)),
             sourceCount = UIUtils.makeOverviewNumber(CalcUtils.sourceCount(this.props.results)),
             validPercent = UIUtils.makeOverviewNumber(CalcUtils.validPercent(this.props.results)),
-            timelyPercent = UIUtils.makeOverviewNumber(CalcUtils.timelyPercent(this.props.results)),
-            totalScore = UIUtils.makeOverviewNumber(CalcUtils.totalScore(this.props.results));
+            timelyPercent = UIUtils.makeOverviewNumber(CalcUtils.timelyPercent(this.props.results));
         return (
             <div className="container">
                 <ul className="overview">
@@ -17,7 +16,6 @@ var MainOverview = React.createClass({
                     <li className="counter"><span className="value">{sourceCount}</span> <span className="label">sources</span></li>
                     <li className="counter"><span className="value">{validPercent}</span><span className="label">% valid</span></li>
                     <li className="counter"><span className="value">{timelyPercent}</span><span className="label">% timely</span></li>
-                    <li className="counter"><span className="value">{totalScore}</span><span className="label"> total score</span></li>
                 </ul>
             </div>
         );

@@ -9,8 +9,6 @@ var HeaderPanel = require('../panels/Header.react');
 var FooterPanel = require('../panels/Footer.react');
 var PublisherChart = require('../charts/PublisherChart.react');
 var PublisherOverview = require('../PublisherOverview.react');
-var PublisherActions = require('../PublisherActions.react');
-var PublisherTable = require('../tables/PublisherTable.react');
 var SourceTable = require('../tables/SourceTable.react');
 var APIUtils = require('../../utils/APIUtils');
 var Mixins = require('./Mixins.react');
@@ -56,17 +54,10 @@ var Publisher = React.createClass({
                 <HeaderPanel instance={this.state.instance} />
                 <div className="dashboard">
                     <div className="jumbotron">
-                        <div className="container">
-                            <h2>{this.state.publisher.name}</h2>
-                        </div>
                         <PublisherOverview results={this.state.results} />
                     </div>
                     <div className="container">
-                        <PublisherChart results={this.state.results} />
-                    </div>
-                    <div className="container">
-                        <h2>Actions</h2>
-                        <PublisherActions />
+                        <PublisherChart results={this.state.results} publisher={this.state.publisher} />
                     </div>
                     <section className="publishers">
                         <SourceTable sources={this.state.sources}/>

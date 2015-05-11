@@ -2,10 +2,7 @@ var React = require('react');
 var _ = require('lodash');
 var UIUtils = require('../../utils/UIUtils.js');
 var Table = require('react-bootstrap/Table');
-var Col = require('react-bootstrap/Col');
 var TableFilter = require('./TableFilter.react');
-var TableResize = require('./TableResize.react');
-var TableInfo = require('./TableInfo.react');
 
 
 var PublisherTable = React.createClass({
@@ -21,9 +18,9 @@ var PublisherTable = React.createClass({
                         <a className="btn btn-default" href="#" role="button">More</a>
                     </div>
                 </div>
-                <div>
+                {/*<div>
                     <span className="pull-right"><TableFilter /></span>
-                </div>
+                </div>*/}
                 <Table className="table">
                     <thead>
                         <tr>
@@ -37,10 +34,6 @@ var PublisherTable = React.createClass({
                         })}
                     </tbody>
                 </Table>
-                <Col>
-                    <TableInfo />
-                    <TableResize />
-                </Col>
             </div>
         );
     }

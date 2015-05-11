@@ -1,10 +1,5 @@
 var React = require('react');
 var _ = require('lodash');
-var Col = require('react-bootstrap/Col');
-var Navbar = require('react-bootstrap/Navbar');
-var Nav = require('react-bootstrap/Nav');
-var NavItem = require('react-bootstrap/NavItem');
-var AutoCompleteInput = require('react-bootstrap-async-autocomplete');
 var UIUtils = require('../../utils/UIUtils');
 
 
@@ -43,9 +38,6 @@ var Header = React.createClass({
                 </div>
                 <div id="navbar" className="collapse navbar-collapse">
                   <ul className="nav navbar-nav">
-                    <li>
-                      <div className="auto-complete-container"><AutoCompleteInput placeholder="Go to publisher ..." onSearch={this.publisherSearch} onItemSelect={this.publisherSearchSelected} /></div>
-                    </li>
                   </ul>
                 </div>
               </div>

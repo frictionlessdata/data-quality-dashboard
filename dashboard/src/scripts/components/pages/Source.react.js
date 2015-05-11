@@ -55,21 +55,20 @@ var Source = React.createClass({
                 <HeaderPanel instance={this.state.instance} />
                 <div className="dashboard">
                     <div className="jumbotron">
-                        <div className="container">
-                            <h2>{this.state.source.name} ({this.state.publisher.name})</h2>
-                        </div>
                         <SourceOverview results={this.state.results} source={this.state.source} />
                     </div>
                     <div className="container">
-                        <SourceChart results={this.state.results} />
+                        <SourceChart results={this.state.results} publisher={this.state.publisher} source={this.state.source} />
                     </div>
                     <div className="container">
-                        <h2>Actions</h2>
-                        <SourceActions instance={this.state.instance} source={this.state.source} />
-                    </div>
-                    <div className="container">
-                        <h2>Report</h2>
-                        {/*<SourceReport instance={this.state.instance} source={this.state.source} />*/}
+                        <div className="intro">
+                            <div className="text">
+                                <h2>Report</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc cursus mauris molestie accumsan laoreet. Vestibulum elementum porta rhoncus. Vivamus sagittis urna congue sollicitudin mollis. Phasellus dictum elit sed posuere mattis. Donec egestas libero sit amet elit congue, quis placerat tellus pharetra.</p>
+                            </div>
+                            <SourceActions instance={this.state.instance} source={this.state.source} />
+                            {/*<SourceReport instance={this.state.instance} source={this.state.source} />*/}
+                        </div>
                     </div>
                 </div>
                 <FooterPanel instance={this.state.instance} />
