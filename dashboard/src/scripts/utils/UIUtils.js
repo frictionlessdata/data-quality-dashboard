@@ -148,24 +148,41 @@ function makeTableHeader(obj) {
 }
 
 function makeTableBody(objects, results, options) {
-    var _body = [];
+    var _body = [],
+        _unsorted = [];
     if (options.route === 'publishers') {
-        // for each publisher, get its score from results and return a table row
-        _body = _.map(objects, function(obj) {
+        // for each publisher, get its score from results and return a new array of publishers with scores
+        _unsorted = _.map(objects, function(obj) {
             var _publisherScore = CalcUtils.publisherScore(obj.id, results);
-            return <tr key={obj.name}>{makeTableRow(obj, _publisherScore, options)}</tr>;
+            var _objWithScore = _.cloneDeep(obj);
+            _objWithScore.score = _publisherScore;
+            return _objWithScore;
+        });
+        // sort publishers by score in descending order and by name in ascending order
+        _body = _.sortBy(_.sortBy(_unsorted, 'name').reverse(), 'score').reverse();
+        // for each publisher, return a table row
+        _body = _.map(_body, function(obj) {
+            return <tr key={obj.name}>{makeTableRow(obj, options)}</tr>;
         });
     } else if (options.route === 'sources') {
-        // for each source, get its score from results and return a table row
-        _body = _.map(objects, function(obj) {
+        // for each source, get its score from results and return a new array of sources with scores
+        _unsorted = _.map(objects, function(obj) {
             var _sourceScore = CalcUtils.sourceScore(obj.id, results);
-            return <tr key={obj.id}>{makeTableRow(obj, _sourceScore, options)}</tr>;
+            var _objWithScore = _.cloneDeep(obj);
+            _objWithScore.score = _sourceScore;
+            return _objWithScore;
+        });
+        // sort sources by score in descending order and by name in ascending order
+        _body = _.sortBy(_.sortBy(_unsorted, 'name').reverse(), 'score').reverse();
+        // for each source, return a table row
+        _body = _.map(_body, function(obj) {
+            return <tr key={obj.id}>{makeTableRow(obj, options)}</tr>;
         });
     }
     return _body;
 }
 
-function makeTableRow(obj, score, options) {
+function makeTableRow(obj, options) {
     var _row = [];
     _.forEach(obj, function(value, key) {
         var _cell;
@@ -181,14 +198,14 @@ function makeTableRow(obj, score, options) {
         } else if (key === 'score') {
 
             var _c;
-            if (score <= 4) {
+            if (value <= 4) {
                 _c = 'danger';
-            } else if (score <= 8) {
+            } else if (value <= 8) {
                 _c = 'warning';
             } else {
                 _c = 'success';
             }
-            _cell = <td key={key} className={'score ' + _c}>{score}</td>;
+            _cell = <td key={key} className={'score ' + _c}>{value}</td>;
 
         } else if (key === 'name' || key === 'description' || key == 'contact' || key === 'jurisdiction_code' || key === 'revision' || key === 'timestamp' || key === 'publisher_id' || key === 'period_id') {
 

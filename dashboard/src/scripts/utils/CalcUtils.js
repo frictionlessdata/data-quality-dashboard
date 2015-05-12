@@ -37,7 +37,7 @@ function totalScore(results) {
 
 function publisherScore(publisher, results) {
     var scores = [],
-        publisherScore = 'n/a';
+        publisherScore = 0;
     // get all scores for this publisher from results
     _.forEach(results, function(obj) {
         if (obj.publisher_id === publisher) {
@@ -54,7 +54,7 @@ function publisherScore(publisher, results) {
 
 function sourceScore(source, results) {
     var scores = [],
-        sourceScore = 'n/a';
+        sourceScore = 0;
     // get all scores and timestamps for this source from results
     _.forEach(results, function(obj) {
         if (obj.source_id === source) {
