@@ -30,7 +30,7 @@ function validPercent(results) {
 function totalScore(results) {
     var scores = [];
     _.forEach(results, function(obj) {
-        scores.push(obj.score);
+        scores.push(parseInt(obj.score));
     });
     return Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / results.length);
 }

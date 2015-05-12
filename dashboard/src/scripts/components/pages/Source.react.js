@@ -5,8 +5,6 @@ var PublisherStore = require('../../stores/publisherStore');
 var SourceStore = require('../../stores/sourceStore');
 var ResultStore = require('../../stores/resultStore');
 var RunStore = require('../../stores/runStore');
-var Row = require('react-bootstrap/Row');
-var Col = require('react-bootstrap/Col');
 var HeaderPanel = require('../panels/Header.react');
 var FooterPanel = require('../panels/Footer.react');
 var SourceChart = require('../charts/SourceChart.react');
@@ -55,40 +53,25 @@ var Source = React.createClass({
         return (
             <div>
                 <HeaderPanel instance={this.state.instance} />
-                <section id="main" className="container">
-                    <Row>
-                        <Col md={12}>
-                            <h2>{this.state.source.name} Overview ({this.state.publisher.name})</h2>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
-                            <SourceOverview results={this.state.results} source={this.state.source} />
-                        </Col>
-                        <Col md={6}>
-                            <SourceChart results={this.state.results} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
-                            <h2>Actions</h2>
-                        </Col>
-                        <Col md={12}>
+                <div className="dashboard">
+                    <div className="jumbotron">
+                        <SourceOverview results={this.state.results} source={this.state.source} />
+                    </div>
+                    <div className="container">
+                        <SourceChart results={this.state.results} publisher={this.state.publisher} source={this.state.source} />
+                    </div>
+                    <div className="container">
+                        <div className="intro">
+                            <div className="text">
+                                <h2>Report</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc cursus mauris molestie accumsan laoreet. Vestibulum elementum porta rhoncus. Vivamus sagittis urna congue sollicitudin mollis. Phasellus dictum elit sed posuere mattis. Donec egestas libero sit amet elit congue, quis placerat tellus pharetra.</p>
+                            </div>
                             <SourceActions instance={this.state.instance} source={this.state.source} />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
-                            <h2>Report</h2>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={12}>
                             {/*<SourceReport instance={this.state.instance} source={this.state.source} />*/}
-                        </Col>
-                    </Row>
-                </section>
-                <FooterPanel instance={this.props.instance} />
+                        </div>
+                    </div>
+                </div>
+                <FooterPanel instance={this.state.instance} />
             </div>
         );
     }

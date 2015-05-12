@@ -114,3 +114,7 @@
     color:$footer-disclaimer-color;
   }
 }
+
+.container + .site-footer {
+  margin-top:$base-spacing * 2;
+}

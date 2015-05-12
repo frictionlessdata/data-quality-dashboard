@@ -1,15 +1,33 @@
 <!doctype html>
-<html>
+<html class="no-js" lang="">
   <head>
     <meta charset="utf-8">
     <base href="/">
-    <link rel="stylesheet" type="text/css" href="app.min.css" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Spend Publishing Dashboard | Open Knowledge</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="app.min.css" />
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
   </head>
   <body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
     <section id="application"></section>
     <!--# TODO: Load Chart.js in bundle with everythng else. We've already got it in node_modules-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
+
     <script src="app.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
