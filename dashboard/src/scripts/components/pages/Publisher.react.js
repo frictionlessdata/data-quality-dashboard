@@ -19,7 +19,7 @@ function getStateFromStores(getParams) {
         instance: InstanceStore.get(),
         publisher: PublisherStore.get(getParams.lookup),
         results: ResultStore.query({'publisher_id': getParams.lookup}),
-        sources: SourceStore.all({'publisher_id': getParams.lookup})
+        sources: SourceStore.query({'publisher_id': getParams.lookup})
     };
 }
 
