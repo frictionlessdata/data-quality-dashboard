@@ -19,12 +19,17 @@ function timelyPercent(results) {
 }
 
 function validPercent(results) {
+    var validPercent = 0;
     var valid = _.filter(results, function(obj) {
-        if (obj.score >= 9) {
+        var score = obj.score ? obj.score : 0;
+        if (score >= 9) {
             return obj;
         }
     });
-    return Math.round((valid.length / results.length) * 100);
+    if (results.length > 0) {
+        validPercent = Math.round((valid.length / results.length) * 100);
+    }
+    return validPercent;
 }
 
 function totalScore(results) {
