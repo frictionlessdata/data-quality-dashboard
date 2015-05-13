@@ -22,7 +22,7 @@ function validPercent(results) {
     var validPercent = 0;
     var valid = _.filter(results, function(obj) {
         var score = obj.score ? obj.score : 0;
-        if (score >= 9) {
+        if (score == 10) {
             return obj;
         }
     });

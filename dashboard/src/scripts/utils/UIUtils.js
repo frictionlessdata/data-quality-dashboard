@@ -200,7 +200,7 @@ function makeTableRow(obj, options) {
             var _c;
             if (value <= 4) {
                 _c = 'danger';
-            } else if (value <= 8) {
+            } else if (value <= 9) {
                 _c = 'warning';
             } else {
                 _c = 'success';
