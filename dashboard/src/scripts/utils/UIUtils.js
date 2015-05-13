@@ -165,11 +165,14 @@ function makeTableBody(objects, results, options) {
             return <tr key={obj.name}>{makeTableRow(obj, options)}</tr>;
         });
     } else if (options.route === 'sources') {
-        // for each source, get its score from results and return a new array of sources with scores
+        // for each source, get its score and timestamp from results and return a new array of sources with scores and timestamps
         _unsorted = _.map(objects, function(obj) {
-            var _sourceScore = CalcUtils.sourceScore(obj.id, results);
+            var _sourceData = CalcUtils.sourceScore(obj.id, results);
+            var _sourceTimestamp = new Date(_sourceData.timestamp);
+            var _displayedTimestamp = _sourceTimestamp.getFullYear() + '-' +  ('0' + (_sourceTimestamp.getMonth() + 1)).slice(-2) + '-' +  ('0' + _sourceTimestamp.getDate()).slice(-2);
             var _objWithScore = _.cloneDeep(obj);
-            _objWithScore.score = _sourceScore;
+            _objWithScore.score = _sourceData.score;
+            _objWithScore.timestamp = _displayedTimestamp;
             return _objWithScore;
         });
         // sort sources by score in descending order and by name in ascending order

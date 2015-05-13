@@ -57,15 +57,16 @@ function publisherScore(publisher, results) {
     return publisherScore;
 }
 
+// return the latest score for a source and its timestamp from results
 function sourceScore(source, results) {
     var scores = [],
-        sourceScore = 0;
+        sourceScore = {score: 0, timestamp: 0};
     // get all scores and timestamps for this source from results
     _.forEach(results, function(obj) {
         if (obj.source_id === source) {
             var score = obj.score ? obj.score : 0;
             var timestamp = Date.parse(obj.timestamp);
-            scores.push({'score': parseInt(score), 'timestamp': timestamp});
+            scores.push({score: parseInt(score), timestamp: timestamp});
         }
     });
     // set the source score to: the latest score
@@ -73,7 +74,7 @@ function sourceScore(source, results) {
         var latestScore = _.max(scores, function(elt) {
             return elt.timestamp;
         });
-        sourceScore = latestScore.score;
+        sourceScore = latestScore;
     }
     return sourceScore;
 }
