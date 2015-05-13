@@ -46,7 +46,7 @@ function makeOverviewCounter(label, number, counterPadding, digitWidth) {
     return <li className="counter" style={counterStyle}><span className="value">{makeOverviewNumber(number, digitWidth)}</span> <span className="label">{label}</span></li>;
 }
 
-function makeOverview(results) {
+function makeOverview(results, page) {
     var documentWidth = document.body.clientWidth,
         availableWidth = 0,
         counters = [],
@@ -54,24 +54,42 @@ function makeOverview(results) {
         digitCount = 0,
         spacePerDigit, digitMaxWidth, digitWidth, counterPadding;
 
-    var values = {
-        publisherCount: {
-            label: 'publishers',
-            value: CalcUtils.publisherCount(results) + ''
-        },
-        sourceCount: {
-            label: 'sources',
-            value: CalcUtils.sourceCount(results) + ''
-        },
-        validPercent: {
-            label: '% valid',
-            value: CalcUtils.validPercent(results) + ''
-        },
-        invalidPercent: {
-            label: '% invalid',
-            value: (100 - CalcUtils.validPercent(results)) + ''
-        }
-    };
+    if (page === 'main') {
+        var values = {
+            publisherCount: {
+                label: 'publishers',
+                value: CalcUtils.publisherCount(results) + ''
+            },
+            sourceCount: {
+                label: 'sources',
+                value: CalcUtils.sourceCount(results) + ''
+            },
+            validPercent: {
+                label: '% valid',
+                value: CalcUtils.validPercent(results) + ''
+            },
+            invalidPercent: {
+                label: '% invalid',
+                value: (100 - CalcUtils.validPercent(results)) + ''
+            }
+        };
+    } else if (page === 'publisher') {
+        var values = {
+            sourceCount: {
+                label: 'sources',
+                value: CalcUtils.sourceCount(results) + ''
+            },
+            validPercent: {
+                label: '% valid',
+                value: CalcUtils.validPercent(results) + ''
+            },
+            invalidPercent: {
+                label: '% invalid',
+                value: (100 - CalcUtils.validPercent(results)) + ''
+            }
+        };
+    }
+    
 
     if (documentWidth >= 980 && documentWidth < 1180) {
         availableWidth = 980;

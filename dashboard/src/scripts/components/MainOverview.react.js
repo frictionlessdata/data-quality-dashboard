@@ -7,7 +7,7 @@ var MainOverview = React.createClass({
         return (
             <div className="container">
                 <ul className="overview">
-                    {UIUtils.makeOverview(this.props.results)}
+                    {UIUtils.makeOverview(this.props.results, 'main')}
                 </ul>
             </div>
         );
