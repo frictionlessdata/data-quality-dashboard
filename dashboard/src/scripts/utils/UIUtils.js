@@ -67,9 +67,9 @@ function makeOverview(results) {
             label: '% valid',
             value: CalcUtils.validPercent(results) + ''
         },
-        timelyPercent: {
-            label: '% timely',
-            value: CalcUtils.timelyPercent(results) + ''
+        invalidPercent: {
+            label: '% invalid',
+            value: (100 - CalcUtils.validPercent(results)) + ''
         }
     };
 
