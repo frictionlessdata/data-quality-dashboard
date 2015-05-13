@@ -28,10 +28,7 @@ var PublisherTable = React.createClass({
                         </tr>
                     </thead>
                     <tbody>
-                        {_.map(this.props.publishers, function(obj) {
-                            var _options = {'route': 'publishers'};
-                            return <tr key={obj.name}>{UIUtils.makeTableRow(obj, _options)}</tr>;
-                        })}
+                        {UIUtils.makeTableBody(this.props.publishers, this.props.results, {'route': 'publishers'})}
                     </tbody>
                 </Table>
             </div>
