@@ -173,10 +173,11 @@ function makeTableBody(objects, results, options) {
             var _objWithScore = _.cloneDeep(obj);
             _objWithScore.score = _sourceData.score;
             _objWithScore.timestamp = _displayedTimestamp;
+            _objWithScore.refTimestamp = _sourceData.timestamp;
             return _objWithScore;
         });
-        // sort sources by score in descending order and by name in ascending order
-        _body = _.sortBy(_.sortBy(_unsorted, 'name').reverse(), 'score').reverse();
+        // sort sources by score and by date in descending order, then by publisher id and by name in ascending order
+        _body = _.sortByAll(_.sortByAll(_unsorted, ['publisher_id', 'name']).reverse(), ['score', 'refTimestamp']).reverse();
         // for each source, return a table row
         _body = _.map(_body, function(obj) {
             return <tr key={obj.id}>{makeTableRow(obj, options)}</tr>;
