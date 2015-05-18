@@ -11,7 +11,7 @@ var MetaChart = React.createClass({
                 <section className="line-chart">
                     <div className="intro">
                         <div className="text">
-                            <h2>{this.props.publisher.name}</h2>
+                            <h2>{this.props.publisher.title}</h2>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc cursus mauris molestie accumsan laoreet. Vestibulum elementum porta rhoncus. Vivamus sagittis urna congue sollicitudin mollis. Phasellus dictum elit sed posuere mattis. Donec egestas libero sit amet elit congue, quis placerat tellus pharetra.</p>
                         </div>
                         <div className="more">

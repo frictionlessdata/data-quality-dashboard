@@ -26,7 +26,7 @@ var SourceTable = React.createClass({
                 <Table className="table">
                     <thead>
                         <tr>
-                            {UIUtils.makeTableHeader(this.props.sources[0])}
+                            {UIUtils.makeTableHeader(this.props.sources[0], 'sources')}
                         </tr>
                     </thead>
                     <tbody>

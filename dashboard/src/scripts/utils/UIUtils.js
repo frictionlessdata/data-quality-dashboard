@@ -124,44 +124,47 @@ function makeOverview(results, page) {
     return counters;
 }
 
-function makeTableHeader(obj) {
+function makeTableHeader(obj, table) {
     var _header = [];
-    _.forEach(obj, function(value, key) {
-        switch(key) {
-            case 'id':
-                _header.push(<th key={key}>ID</th>);
-            break;
+    if (table === 'publishers') {
+        _.forEach(obj, function(value, key) {
+            switch(key) {
+                case 'id':
+                    _header.push(<th key={key}>ID</th>);
+                break;
 
-            case 'name':
-            case 'description':
-            case 'contact':
-            case 'revision':
-            case 'timestamp':
-                _header.push(<th key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</th>);
-            break;
+                case 'title':
+                case 'type':
+                case 'homepage':
+                case 'contact':
+                case 'email':
+                    _header.push(<th key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</th>);
+                break;
+            }
+            _header.push(<th key={key} className="score">Score</th>);
+        });
+    } else if (table === 'sources') {
+        _.forEach(obj, function(value, key) {
+            switch(key) {
+                case 'title':
+                case 'format':
+                    _header.push(<th key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</th>);
+                break;
 
-            case 'url':
-            case 'data':
-                _header.push(<th key={key}></th>);
-            break;
+                case 'data':
+                    _header.push(<th key={key}>URL</th>);
+                break;
 
-            case 'jurisdiction_code':
-                _header.push(<th key={key}>Jurisdiction</th>);
-            break;
+                case 'last_modified':
+                    _header.push(<th key={key}>Last modified</th>);
+                break;
 
-            case 'publisher_id':
-                _header.push(<th key={key}>Publisher ID</th>);
-            break;
-
-            case 'period_id':
-                _header.push(<th key={key}>Period ID</th>);
-            break;
-
-            case 'score':
-                _header.push(<th key={key} className="score">Score</th>);
-            break;
-        }
-    });
+                case 'period_id':
+                    _header.push(<th key={key} className="score">Score</th>);
+                break;
+            }
+        });
+    }
     return _header;
 }
 
@@ -177,10 +180,10 @@ function makeTableBody(objects, results, options) {
             return _objWithScore;
         });
         // sort publishers by score in descending order and by name in ascending order
-        _body = _.sortBy(_.sortBy(_unsorted, 'name').reverse(), 'score').reverse();
+        _body = _.sortBy(_.sortBy(_unsorted, 'title').reverse(), 'score').reverse();
         // for each publisher, return a table row
         _body = _.map(_body, function(obj) {
-            return <tr key={obj.name}>{makeTableRow(obj, options)}</tr>;
+            return <tr key={obj.id}>{makeTableRow(obj, options, 'publishers')}</tr>;
         });
     } else if (options.route === 'sources') {
         // for each source, get its score and timestamp from results and return a new array of sources with scores and timestamps
@@ -188,54 +191,98 @@ function makeTableBody(objects, results, options) {
             var _sourceData = CalcUtils.sourceScore(obj.id, results);
             var _sourceTimestamp = new Date(_sourceData.timestamp);
             var _displayedTimestamp = _sourceTimestamp.getFullYear() + '-' +  ('0' + (_sourceTimestamp.getMonth() + 1)).slice(-2) + '-' +  ('0' + _sourceTimestamp.getDate()).slice(-2);
+            var _sourceLastModified = new Date(obj.last_modified);
+            if (obj.last_modified != '') {
+                var _displayedLastModified = _sourceLastModified.getFullYear() + '-' +  ('0' + (_sourceLastModified.getMonth() + 1)).slice(-2) + '-' +  ('0' + _sourceLastModified.getDate()).slice(-2);
+            } else {
+                var _displayedLastModified = ''
+            }
             var _objWithScore = _.cloneDeep(obj);
             _objWithScore.score = _sourceData.score;
             _objWithScore.timestamp = _displayedTimestamp;
             _objWithScore.refTimestamp = _sourceData.timestamp;
+            _objWithScore.last_modified = _displayedLastModified;
             return _objWithScore;
         });
         // sort sources by score and by date in descending order, then by publisher id and by name in ascending order
-        _body = _.sortByAll(_.sortByAll(_unsorted, ['publisher_id', 'name']).reverse(), ['score', 'refTimestamp']).reverse();
+        _body = _.sortByAll(_.sortByAll(_unsorted, 'title').reverse(), ['score', 'refTimestamp']).reverse();
         // for each source, return a table row
         _body = _.map(_body, function(obj) {
-            return <tr key={obj.id}>{makeTableRow(obj, options)}</tr>;
+            return <tr key={obj.id}>{makeTableRow(obj, options, 'sources')}</tr>;
         });
     }
     return _body;
 }
 
-function makeTableRow(obj, options) {
+function makeTableRow(obj, options, table) {
     var _row = [];
-    _.forEach(obj, function(value, key) {
-        var _cell;
+    if (table === 'publishers') {
+        _.forEach(obj, function(value, key) {
+            var _cell;
 
-        if (key === 'id') {
+            if (key === 'id') {
 
-            _cell = <td key={key}><Link to={options.route} params={{lookup: value}} className="label label-default">{value}</Link></td>;
+                _cell = <td key={key}><Link to={options.route} params={{lookup: value}} className="label label-default">{value}</Link></td>;
 
-        } else if (key === 'url' || key === 'data') {
+            } else if (key === 'homepage') {
 
-            _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
+                _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
 
-        } else if (key === 'score') {
+            } else if (key === 'email') {
 
-            var _c;
-            if (value <= 4) {
-                _c = 'danger';
-            } else if (value <= 9) {
-                _c = 'warning';
-            } else {
-                _c = 'success';
+                _cell = <td key={key}><a href={'mailto:' + value}><span className="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></td>;
+
+            } else if (key === 'score') {
+
+                var _c;
+                if (value <= 4) {
+                    _c = 'danger';
+                } else if (value <= 9) {
+                    _c = 'warning';
+                } else {
+                    _c = 'success';
+                }
+                _cell = <td key={key} className={'score ' + _c}>{value}</td>;
+
+            } else if (key === 'title' || key === 'type' || key == 'contact') {
+
+                _cell = <td key={key}>{value}</td>;
+
             }
-            _cell = <td key={key} className={'score ' + _c}>{value}</td>;
+            _row.push(_cell);
+        });
+    } else if (table === 'sources') {
+        _.forEach(obj, function(value, key) {
+            var _cell;
 
-        } else if (key === 'name' || key === 'description' || key == 'contact' || key === 'jurisdiction_code' || key === 'revision' || key === 'timestamp' || key === 'publisher_id' || key === 'period_id') {
+            if (key === 'title') {
 
-            _cell = <td key={key}>{value}</td>;
+                _cell = <td key={key}><Link to={options.route} params={{lookup: obj.id}}>{value}</Link></td>;
 
-        }
-        _row.push(_cell);
-    });
+            } else if (key === 'data') {
+
+                _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
+
+            } else if (key === 'score') {
+
+                var _c;
+                if (value <= 4) {
+                    _c = 'danger';
+                } else if (value <= 9) {
+                    _c = 'warning';
+                } else {
+                    _c = 'success';
+                }
+                _cell = <td key={key} className={'score ' + _c}>{value}</td>;
+
+            } else if (key === 'format' || key === 'last_modified') {
+
+                _cell = <td key={key}>{value}</td>;
+
+            }
+            _row.push(_cell);
+        });
+    }
     return _row;
 }
 
