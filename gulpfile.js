@@ -22,7 +22,8 @@ var scriptsDir = srcDir + '/scripts';
 gulp.task('deploy', function() {
     return gulp.src(distDir + '/*')
         .pipe(ghPages({
-            message: "Dashboard update." + Date.now()
+            message: "Dashboard update." + Date.now(),
+            remoteUrl: "https://github.com/okfn/spend-publishing-dashboard"
         }));
 });
 
