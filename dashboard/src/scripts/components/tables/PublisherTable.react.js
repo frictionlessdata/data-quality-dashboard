@@ -24,7 +24,7 @@ var PublisherTable = React.createClass({
                 <Table className="table">
                     <thead>
                         <tr>
-                            {UIUtils.makeTableHeader(this.props.publishers[0])}
+                            {UIUtils.makeTableHeader(this.props.publishers[0], 'publishers')}
                         </tr>
                     </thead>
                     <tbody>
