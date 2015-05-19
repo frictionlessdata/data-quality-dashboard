@@ -12,10 +12,7 @@ var PublisherTable = React.createClass({
                 <div className="intro">
                     <div className="text">
                         <h2>Publishers</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc cursus mauris molestie accumsan laoreet. Vestibulum elementum porta rhoncus. Vivamus sagittis urna congue sollicitudin mollis. Phasellus dictum elit sed posuere mattis. Donec egestas libero sit amet elit congue, quis placerat tellus pharetra.</p>
-                    </div>
-                    <div className="more">
-                        <a className="btn btn-default" href="#" role="button">More</a>
+                        <p>This dashboard monitors the following spend data publishers. The publishers are ordered by their average score of all of their source files (rounded down). This is the result of the latest dashboard run (processing) of the spend publications.</p>
                     </div>
                 </div>
                 {/*<div>
