@@ -56,9 +56,9 @@ var Main = React.createClass({
                     <div className="jumbotron">
                         <MainOverview results={this.state.results} />
                     </div>
-                    <div className="container">
+                    {/*<div className="container">
                         <MainChart results={this.state.results} />
-                    </div>
+                    </div>*/}
                     <section className="publishers">
                         <PublisherTable publishers={this.state.publishers} results={this.state.results} />
                     </section>

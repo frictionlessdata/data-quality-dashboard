@@ -57,9 +57,9 @@ var Source = React.createClass({
                     <div className="jumbotron">
                         <SourceOverview results={this.state.results} source={this.state.source} />
                     </div>
-                    <div className="container">
+                    {/*<div className="container">
                         <SourceChart results={this.state.results} publisher={this.state.publisher} source={this.state.source} />
-                    </div>
+                    </div>*/}
                     <div className="container">
                         <div className="intro">
                             <div className="text">
