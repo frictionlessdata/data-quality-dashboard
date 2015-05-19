@@ -56,9 +56,9 @@ var Publisher = React.createClass({
                     <div className="jumbotron">
                         <PublisherOverview results={this.state.results} />
                     </div>
-                    <div className="container">
+                    {/*<div className="container">
                         <PublisherChart results={this.state.results} publisher={this.state.publisher} />
-                    </div>
+                    </div>*/}
                     <section className="publishers">
                         <SourceTable sources={this.state.sources}  results={this.state.results} />
                     </section>

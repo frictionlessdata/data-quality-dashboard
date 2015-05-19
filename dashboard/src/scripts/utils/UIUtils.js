@@ -68,9 +68,9 @@ function makeOverview(results, page) {
                 label: '% valid',
                 value: CalcUtils.validPercent(results) + ''
             },
-            invalidPercent: {
-                label: '% invalid',
-                value: (100 - CalcUtils.validPercent(results)) + ''
+            totalScore: {
+                label: 'total score',
+                value: CalcUtils.totalScore(results) + ''
             }
         };
     } else if (page === 'publisher') {
@@ -83,9 +83,9 @@ function makeOverview(results, page) {
                 label: '% valid',
                 value: CalcUtils.validPercent(results) + ''
             },
-            invalidPercent: {
-                label: '% invalid',
-                value: (100 - CalcUtils.validPercent(results)) + ''
+            totalScore: {
+                label: 'total score',
+                value: CalcUtils.totalScore(results) + ''
             }
         };
     }
