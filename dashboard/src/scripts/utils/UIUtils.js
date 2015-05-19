@@ -67,10 +67,6 @@ function makeOverview(results, page) {
             validPercent: {
                 label: '% valid',
                 value: CalcUtils.validPercent(results) + ''
-            },
-            totalScore: {
-                label: 'total score',
-                value: CalcUtils.totalScore(results) + ''
             }
         };
     } else if (page === 'publisher') {
