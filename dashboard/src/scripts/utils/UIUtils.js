@@ -61,7 +61,7 @@ function makeOverview(results, page) {
                 value: CalcUtils.publisherCount(results) + ''
             },
             sourceCount: {
-                label: 'sources',
+                label: 'data files',
                 value: CalcUtils.sourceCount(results) + ''
             },
             validPercent: {
@@ -76,7 +76,7 @@ function makeOverview(results, page) {
     } else if (page === 'publisher') {
         var values = {
             sourceCount: {
-                label: 'sources',
+                label: 'data files',
                 value: CalcUtils.sourceCount(results) + ''
             },
             validPercent: {
