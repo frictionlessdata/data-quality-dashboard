@@ -12,7 +12,6 @@ var PublisherTable = React.createClass({
                 <div className="intro">
                     <div className="text">
                         <h2>Publishers</h2>
-                        <p>This dashboard monitors the following spend data publishers. The publishers are ordered by their average score of all of their source files (rounded down). This is the result of the latest dashboard run (processing) of the spend publications.</p>
                     </div>
                 </div>
                 {/*<div>
