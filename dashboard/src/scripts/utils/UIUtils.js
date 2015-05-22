@@ -129,20 +129,16 @@ function makeTableHeader(obj, table) {
     if (table === 'publishers') {
         _.forEach(obj, function(value, key) {
             switch(key) {
-                case 'id':
-                    _header.push(<th key={key}>ID</th>);
-                break;
-
                 case 'title':
                 case 'type':
                 case 'homepage':
                 case 'contact':
                 case 'email':
                     _header.push(<th key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}</th>);
-                break;
+                    break;
             }
-            _header.push(<th key={key} className="score">Score</th>);
         });
+        _header.push(<th key="score" className="score">Score</th>);
     } else if (table === 'sources') {
         _.forEach(obj, function(value, key) {
             switch(key) {
@@ -220,9 +216,9 @@ function makeTableRow(obj, options, table) {
         _.forEach(obj, function(value, key) {
             var _cell;
 
-            if (key === 'id') {
+            if (key === 'title') {
 
-                _cell = <td key={key}><Link to={options.route} params={{lookup: value}} className="label label-default">{value}</Link></td>;
+		 _cell = <td key={key}><Link to={options.route} params={{lookup: obj.id}}>{value}</Link></td>;
 
             } else if (key === 'homepage') {
 
@@ -244,7 +240,7 @@ function makeTableRow(obj, options, table) {
                 }
                 _cell = <td key={key} className={'score ' + _c}>{value}</td>;
 
-            } else if (key === 'title' || key === 'type' || key == 'contact') {
+            } else if (key === 'type' || key == 'contact') {
 
                 _cell = <td key={key}>{value}</td>;
 
