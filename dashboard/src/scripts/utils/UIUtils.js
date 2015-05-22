@@ -255,11 +255,7 @@ function makeTableRow(obj, options, table) {
         _.forEach(obj, function(value, key) {
             var _cell;
 
-            if (key === 'title') {
-
-                _cell = <td key={key}><Link to={options.route} params={{lookup: obj.id}}>{value}</Link></td>;
-
-            } else if (key === 'data') {
+            if (key === 'data') {
 
                 _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
 
@@ -275,7 +271,7 @@ function makeTableRow(obj, options, table) {
                 }
                 _cell = <td key={key} className={'score ' + _c}>{value}</td>;
 
-            } else if (key === 'format' || key === 'last_modified') {
+            } else if (key === 'title' || key === 'format' || key === 'last_modified') {
 
                 _cell = <td key={key}>{value}</td>;
 
