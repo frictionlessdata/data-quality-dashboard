@@ -34,7 +34,6 @@ var Header = React.createClass({
                       <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
                       <span className="text">{this.props.instance.name}</span>
                   </a>
-                  <span className="alpha release badge">alpha</span>
                 </div>
                 <div id="navbar" className="collapse navbar-collapse">
                   <ul className="nav navbar-nav">
