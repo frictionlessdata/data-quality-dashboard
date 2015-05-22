@@ -12,8 +12,7 @@ var SourceTable = React.createClass({
             <div className="container">
                 <div className="intro">
                     <div className="text">
-                        <h2>Sources</h2>
-                        <p>The dashboard monitors the following spend publication source files for this publisher. The source files are ordered by their score. The score for each source file is computed by subtracting the number of validation errors it causes from 10 (never going below 0). This is a result of the latest run (processing) of each of the spend publication source files.</p>
+                        <h2>Data files</h2>
                     </div>
                 </div>
                 {/*<div>
