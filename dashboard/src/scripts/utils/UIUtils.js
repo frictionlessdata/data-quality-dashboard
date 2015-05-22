@@ -240,7 +240,11 @@ function makeTableRow(obj, options, table) {
                 }
                 _cell = <td key={key} className={'score ' + _c}>{value}</td>;
 
-            } else if (key === 'type' || key == 'contact') {
+            } else if (key === 'type') {
+
+                _cell = <td key={key}>{value.charAt(0).toUpperCase() + value.slice(1).replace('-', ' ')}</td>
+
+            } else if (key == 'contact') {
 
                 _cell = <td key={key}>{value}</td>;
 
