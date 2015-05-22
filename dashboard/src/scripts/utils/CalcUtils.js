@@ -1,8 +1,8 @@
 _ = require('lodash');
 
 
-function publisherCount(results) {
-    return _.uniq(results, 'publisher_id').length;
+function publisherCount(publishers) {
+    return _.uniq(publishers, 'id').length;
 }
 
 function sourceCount(results) {

@@ -7,7 +7,7 @@ var PublisherOverview = React.createClass({
         return (
             <div className="container">
                 <ul className="overview">
-                    {UIUtils.makeOverview(this.props.results, 'publisher')}
+                    {UIUtils.makeOverview(this.props.results, [], 'publisher')}
                 </ul>
             </div>
         );

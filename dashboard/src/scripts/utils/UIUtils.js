@@ -46,7 +46,7 @@ function makeOverviewCounter(label, number, counterPadding, digitWidth) {
     return <li className="counter" style={counterStyle}><span className="value">{makeOverviewNumber(number, digitWidth)}</span> <span className="label">{label}</span></li>;
 }
 
-function makeOverview(results, page) {
+function makeOverview(results, objects, page) {
     var documentWidth = document.body.clientWidth,
         availableWidth = 0,
         counters = [],
@@ -58,7 +58,7 @@ function makeOverview(results, page) {
         var values = {
             publisherCount: {
                 label: 'publishers',
-                value: CalcUtils.publisherCount(results) + ''
+                value: CalcUtils.publisherCount(objects) + ''
             },
             sourceCount: {
                 label: 'sources',
