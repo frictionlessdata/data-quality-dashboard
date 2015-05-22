@@ -54,7 +54,7 @@ var Publisher = React.createClass({
                 <HeaderPanel instance={this.state.instance} />
                 <div className="dashboard">
                     <div className="jumbotron">
-                        <PublisherOverview results={this.state.results} />
+                        <PublisherOverview publisher={this.state.publisher} results={this.state.results} />
                     </div>
                     {/*<div className="container">
                         <PublisherChart results={this.state.results} publisher={this.state.publisher} />
