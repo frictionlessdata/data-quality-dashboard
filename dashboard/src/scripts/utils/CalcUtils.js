@@ -66,7 +66,7 @@ function sourceScore(source, results) {
         if (obj.source_id === source) {
             var score = obj.score ? obj.score : 0;
             var timestamp = Date.parse(obj.timestamp);
-            scores.push({score: parseInt(score), timestamp: timestamp});
+            scores.push({score: parseInt(score) * 10, timestamp: timestamp});
         }
     });
     // set the source score to: the latest score
