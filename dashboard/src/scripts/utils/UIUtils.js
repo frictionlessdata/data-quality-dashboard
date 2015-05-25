@@ -151,10 +151,6 @@ function makeTableHeader(obj, table) {
                     _header.push(<th key={key}>URL</th>);
                 break;
 
-                case 'last_modified':
-                    _header.push(<th key={key}>Last modified</th>);
-                break;
-
                 case 'period_id':
                     _header.push(<th key={key}>Period</th>);
                     _header.push(<th key="report">What needs fixing</th>);
@@ -274,7 +270,7 @@ function makeTableRow(obj, options, table) {
                 }
                 _cell = <td key={key} className={'score ' + _c}>{value}</td>;
 
-            } else if (key === 'title' || key === 'format' || key === 'last_modified') {
+            } else if (key === 'title' || key === 'format') {
 
                 _cell = <td key={key}>{value}</td>;
 
