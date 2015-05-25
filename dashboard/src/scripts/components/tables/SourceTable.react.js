@@ -7,6 +7,10 @@ var Button = require('react-bootstrap/Button');
 
 
 var SourceTable = React.createClass({
+    getInitialState: function() {
+	// Default sort order: true is ascending - false is descending
+	return {sort: [['periodTimestamp', false], ['score', false]]}
+    },
     render: function() {
         return (
             <div className="container">
@@ -25,7 +29,7 @@ var SourceTable = React.createClass({
                         </tr>
                     </thead>
                     <tbody>
-                        {UIUtils.makeTableBody(this.props.sources, this.props.results, {'route': 'sources'})}
+                        {UIUtils.makeTableBody(this.props.sources, this.props.results, {'route': 'sources', 'sort':this.state.sort})}
                     </tbody>
                 </Table>
             </div>

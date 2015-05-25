@@ -173,12 +173,6 @@ function makeTableBody(objects, results, options) {
             _objWithScore.score = _publisherScore;
             return _objWithScore;
         });
-        // sort publishers by score in descending order and by name in ascending order
-        _body = _.sortBy(_.sortBy(_unsorted, 'title').reverse(), 'score').reverse();
-        // for each publisher, return a table row
-        _body = _.map(_body, function(obj) {
-            return <tr key={obj.id}>{makeTableRow(obj, options, 'publishers')}</tr>;
-        });
     } else if (options.route === 'sources') {
         // for each source, get its score and timestamp from results and return a new array of sources with scores and timestamps
         _unsorted = _.map(objects, function(obj) {
@@ -200,13 +194,16 @@ function makeTableBody(objects, results, options) {
             _objWithScore.periodTimestamp = periodTimestamp;
             return _objWithScore;
         });
-        // sort sources by period and by score in descending order
-        _body = _.sortByAll(_unsorted, ['periodTimestamp', 'score']).reverse();
-        // for each source, return a table row
-        _body = _.map(_body, function(obj) {
-            return <tr key={obj.id}>{makeTableRow(obj, options, 'sources')}</tr>;
-        });
     }
+
+    // sort
+    var sorters = _.unzip(options.sort)
+    _body = _.sortByOrder(_unsorted, sorters[0], sorters[1]);
+    // for each data item, return a table row
+    _body = _.map(_body, function(obj) {
+        return <tr key={obj.id}>{makeTableRow(obj, options, options.route)}</tr>;
+    });
+
     return _body;
 }
 

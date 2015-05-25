@@ -6,6 +6,10 @@ var TableFilter = require('./TableFilter.react');
 
 
 var PublisherTable = React.createClass({
+    getInitialState: function() {
+	// Default sort order: true is ascending - false is descending
+	return {sort: [['score', false], ['title', true]]}
+    },
     render: function() {
         return (
             <div className="container">
@@ -24,7 +28,7 @@ var PublisherTable = React.createClass({
                         </tr>
                     </thead>
                     <tbody>
-                        {UIUtils.makeTableBody(this.props.publishers, this.props.results, {'route': 'publishers'})}
+                        {UIUtils.makeTableBody(this.props.publishers, this.props.results, {'route': 'publishers', 'sort': this.state.sort})}
                     </tbody>
                 </Table>
             </div>
