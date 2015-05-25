@@ -50,9 +50,9 @@ function publisherScore(publisher, results) {
             scores.push(parseInt(score));
         }
     });
-    // set the publisher score to: sum of scores / number of scores
+    // set the publisher score to: sum of scores / number of scores * 10 (to have a percentage)
     if (scores.length > 0) {
-        publisherScore = Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / scores.length);
+        publisherScore = Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / scores.length * 10);
     }
     return publisherScore;
 }
