@@ -156,7 +156,9 @@ function makeTableHeader(obj, table) {
                 break;
 
                 case 'period_id':
-                    _header.push(<th key={key} className="score">Score</th>);
+                    _header.push(<th key={key}>Period</th>);
+                    _header.push(<th key="report">Report</th>);
+                    _header.push(<th key="score" className="score">Score</th>);
                 break;
             }
         });
@@ -271,9 +273,13 @@ function makeTableRow(obj, options, table) {
                 }
                 _cell = <td key={key} className={'score ' + _c}>{value}</td>;
 
-            } else if (key === 'title' || key === 'format' || key === 'last_modified') {
+            } else if (key === 'title' || key === 'format' || key === 'last_modified' || key === 'period_id') {
 
                 _cell = <td key={key}>{value}</td>;
+
+            } else if ( key === 'schema') {
+
+                _cell = <td key="report"><a href={'http://goodtables.okfnlabs.org/reports?data_url=' + obj.data + '&format=' + obj.format + '&encoding=&schema_url=' + value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
 
             }
             _row.push(_cell);
