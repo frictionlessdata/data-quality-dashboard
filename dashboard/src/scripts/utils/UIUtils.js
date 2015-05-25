@@ -183,23 +183,25 @@ function makeTableBody(objects, results, options) {
         // for each source, get its score and timestamp from results and return a new array of sources with scores and timestamps
         _unsorted = _.map(objects, function(obj) {
             var _sourceData = CalcUtils.sourceScore(obj.id, results);
-            var _sourceTimestamp = new Date(_sourceData.timestamp);
-            var _displayedTimestamp = _sourceTimestamp.getFullYear() + '-' +  ('0' + (_sourceTimestamp.getMonth() + 1)).slice(-2) + '-' +  ('0' + _sourceTimestamp.getDate()).slice(-2);
-            var _sourceLastModified = new Date(obj.last_modified);
-            if (obj.last_modified != '') {
-                var _displayedLastModified = _sourceLastModified.getFullYear() + '-' +  ('0' + (_sourceLastModified.getMonth() + 1)).slice(-2) + '-' +  ('0' + _sourceLastModified.getDate()).slice(-2);
-            } else {
-                var _displayedLastModified = ''
-            }
             var _objWithScore = _.cloneDeep(obj);
             _objWithScore.score = _sourceData.score;
-            _objWithScore.timestamp = _displayedTimestamp;
-            _objWithScore.refTimestamp = _sourceData.timestamp;
-            _objWithScore.last_modified = _displayedLastModified;
+            _objWithScore.timestamp = _sourceData.timestamp;
+            // get period timestamp
+            if (obj.period_id) {
+                var period = obj.period_id.split('/');
+                if (period.length === 1) {
+                    var periodTimestamp = Date.parse(period[0]);
+                } else if (period.length === 2) {
+                    var periodTimestamp = Date.parse(period[1]);
+                }
+            } else {
+                var periodTimestamp = 0;
+            }
+            _objWithScore.periodTimestamp = periodTimestamp;
             return _objWithScore;
         });
-        // sort sources by score and by date in descending order, then by publisher id and by name in ascending order
-        _body = _.sortByAll(_.sortByAll(_unsorted, 'title').reverse(), ['score', 'refTimestamp']).reverse();
+        // sort sources by period and by score in descending order
+        _body = _.sortByAll(_unsorted, ['periodTimestamp', 'score']).reverse();
         // for each source, return a table row
         _body = _.map(_body, function(obj) {
             return <tr key={obj.id}>{makeTableRow(obj, options, 'sources')}</tr>;
