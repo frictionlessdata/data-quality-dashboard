@@ -37,7 +37,7 @@ function totalScore(results) {
     _.forEach(results, function(obj) {
         scores.push(parseInt(obj.score));
     });
-    return Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / results.length);
+    return Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / results.length * 10);
 }
 
 function publisherScore(publisher, results) {

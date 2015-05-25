@@ -69,7 +69,7 @@ function makeOverview(results, objects, page) {
                 value: CalcUtils.validPercent(results) + ''
             },
             totalScore: {
-                label: 'average score',
+                label: '% average score',
                 value: CalcUtils.totalScore(results) + ''
             }
         };
@@ -84,7 +84,7 @@ function makeOverview(results, objects, page) {
                 value: CalcUtils.validPercent(results) + ''
             },
             totalScore: {
-                label: 'average score',
+                label: '% average score',
                 value: CalcUtils.totalScore(results) + ''
             }
         };
