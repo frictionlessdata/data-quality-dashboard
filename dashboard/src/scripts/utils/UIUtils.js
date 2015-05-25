@@ -151,12 +151,10 @@ function makeTableHeader(obj, table) {
                     _header.push(<th key={key}>URL</th>);
                 break;
 
-                case 'last_modified':
-                    _header.push(<th key={key}>Last modified</th>);
-                break;
-
                 case 'period_id':
-                    _header.push(<th key={key} className="score">Score</th>);
+                    _header.push(<th key={key}>Period</th>);
+                    _header.push(<th key="report">What needs fixing</th>);
+                    _header.push(<th key="score" className="score">Score</th>);
                 break;
             }
         });
@@ -185,23 +183,25 @@ function makeTableBody(objects, results, options) {
         // for each source, get its score and timestamp from results and return a new array of sources with scores and timestamps
         _unsorted = _.map(objects, function(obj) {
             var _sourceData = CalcUtils.sourceScore(obj.id, results);
-            var _sourceTimestamp = new Date(_sourceData.timestamp);
-            var _displayedTimestamp = _sourceTimestamp.getFullYear() + '-' +  ('0' + (_sourceTimestamp.getMonth() + 1)).slice(-2) + '-' +  ('0' + _sourceTimestamp.getDate()).slice(-2);
-            var _sourceLastModified = new Date(obj.last_modified);
-            if (obj.last_modified != '') {
-                var _displayedLastModified = _sourceLastModified.getFullYear() + '-' +  ('0' + (_sourceLastModified.getMonth() + 1)).slice(-2) + '-' +  ('0' + _sourceLastModified.getDate()).slice(-2);
-            } else {
-                var _displayedLastModified = ''
-            }
             var _objWithScore = _.cloneDeep(obj);
             _objWithScore.score = _sourceData.score;
-            _objWithScore.timestamp = _displayedTimestamp;
-            _objWithScore.refTimestamp = _sourceData.timestamp;
-            _objWithScore.last_modified = _displayedLastModified;
+            _objWithScore.timestamp = _sourceData.timestamp;
+            // get period timestamp
+            if (obj.period_id) {
+                var period = obj.period_id.split('/');
+                if (period.length === 1) {
+                    var periodTimestamp = Date.parse(period[0]);
+                } else if (period.length === 2) {
+                    var periodTimestamp = Date.parse(period[1]);
+                }
+            } else {
+                var periodTimestamp = 0;
+            }
+            _objWithScore.periodTimestamp = periodTimestamp;
             return _objWithScore;
         });
-        // sort sources by score and by date in descending order, then by publisher id and by name in ascending order
-        _body = _.sortByAll(_.sortByAll(_unsorted, 'title').reverse(), ['score', 'refTimestamp']).reverse();
+        // sort sources by period and by score in descending order
+        _body = _.sortByAll(_unsorted, ['periodTimestamp', 'score']).reverse();
         // for each source, return a table row
         _body = _.map(_body, function(obj) {
             return <tr key={obj.id}>{makeTableRow(obj, options, 'sources')}</tr>;
@@ -212,6 +212,7 @@ function makeTableBody(objects, results, options) {
 
 function makeTableRow(obj, options, table) {
     var _row = [];
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     if (table === 'publishers') {
         _.forEach(obj, function(value, key) {
             var _cell;
@@ -271,9 +272,37 @@ function makeTableRow(obj, options, table) {
                 }
                 _cell = <td key={key} className={'score ' + _c}>{value}</td>;
 
-            } else if (key === 'title' || key === 'format' || key === 'last_modified') {
+            } else if (key === 'title' || key === 'format') {
 
                 _cell = <td key={key}>{value}</td>;
+
+            } else if (key === 'period_id') {
+
+                if (value) {
+                    var period = value.split('/');
+                    if (period.length === 1) {
+                        var elements = period[0].split('-');
+                        var month = months[elements[1] - 1];
+                        var year = elements[0];
+                        var displayed_period = month + ' ' + year;
+                        _cell = <td key={key}>{displayed_period}</td>;
+                    } else if (period.length === 2) {
+                        var elements_start = period[0].split('-');
+                        var elements_end = period[1].split('-');
+                        var month_start = months[elements_start[1] - 1];
+                        var month_end = months[elements_end[1] - 1];
+                        var year_start = elements_start[0];
+                        var year_end = elements_end[0];
+                        var displayed_period = month_start + ' ' + year_start + ' to ' + month_end + ' ' + year_end;
+                        _cell = <td key={key}>{displayed_period}</td>;
+                    }
+                } else {
+                    _cell = <td key={key}>{}</td>;
+                }
+
+            } else if ( key === 'schema') {
+
+                _cell = <td key="report"><a href={'http://goodtables.okfnlabs.org/reports?data_url=' + obj.data + '&format=' + obj.format + '&encoding=&schema_url=' + value}>{'What needs fixing'}</a></td>;
 
             }
             _row.push(_cell);
