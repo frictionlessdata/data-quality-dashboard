@@ -214,6 +214,7 @@ function makeTableBody(objects, results, options) {
 
 function makeTableRow(obj, options, table) {
     var _row = [];
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     if (table === 'publishers') {
         _.forEach(obj, function(value, key) {
             var _cell;
@@ -273,9 +274,33 @@ function makeTableRow(obj, options, table) {
                 }
                 _cell = <td key={key} className={'score ' + _c}>{value}</td>;
 
-            } else if (key === 'title' || key === 'format' || key === 'last_modified' || key === 'period_id') {
+            } else if (key === 'title' || key === 'format' || key === 'last_modified') {
 
                 _cell = <td key={key}>{value}</td>;
+
+            } else if (key === 'period_id') {
+
+                if (value) {
+                    var period = value.split('/');
+                    if (period.length === 1) {
+                        var elements = period[0].split('-');
+                        var month = months[elements[1] - 1];
+                        var year = elements[0];
+                        var displayed_period = month + ' ' + year;
+                        _cell = <td key={key}>{displayed_period}</td>;
+                    } else if (period.length === 2) {
+                        var elements_start = period[0].split('-');
+                        var elements_end = period[1].split('-');
+                        var month_start = months[elements_start[1] - 1];
+                        var month_end = months[elements_end[1] - 1];
+                        var year_start = elements_start[0];
+                        var year_end = elements_end[0];
+                        var displayed_period = month_start + ' ' + year_start + ' to ' + month_end + ' ' + year_end;
+                        _cell = <td key={key}>{displayed_period}</td>;
+                    }
+                } else {
+                    _cell = <td key={key}>{}</td>;
+                }
 
             } else if ( key === 'schema') {
 
