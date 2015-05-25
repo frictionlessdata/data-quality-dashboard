@@ -54,7 +54,7 @@ var Main = React.createClass({
                 <HeaderPanel instance={this.state.instance} publishers={this.state.publishers} />
                 <div className="dashboard">
                     <div className="jumbotron">
-                        <MainOverview dashboard={this.state.instance.name} results={this.state.results} />
+                        <MainOverview dashboard={this.state.instance.name} results={this.state.results} publishers={this.state.publishers} />
                     </div>
                     {/*<div className="container">
                         <MainChart results={this.state.results} />
