@@ -9,7 +9,7 @@ var HeaderPanel = require('../panels/Header.react');
 var FooterPanel = require('../panels/Footer.react');
 var PublisherChart = require('../charts/PublisherChart.react');
 var PublisherOverview = require('../PublisherOverview.react');
-var SourceTable = require('../tables/SourceTable.react');
+var SortableTable = require('../tables/SortableTable.react');
 var APIUtils = require('../../utils/APIUtils');
 var Mixins = require('./Mixins.react');
 
@@ -48,7 +48,11 @@ var Publisher = React.createClass({
     },
 
     render: function() {
-
+        var _columns = [{key:'title'}, {key:'data', label:'URL'},
+			{key:'format'},
+			{key:'periodTimestamp', label:'period'},
+			{key:'report', label:'Error details'},
+			{key:'score'}];
         return (
             <div>
                 <HeaderPanel instance={this.state.instance} />
@@ -60,7 +64,7 @@ var Publisher = React.createClass({
                         <PublisherChart results={this.state.results} publisher={this.state.publisher} />
                     </div>*/}
                     <section className="publishers">
-                        <SourceTable sources={this.state.sources}  results={this.state.results} />
+                        <SortableTable title={'data files'} rows={this.state.sources}  results={this.state.results} columns={_columns} sort={[['periodTimestamp', false], ['score', false]]}/>
                     </section>
                 </div>
                 <FooterPanel instance={this.state.instance} />

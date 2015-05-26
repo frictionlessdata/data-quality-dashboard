@@ -17,12 +17,10 @@ var Header = React.createClass({
     render: function() {
         return (
           <div>
-            <div className="collapse" id="okf-panel">
-              <iframe src="//assets.okfn.org/themes/okfn/okf-panel.html" scrolling="no"></iframe>
-            </div>
+            <div id="ok-panel" class="closed"><iframe src="//assets.okfn.org/themes/okfn/okf-panel.html" scrolling="no"></iframe></div>
             <nav className="navbar navbar-static-top">
               <div className="container">
-                <a href="http://okfn.org/" className="open-knowledge collapsed" title="An Open Knowledge Project" data-toggle="collapse" data-target="#okf-panel" onClick={this._onClick}><span className="text">An Open Knowledge Project</span></a>
+		<a className="ok-ribbon" href="https://okfn.org/"><img src="//okfnlabs.org/ok-panel/assets/images/ok-ribbon.png" alt="Open Knowledge"/></a>
                 <div className="navbar-header">
                   <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span className="sr-only">Toggle navigation</span>
