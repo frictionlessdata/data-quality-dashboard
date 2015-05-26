@@ -4,6 +4,7 @@ var sources = dataBaseDir + '/sources.csv';
 var results = dataBaseDir + '/results.csv';
 var runs = dataBaseDir + '/runs.csv';
 var instance = dataBaseDir + '/instance.json';
+var performance = dataBaseDir + '/performance.csv';
 
 
 module.exports = {
@@ -12,6 +13,7 @@ module.exports = {
         sources: sources,
         results: results,
         runs: runs,
-        instance: instance
+        instance: instance,
+        performance: performance
     }
 };

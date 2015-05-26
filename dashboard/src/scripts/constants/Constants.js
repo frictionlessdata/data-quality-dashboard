@@ -6,7 +6,8 @@ module.exports = {
           publishers: 'publishers',
           sources: 'sources',
           results: 'results',
-          runs: 'runs'
+          runs: 'runs',
+          performance: 'performance'
       }
   }
 
