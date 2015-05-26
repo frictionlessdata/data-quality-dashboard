@@ -41,8 +41,8 @@ var SortableTable = React.createClass({
                 <Table className="table">
                     <thead>
                         <tr>
-                            {_columns.map(function(key) {
-                                return <TableHead key={key} column={key} sortFunction={sortFunction} />;
+                            {_columns.map(function(column) {
+                                return <TableHead key={column.key} column={column} sortFunction={sortFunction} />;
                             })}
                         </tr>
                     </thead>

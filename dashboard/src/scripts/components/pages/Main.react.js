@@ -49,6 +49,8 @@ var Main = React.createClass({
     },
 
     render: function() {
+	var _columns = [{key:'title'}, {key:'type'}, {key:'homepage'},
+                        {key:'contact'}, {key:'email'}, {key:'score'}];
         return (
             <div>
                 <HeaderPanel instance={this.state.instance} publishers={this.state.publishers} />
@@ -60,7 +62,7 @@ var Main = React.createClass({
                         <MainChart results={this.state.results} />
                     </div>*/}
                     <section className="publishers">
-                        <SortableTable title={'publishers'} rows={this.state.publishers} results={this.state.results} columns={['title', 'type', 'homepage', 'contact', 'email', 'score']} sort={[['score', false], ['title', true]]} />
+                        <SortableTable title={'publishers'} rows={this.state.publishers} results={this.state.results} columns={_columns} sort={[['score', false], ['title', true]]} />
                     </section>
                 </div>
                 <FooterPanel instance={this.state.instance} />
