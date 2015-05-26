@@ -37,7 +37,7 @@ function totalScore(results) {
     _.forEach(results, function(obj) {
         scores.push(parseInt(obj.score));
     });
-    return Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / results.length);
+    return Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / results.length * 10);
 }
 
 function publisherScore(publisher, results) {
@@ -50,9 +50,9 @@ function publisherScore(publisher, results) {
             scores.push(parseInt(score));
         }
     });
-    // set the publisher score to: sum of scores / number of scores
+    // set the publisher score to: sum of scores / number of scores * 10 (to have a percentage)
     if (scores.length > 0) {
-        publisherScore = Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / scores.length);
+        publisherScore = Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / scores.length * 10);
     }
     return publisherScore;
 }
@@ -66,7 +66,7 @@ function sourceScore(source, results) {
         if (obj.source_id === source) {
             var score = obj.score ? obj.score : 0;
             var timestamp = Date.parse(obj.timestamp);
-            scores.push({score: parseInt(score), timestamp: timestamp});
+            scores.push({score: parseInt(score) * 10, timestamp: timestamp});
         }
     });
     // set the source score to: the latest score
