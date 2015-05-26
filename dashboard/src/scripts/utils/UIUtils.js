@@ -69,7 +69,7 @@ function makeOverview(results, objects, page) {
                 value: CalcUtils.validPercent(results) + ''
             },
             totalScore: {
-                label: 'average score',
+                label: '% average score',
                 value: CalcUtils.totalScore(results) + ''
             }
         };
@@ -84,7 +84,7 @@ function makeOverview(results, objects, page) {
                 value: CalcUtils.validPercent(results) + ''
             },
             totalScore: {
-                label: 'average score',
+                label: '% average score',
                 value: CalcUtils.totalScore(results) + ''
             }
         };
@@ -232,14 +232,14 @@ function makeTableRow(obj, options, table) {
             } else if (key === 'score') {
 
                 var _c;
-                if (value <= 4) {
+                if (value <= 49) {
                     _c = 'danger';
-                } else if (value <= 9) {
+                } else if (value <= 99) {
                     _c = 'warning';
                 } else {
                     _c = 'success';
                 }
-                _cell = <td key={key} className={'score ' + _c}>{value}</td>;
+                _cell = <td key={key} className={'score ' + _c}>{value + ' %'}</td>;
 
             } else if (key === 'type') {
 
@@ -263,14 +263,14 @@ function makeTableRow(obj, options, table) {
             } else if (key === 'score') {
 
                 var _c;
-                if (value <= 4) {
+                if (value <= 49) {
                     _c = 'danger';
-                } else if (value <= 9) {
+                } else if (value <= 99) {
                     _c = 'warning';
                 } else {
                     _c = 'success';
                 }
-                _cell = <td key={key} className={'score ' + _c}>{value}</td>;
+                _cell = <td key={key} className={'score ' + _c}>{value + ' %'}</td>;
 
             } else if (key === 'title' || key === 'format') {
 
