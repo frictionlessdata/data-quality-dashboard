@@ -274,125 +274,97 @@ function filterTable() {
     //
 }
 
-function shiftToStartMonth(data, currentDate) {
-    var currentMonth = currentDate.getMonth(),
-        currentYear = currentDate.getFullYear(),
-        lastYear = currentYear - 1,
-        startMonth,
-        yearLabel,
-        shiftedPercent = [null, null, null, null, null, null, null, null, null, null, null],
-        shiftedLabels = [];
+function makeLabel(timestamp) {
+    var date = new Date(timestamp),
+        year = date.getFullYear(),
+        month = date.getMonth(),
+        abbr_months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    // set the start month to 12 months ago
-    if (currentMonth != 11) {
-        startMonth = currentMonth + 1;
-    } else {
-        startMonth = 0;
-    }
-
-    if (startMonth > 0) {
-        // shift validPercent array so the value at index 0 corresponds to the start month value
-        _.forEach(data.validPercent, function(value, key) {
-            var i = key - startMonth;
-            if (i >= 0) {
-                shiftedPercent[i] = value;
-            } else {
-                shiftedPercent[i + 12] = value;
-            }
-        });
-        data.validPercent = shiftedPercent;
-    }
-
-    // shift labels array so the label at index 0 corresponds to the start month label
-    // and add year to label
-    _.forEach(data.labels, function(value, key) {
-        var i = key - startMonth;
-        if (startMonth === 0 || key < startMonth) {
-            yearLabel = currentYear.toString().substr(2,2);
-        } else {
-            yearLabel = lastYear.toString().substr(2,2);
-        }
-        if (i >= 0) {
-            shiftedLabels[i] = value + '-' + yearLabel;
-        } else {
-            shiftedLabels[i + 12] = value + '-' + yearLabel;
-        }
-    });
-    data.labels = shiftedLabels;
-
-    return data;
+    return abbr_months[month] + ' ' + year;
 }
 
-function makeChartData(results) {
-    var data = {},
+function makeChartData(performance) {
+    var performances = [],
+        data = {},
         scores = [],
-        validPercentByMonth = [null, null, null, null, null, null, null, null, null, null, null],
-        monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    var currentDate = new Date(),
-        currentMonth = currentDate.getMonth(),
-        currentYear = currentDate.getFullYear(),
-        startTimestamp;
+        valids = [],
+        scores_to_date = [],
+        valids_to_date = [],
+        labels = [];
 
-    // set the start timestamp to 12 months ago
-    if (currentMonth != 11) {
-        startTimestamp = new Date(currentYear - 1, currentMonth + 1, 1).getTime();
-    } else {
-        startTimestamp = new Date(currentYear, 0, 1).getTime();
-    }
-    // get all scores from 12 months ago until now
-    _.forEach(results, function(obj) {
-        var timestamp = new Date(obj.timestamp);
-        if (timestamp.getTime() >= startTimestamp) {
-            scores.push({score: parseInt(obj.score), month: timestamp.getMonth()});
+    // get performances for all publishers
+    _.forEach(performance, function(obj) {
+        if (obj.publisher_id === 'all') {
+            performances.push({period_id: obj.period_id, timestamp: Date.parse(obj.period_id), score: obj.score, valid: obj.valid, score_to_date: obj.score_to_date, valid_to_date: obj.valid_to_date});
         }
     });
-    // group scores by month
-    var scoresByMonth = _.groupBy(scores, 'month');
-    // get valid percent by month
-    _.forEach(scoresByMonth, function(value, key) {
-        var validPercent = CalcUtils.validPercent(value);
-        validPercentByMonth[key] = validPercent;
+
+    // sort performances by period
+    _sorted = _.sortBy(performances, 'timestamp');
+
+    _.forEach(_sorted, function(obj) {
+        scores.push(obj.score);
+        valids.push(obj.valid);
+        scores_to_date.push(obj.score_to_date);
+        valids_to_date.push(obj.valid_to_date);
+        labels.push(makeLabel(obj.timestamp));
     });
-    // set the start month to 12 months ago in data (index 0 of arrays) and make labels
-    data = shiftToStartMonth({validPercent: validPercentByMonth, labels: monthLabels}, currentDate);
+
+    data = {scores: scores, valids: valids, scores_to_date: scores_to_date, valids_to_date: valids_to_date, labels: labels};
 
     return data;
 }
 
-function makeScoreLinePayload(results) {
-    var chartData = makeChartData(results),
-        validPercent = chartData.validPercent,
-        monthLabels = chartData.labels;
-    var invalidPercent = _.map(validPercent, function(n) {
-        if (n == null) {
-            return null;
-        } else {
-            return 100 - n;
-        }
-    });
+function makeScoreLinePayload(results, performance) {
+    var chartData = makeChartData(performance),
+        scores = chartData.scores,
+        valids = chartData.valids,
+        scores_to_date = chartData.scores_to_date,
+        valids_to_date = chartData.valids_to_date,
+        labels = chartData.labels;
 
     var data = {
-        labels: monthLabels,
+        labels: labels,
         datasets: [
             {
-                label: "Valid %",
+                label: "Score",
                 fillColor: "rgba(122, 184, 0,0.2)",
                 strokeColor: "rgba(122, 184, 0,1)",
                 pointColor: "rgba(122, 184, 0,1)",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(122, 184, 0,1)",
-                data: validPercent
+                data: scores
             },
             {
-                label: "Invalid %",
+                label: "Score to date",
+                fillColor: "rgba(70,191,189,0.2)",
+                strokeColor: "rgba(70,191,189,1)",
+                pointColor: "rgba(70,191,189,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(122, 184, 0,1)",
+                data: scores_to_date
+            },
+            {
+                label: "Valid",
                 fillColor: "rgba(119,119,119,0.2)",
                 strokeColor: "rgba(119,119,119,1)",
                 pointColor: "rgba(119,119,119,1)",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(119,119,119,1)",
-                data: invalidPercent
+                data: valids
+            },
+            {
+                label: "Valid to date",
+                fillColor: "rgba(247,70,74,0.2)",
+                strokeColor: "rgba(247,70,74,1)",
+                pointColor: "rgba(247,70,74,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(119,119,119,1)",
+                data: valids_to_date
             }
         ]
     };
@@ -408,10 +380,16 @@ function makeScoreLinePayload(results) {
         pointDot : true,
         pointDotRadius : 4,
         pointDotStrokeWidth : 1,
-        pointHitDetectionRadius : 20,
+        pointHitDetectionRadius : 2,
         datasetStroke : true,
         datasetStrokeWidth : 2,
-        datasetFill : true
+        datasetFill : false,
+        scaleLabel: '<%=value%> %',
+        scaleOverride: true,
+        scaleSteps: 10,
+        scaleStepWidth: 10,
+        scaleStartValue: 0,
+        multiTooltipTemplate: '<%= datasetLabel %>: <%= value %> %'
     };
 
     return {
@@ -420,11 +398,52 @@ function makeScoreLinePayload(results) {
     };
 }
 
+function makeLegend() {
+    var ulStyle = {
+            listStyleType: 'none'
+        },
+        colorStyle = {
+            display: 'inline-block',
+            width: '22px',
+            height: '13px',
+            marginRight: '5px'
+        };
+
+    var scoreColStyle = _.cloneDeep(colorStyle),
+        scoreDateColStyle = _.cloneDeep(colorStyle),
+        validColStyle = _.cloneDeep(colorStyle),
+        validDateColStyle = _.cloneDeep(colorStyle);
+    scoreColStyle.backgroundColor = 'rgba(122, 184, 0,1)';
+    scoreDateColStyle.backgroundColor = 'rgba(70,191,189,1)';
+    validColStyle.backgroundColor = 'rgba(119,119,119,1)';
+    validDateColStyle.backgroundColor = 'rgba(247,70,74,1)';
+
+    var textStyle = {
+            verticalAlign: 'top',
+            fontSize: '13px'
+        };
+
+    var score = <li><span style={scoreColStyle}></span><span style={textStyle}>{'Score (%)'}</span></li>,
+        scoreDate = <li><span style={scoreDateColStyle}></span><span style={textStyle}>{'Score to date (%)'}</span></li>,
+        valid = <li><span style={validColStyle}></span><span style={textStyle}>{'Valid (%)'}</span></li>,
+        validDate = <li><span style={validDateColStyle}></span><span style={textStyle}>{'Valid to date (%)'}</span></li>;
+
+    var legend = (<ul style={ulStyle}>
+            {score}
+            {scoreDate}
+            {valid}
+            {validDate}
+        </ul>);
+
+    return legend;
+}
+
 module.exports = {
     makeOverviewNumber: makeOverviewNumber,
     makeOverview: makeOverview,
     makeTableBody: makeTableBody,
     filterTable: filterTable,
     makeScoreLinePayload: makeScoreLinePayload,
-    searchIn: searchIn
+    searchIn: searchIn,
+    makeLegend: makeLegend
 };

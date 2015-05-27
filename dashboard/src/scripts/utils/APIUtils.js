@@ -29,6 +29,7 @@ function APIUtils() {
     getCSVEndpoint(Config.backend.sources, 'sources');
     getCSVEndpoint(Config.backend.results, 'results');
     getCSVEndpoint(Config.backend.runs, 'runs');
+    getCSVEndpoint(Config.backend.performance, 'performance');
 }
 
 module.exports = APIUtils;

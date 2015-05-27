@@ -5,6 +5,7 @@ var PublisherStore = require('../../stores/publisherStore');
 var SourceStore = require('../../stores/sourceStore');
 var ResultStore = require('../../stores/resultStore');
 var RunStore = require('../../stores/runStore');
+var PerformanceStore = require('../../stores/performanceStore');
 var HeaderPanel = require('../panels/Header.react');
 var FooterPanel = require('../panels/Footer.react');
 var SortableTable = require('../tables/SortableTable.react');
@@ -20,7 +21,8 @@ function getStateFromStores() {
         publishers: PublisherStore.all(),
         sources: SourceStore.all(),
         results: ResultStore.all(),
-        runs: RunStore.all()
+        runs: RunStore.all(),
+        performance: PerformanceStore.all()
     };
 }
 
@@ -38,6 +40,7 @@ var Main = React.createClass({
         SourceStore.removeChangeListener(this._onChange);
         ResultStore.removeChangeListener(this._onChange);
         RunStore.removeChangeListener(this._onChange);
+        PerformanceStore.removeChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
@@ -46,6 +49,7 @@ var Main = React.createClass({
         SourceStore.addChangeListener(this._onChange);
         ResultStore.addChangeListener(this._onChange);
         RunStore.addChangeListener(this._onChange);
+        PerformanceStore.addChangeListener(this._onChange);
     },
 
     render: function() {
@@ -58,9 +62,9 @@ var Main = React.createClass({
                     <div className="jumbotron">
                         <MainOverview dashboard={this.state.instance.name} results={this.state.results} publishers={this.state.publishers} />
                     </div>
-                    {/*<div className="container">
-                        <MainChart results={this.state.results} />
-                    </div>*/}
+                    <div className="container">
+                        <MainChart results={this.state.results} performance={this.state.performance} />
+                    </div>
                     <section className="publishers">
                         <SortableTable title={'publishers'} rows={this.state.publishers} results={this.state.results} columns={_columns} sort={[['score', false], ['title', true]]} />
                     </section>
