@@ -33,11 +33,15 @@ function validPercent(results) {
 }
 
 function totalScore(results) {
-    var scores = [];
+    var scores = [],
+        score = 0;
     _.forEach(results, function(obj) {
         scores.push(parseInt(obj.score));
     });
-    return Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / results.length * 10);
+    if (scores.length > 0) {
+        score = Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / results.length * 10);
+    }
+    return score;
 }
 
 function publisherScore(publisher, results) {
