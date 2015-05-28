@@ -22,7 +22,7 @@ function getStateFromStores() {
         sources: SourceStore.all(),
         results: ResultStore.all(),
         runs: RunStore.all(),
-        performance: PerformanceStore.all()
+        performance: PerformanceStore.query({'publisher_id': 'all'})
     };
 }
 

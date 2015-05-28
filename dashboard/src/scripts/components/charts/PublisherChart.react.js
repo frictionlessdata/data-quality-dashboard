@@ -6,18 +6,9 @@ var CalcUtils = require('../../utils/CalcUtils');
 
 var MetaChart = React.createClass({
     render: function() {
-            var linePayload = UIUtils.makeScoreLinePayload(this.props.results);
+            var linePayload = UIUtils.makeScoreLinePayload(this.props.results, this.props.performance);
             return (
                 <section className="line-chart">
-                    <div className="intro">
-                        <div className="text">
-                            <h2>{this.props.publisher.title}</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc cursus mauris molestie accumsan laoreet. Vestibulum elementum porta rhoncus. Vivamus sagittis urna congue sollicitudin mollis. Phasellus dictum elit sed posuere mattis. Donec egestas libero sit amet elit congue, quis placerat tellus pharetra.</p>
-                        </div>
-                        <div className="more">
-                            <a className="btn btn-default" href="#" role="button">More</a>
-                        </div>
-                    </div>
                     <LineChart
                         id="lineChart"
                         data={linePayload.data}
@@ -25,6 +16,7 @@ var MetaChart = React.createClass({
                         width={1140}
                         height={300}
                     />
+                    <div id="chartLegend">{UIUtils.makeLegend()}</div>
                 </section>
             );
     }
