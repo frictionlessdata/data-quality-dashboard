@@ -389,6 +389,7 @@ function makeScoreLinePayload(results, performance) {
         scaleSteps: 10,
         scaleStepWidth: 10,
         scaleStartValue: 0,
+        animation: false,
         multiTooltipTemplate: '<%= datasetLabel %>: <%= value %> %'
     };
 
@@ -400,7 +401,12 @@ function makeScoreLinePayload(results, performance) {
 
 function makeLegend() {
     var ulStyle = {
-            listStyleType: 'none'
+            listStyleType: 'none',
+            'float': 'right'
+        },
+        liStyle = {
+            display: 'inline-block',
+            marginRight: '10px'
         },
         colorStyle = {
             display: 'inline-block',
@@ -423,10 +429,10 @@ function makeLegend() {
             fontSize: '13px'
         };
 
-    var score = <li><span style={scoreColStyle}></span><span style={textStyle}>{'Score (%)'}</span></li>,
-        scoreDate = <li><span style={scoreDateColStyle}></span><span style={textStyle}>{'Score to date (%)'}</span></li>,
-        valid = <li><span style={validColStyle}></span><span style={textStyle}>{'Valid (%)'}</span></li>,
-        validDate = <li><span style={validDateColStyle}></span><span style={textStyle}>{'Valid to date (%)'}</span></li>;
+    var score = <li style={liStyle}><span style={scoreColStyle}></span><span style={textStyle}>{'Score (%)'}</span></li>,
+        scoreDate = <li style={liStyle}><span style={scoreDateColStyle}></span><span style={textStyle}>{'Score to date (%)'}</span></li>,
+        valid = <li style={liStyle}><span style={validColStyle}></span><span style={textStyle}>{'Valid (%)'}</span></li>,
+        validDate = <li style={liStyle}><span style={validDateColStyle}></span><span style={textStyle}>{'Valid to date (%)'}</span></li>;
 
     var legend = (<ul style={ulStyle}>
             {score}

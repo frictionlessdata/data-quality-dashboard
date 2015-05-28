@@ -9,6 +9,7 @@ var MetaChart = React.createClass({
             var linePayload = UIUtils.makeScoreLinePayload(this.props.results, this.props.performance);
             return (
                 <section className="line-chart">
+                    <div id="chartLegend">{UIUtils.makeLegend()}</div>
                     <LineChart
                         id="lineChart"
                         data={linePayload.data}
@@ -16,7 +17,6 @@ var MetaChart = React.createClass({
                         width={1140}
                         height={300}
                     />
-                    <div id="chartLegend">{UIUtils.makeLegend()}</div>
                 </section>
             );
     }
