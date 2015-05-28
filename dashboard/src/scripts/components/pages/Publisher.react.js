@@ -5,6 +5,7 @@ var PublisherStore = require('../../stores/publisherStore');
 var SourceStore = require('../../stores/sourceStore');
 var ResultStore = require('../../stores/resultStore');
 var RunStore = require('../../stores/runStore');
+var PerformanceStore = require('../../stores/performanceStore');
 var HeaderPanel = require('../panels/Header.react');
 var FooterPanel = require('../panels/Footer.react');
 var PublisherChart = require('../charts/PublisherChart.react');
@@ -19,7 +20,8 @@ function getStateFromStores(getParams) {
         instance: InstanceStore.get(),
         publisher: PublisherStore.get(getParams.lookup),
         results: ResultStore.query({'publisher_id': getParams.lookup}),
-        sources: SourceStore.query({'publisher_id': getParams.lookup})
+        sources: SourceStore.query({'publisher_id': getParams.lookup}),
+        performance: PerformanceStore.query({'publisher_id': getParams.lookup})
     };
 }
 
@@ -37,6 +39,7 @@ var Publisher = React.createClass({
         SourceStore.removeChangeListener(this._onChange);
         ResultStore.removeChangeListener(this._onChange);
         RunStore.removeChangeListener(this._onChange);
+        PerformanceStore.removeChangeListener(this._onChange);
     },
 
     componentDidMount: function() {
@@ -45,6 +48,7 @@ var Publisher = React.createClass({
         SourceStore.addChangeListener(this._onChange);
         ResultStore.addChangeListener(this._onChange);
         RunStore.addChangeListener(this._onChange);
+        PerformanceStore.addChangeListener(this._onChange);
     },
 
     render: function() {
@@ -60,9 +64,9 @@ var Publisher = React.createClass({
                     <div className="jumbotron">
                         <PublisherOverview publisher={this.state.publisher} results={this.state.results} />
                     </div>
-                    {/*<div className="container">
-                        <PublisherChart results={this.state.results} publisher={this.state.publisher} />
-                    </div>*/}
+                    <div className="container">
+                        <PublisherChart results={this.state.results} publisher={this.state.publisher} performance={this.state.performance} />
+                    </div>
                     <section className="publishers">
                         <SortableTable title={'data files'} rows={this.state.sources}  results={this.state.results} columns={_columns} sort={[['periodTimestamp', false], ['score', false]]}/>
                     </section>

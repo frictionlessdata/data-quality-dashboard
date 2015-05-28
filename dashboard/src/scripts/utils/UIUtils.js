@@ -292,11 +292,11 @@ function makeChartData(performance) {
         valids_to_date = [],
         labels = [];
 
-    // get performances for all publishers
+    // get performances
     _.forEach(performance, function(obj) {
-        if (obj.publisher_id === 'all') {
-            performances.push({period_id: obj.period_id, timestamp: Date.parse(obj.period_id), score: obj.score, valid: obj.valid, score_to_date: obj.score_to_date, valid_to_date: obj.valid_to_date});
-        }
+        var dateParts = obj.period_id.split('-');
+        var date = new Date(parseInt(dateParts[0], 10), parseInt(dateParts[1], 10) - 1, parseInt(dateParts[2], 10));
+        performances.push({period_id: obj.period_id, timestamp: date.getTime(), score: obj.score, valid: obj.valid, score_to_date: obj.score_to_date, valid_to_date: obj.valid_to_date});
     });
 
     // sort performances by period
