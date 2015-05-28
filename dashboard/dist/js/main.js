@@ -13,5 +13,3 @@
 })(jQuery);*/
 
 $('.pricing-panels').equalize({children: '.pricing-panel > div > div', equalize: 'outerHeight'});
-
-$('a.ok-ribbon').click(function(e) { e.preventDefault(); }
