@@ -1,0 +1,4 @@
+sass:
+  sass_dir: css/_sass
+
+exclude: [node_modules/]
