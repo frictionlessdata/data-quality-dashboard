@@ -12,33 +12,17 @@ var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var historyApiFallback = require('connect-history-api-fallback');
 var sass = require('gulp-sass');
-var baseDir = './dashboard';
-var srcDir = baseDir + '/src';
-var distDir = baseDir + '/dist';
-var stylesDir = srcDir + '/styles';
-var scriptsDir = srcDir + '/scripts';
+
+var scriptsDir = './js/src';
 
 
 gulp.task('deploy', function() {
-    return gulp.src(distDir + '/*')
+    return gulp.src('./*')
         .pipe(ghPages({
             message: "Dashboard update." + Date.now(),
             remoteUrl: "https://github.com/okfn/spend-publishing-dashboard"
         }));
 });
-
-
-gulp.task('serve', function() {
-    // Run a development server that reloads on changes
-    browserSync({
-        open: false,
-        server: {
-            baseDir: distDir,
-            middleware: [historyApiFallback]
-        }
-    });
-});
-
 
 gulp.task('scripts', function() {
     // Transforms scripts into a bundle for the browser
@@ -68,4 +52,4 @@ gulp.task('scripts', function() {
       .pipe(reload({stream:true}));
 });
 
-gulp.task('default', ['scripts', 'serve']);
+gulp.task('default', ['scripts']);
