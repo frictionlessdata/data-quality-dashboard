@@ -6,8 +6,6 @@ var SourceStore = require('../../stores/sourceStore');
 var ResultStore = require('../../stores/resultStore');
 var RunStore = require('../../stores/runStore');
 var PerformanceStore = require('../../stores/performanceStore');
-var HeaderPanel = require('../panels/Header.react');
-var FooterPanel = require('../panels/Footer.react');
 var SortableTable = require('../tables/SortableTable.react');
 var MainOverview = require('../MainOverview.react');
 var MainChart = require('../charts/MainChart.react');
@@ -57,7 +55,6 @@ var Main = React.createClass({
                         {key:'contact'}, {key:'email'}, {key:'score'}];
         return (
             <div>
-                <HeaderPanel instance={this.state.instance} publishers={this.state.publishers} />
                 <div className="dashboard">
                     <div className="jumbotron">
                         <MainOverview dashboard={this.state.instance.name} results={this.state.results} publishers={this.state.publishers} />
@@ -69,7 +66,6 @@ var Main = React.createClass({
                         <SortableTable title={'publishers'} rows={this.state.publishers} results={this.state.results} columns={_columns} sort={[['score', false], ['title', true]]} />
                     </section>
                 </div>
-                <FooterPanel instance={this.state.instance} />
             </div>
         );
     }

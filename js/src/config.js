@@ -1,4 +1,4 @@
-var dataBaseDir = 'https://cdn.rawgit.com/okfn/spd-data-example/master/data';
+var dataBaseDir = 'https://cdn.rawgit.com/okfn/spd-data-uk-all/ministerial-dpts/data';
 var publishers = dataBaseDir + '/publishers.csv';
 var sources = dataBaseDir + '/sources.csv';
 var results = dataBaseDir + '/results.csv';
