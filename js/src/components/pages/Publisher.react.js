@@ -6,8 +6,6 @@ var SourceStore = require('../../stores/sourceStore');
 var ResultStore = require('../../stores/resultStore');
 var RunStore = require('../../stores/runStore');
 var PerformanceStore = require('../../stores/performanceStore');
-var HeaderPanel = require('../panels/Header.react');
-var FooterPanel = require('../panels/Footer.react');
 var PublisherChart = require('../charts/PublisherChart.react');
 var PublisherOverview = require('../PublisherOverview.react');
 var SortableTable = require('../tables/SortableTable.react');
@@ -58,8 +56,6 @@ var Publisher = React.createClass({
 			{key:'report', label:'Error details'},
 			{key:'score'}];
         return (
-            <div>
-                <HeaderPanel instance={this.state.instance} />
                 <div className="dashboard">
                     <div className="jumbotron">
                         <PublisherOverview publisher={this.state.publisher} results={this.state.results} />
@@ -71,8 +67,6 @@ var Publisher = React.createClass({
                         <SortableTable title={'data files'} rows={this.state.sources}  results={this.state.results} columns={_columns} sort={[['periodTimestamp', false], ['score', false]]}/>
                     </section>
                 </div>
-                <FooterPanel instance={this.state.instance} />
-            </div>
         );
     }
 
