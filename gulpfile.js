@@ -51,30 +51,21 @@ gulp.task('scripts', function() {
         fullPaths: true
     });
     var watcher  = watchify(bundler);
+    var destDir = './js/'
 
     return watcher
-    .on('update', function () {
-        var updateStart = Date.now();
-        console.log('Updating!');
-        watcher.bundle()
-        .pipe(source('app.min.js'))
-        .pipe(gulp.dest(distDir));
-        console.log('Updated!', (Date.now() - updateStart) + 'ms');
-    })
-    .bundle()
-    .pipe(source('app.min.js'))
-    .pipe(gulp.dest(distDir))
-    .pipe(reload({stream:true}));
+      .on('update', function () {
+          var updateStart = Date.now();
+          console.log('Updating!');
+          watcher.bundle()
+          .pipe(source('app.min.js'))
+          .pipe(gulp.dest(destDir));
+          console.log('Updated!', (Date.now() - updateStart) + 'ms');
+      })
+      .bundle()
+      .pipe(source('app.min.js'))
+      .pipe(gulp.dest(destDir))
+      .pipe(reload({stream:true}));
 });
 
-
-gulp.task('styles', function () {
-    gulp.src(stylesDir + '/app.scss')
-        .pipe(sass())
-        .pipe(minifyCss({compatibility: 'ie8'}))
-        .pipe(rename('app.min.css'))
-        .pipe(gulp.dest(distDir));
-});
-
-
-gulp.task('default', ['scripts', 'styles', 'serve']);
+gulp.task('default', ['scripts', 'serve']);

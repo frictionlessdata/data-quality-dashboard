@@ -25,8 +25,13 @@ npm install
 # run the server
 gulp
 
-# deploy the app
-gulp deploy
+# build the JS app from source
+gulp scripts
+
+# run jekyll locally
+jekyll serve --watch
+
+# visit http://localhost:4000/
 ```
 
 Read on for details.
@@ -36,13 +41,16 @@ Read on for details.
 The dashboard is a client-side application that hooks up to a static data repository
 for its data.
 
+The site is a combination of Jekyll for static generation and Javascript is
+developed using the [Flux](http://facebook.github.io/flux/) application
+architecture. That means it implements a [unidirectional data
+flow](http://facebook.github.io/flux/docs/overview.html#structure-and-data-flow)
+, and uses [React](https://facebook.github.io/react/) for the view layer.
+
 Everything is written in Node-style CommonJS, and the distributed code is
 transformed with browserify. This is an automated process, just run `gulp`
 and the magic happens.
 
-The code is developed using the [Flux](http://facebook.github.io/flux/)
-application architecture. That means it implements a [unidirectional data flow](http://facebook.github.io/flux/docs/overview.html#structure-and-data-flow)
-, and uses [React](https://facebook.github.io/react/) for the view layer.
 
 ### Local development
 
