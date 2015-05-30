@@ -1,8 +1,5 @@
 # Spend Publishing Dashboard
 
-[![Build Status](https://travis-ci.org/okfn/spend-publishing-dashboard.svg)](https://travis-ci.org/okfn/spend-publishing-dashboard)
-[![Coverage Status](https://coveralls.io/repos/okfn/spend-publishing-dashboard/badge.svg)](https://coveralls.io/r/okfn/spend-publishing-dashboard)
-
 Spend Publishing Dashboard provides access to, and displays statistics on,
 a collection of published data. This collection of data is logically related:
 for example, data published by a single government department, or a group
