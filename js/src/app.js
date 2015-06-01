@@ -7,8 +7,6 @@ var RouteHandler = Router.RouteHandler;
 var APIUtils = require('./utils/APIUtils');
 var MainPage = require('./components/pages/Main.react');
 var PublisherPage = require('./components/pages/Publisher.react');
-var Header = require('./components/panels/Header.react');
-var Footer = require('./components/panels/Footer.react');
 var AppNode = document.getElementById('application');
 
 
