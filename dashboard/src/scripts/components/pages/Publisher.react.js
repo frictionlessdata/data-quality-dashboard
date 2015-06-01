@@ -62,10 +62,10 @@ var Publisher = React.createClass({
                 <HeaderPanel instance={this.state.instance} />
                 <div className="dashboard">
                     <div className="jumbotron">
-                        <PublisherOverview publisher={this.state.publisher} results={this.state.results} />
+                        <PublisherOverview publisher={this.state.publisher || {}} results={this.state.results} />
                     </div>
                     <div className="container">
-                        <PublisherChart results={this.state.results} publisher={this.state.publisher} performance={this.state.performance} />
+                        <PublisherChart results={this.state.results} publisher={this.state.publisher || {}} performance={this.state.performance} />
                     </div>
                     <section className="publishers">
                         <SortableTable title={'data files'} rows={this.state.sources}  results={this.state.results} columns={_columns} sort={[['periodTimestamp', false], ['score', false]]}/>
