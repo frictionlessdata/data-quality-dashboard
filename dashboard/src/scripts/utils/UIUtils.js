@@ -56,6 +56,14 @@ function makeOverview(results, objects, page) {
 
     if (page === 'main') {
         var values = {
+            validPercent: {
+                label: '% valid',
+                value: CalcUtils.validPercent(results) + ''
+            },
+            totalScore: {
+                label: '% average score',
+                value: CalcUtils.totalScore(results) + ''
+            },
             publisherCount: {
                 label: 'publishers',
                 value: CalcUtils.publisherCount(objects) + ''
@@ -63,22 +71,10 @@ function makeOverview(results, objects, page) {
             sourceCount: {
                 label: 'data files',
                 value: CalcUtils.sourceCount(results) + ''
-            },
-            validPercent: {
-                label: '% valid',
-                value: CalcUtils.validPercent(results) + ''
-            },
-            totalScore: {
-                label: '% average score',
-                value: CalcUtils.totalScore(results) + ''
             }
         };
     } else if (page === 'publisher') {
         var values = {
-            sourceCount: {
-                label: 'data files',
-                value: CalcUtils.sourceCount(results) + ''
-            },
             validPercent: {
                 label: '% valid',
                 value: CalcUtils.validPercent(results) + ''
@@ -86,6 +82,10 @@ function makeOverview(results, objects, page) {
             totalScore: {
                 label: '% average score',
                 value: CalcUtils.totalScore(results) + ''
+            },
+            sourceCount: {
+                label: 'data files',
+                value: CalcUtils.sourceCount(results) + ''
             }
         };
     }
