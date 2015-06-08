@@ -61,7 +61,7 @@ function makeOverview(results, objects, page) {
                 value: CalcUtils.validPercent(results) + ''
             },
             totalScore: {
-                label: 'average score (%)',
+                label: 'score (%)',
                 value: CalcUtils.totalScore(results) + ''
             },
             publisherCount: {
@@ -80,7 +80,7 @@ function makeOverview(results, objects, page) {
                 value: CalcUtils.validPercent(results) + ''
             },
             totalScore: {
-                label: 'average score (%)',
+                label: 'score (%)',
                 value: CalcUtils.totalScore(results) + ''
             },
             sourceCount: {
