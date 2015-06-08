@@ -61,6 +61,20 @@ function publisherScore(publisher, results) {
     return publisherScore;
 }
 
+// return last publication date for a give publisher
+function lastFileDate(publisher, results) {
+    var publication = _.max(results, function(obj) {
+        if (obj.publisher_id === publisher) {
+            // we're after the timestamp of the publisher
+            return new Date(_.last(obj.period_id.split('/')));
+        } else {
+            // if this is not the publisher we want, we return empty string
+            return 0;
+        }
+    });
+    return new Date(_.last(publication.period_id.split('/')));
+}
+
 // return the latest score for a source and its timestamp from results
 function sourceScore(source, results) {
     var scores = [],
@@ -90,5 +104,6 @@ module.exports = {
     validPercent: validPercent,
     totalScore: totalScore,
     publisherScore: publisherScore,
-    sourceScore: sourceScore
+    sourceScore: sourceScore,
+    lastFileDate: lastFileDate
 };

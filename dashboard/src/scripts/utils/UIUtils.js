@@ -131,8 +131,10 @@ function makeTableBody(objects, results, options) {
         // for each publisher, get its score from results and return a new array of publishers with scores
         _unsorted = _.map(objects, function(obj) {
             var _publisherScore = CalcUtils.publisherScore(obj.id, results);
+            var _lastFileDate = CalcUtils.lastFileDate(obj.id, results);
             var _objWithScore = _.cloneDeep(obj);
             _objWithScore.score = _publisherScore;
+            _objWithScore.lastFileDate = _lastFileDate;
             return _objWithScore;
         });
     } else if (options.route === 'data files') {
@@ -203,10 +205,24 @@ function makeTableRow(obj, options, table) {
                     _c = 'success';
                 }
                 _cell = <td key={key} className={'score ' + _c}>{value + ' %'}</td>;
+            } else if (key === 'lastFileDate') {
+
+                var displayed_period = 'No publications';
+
+                if (value) {
+                    var date = new Date(value);
+
+                    var month = months[date.getMonth()];
+                    var year = date.getFullYear();
+
+                    displayed_period = month + ' ' + year;
+                }
+
+                _cell = <td key={key}>{displayed_period}</td>;
 
             } else if (key === 'type') {
 
-                _cell = <td key={key}>{value.charAt(0).toUpperCase() + value.slice(1).replace('-', ' ')}</td>
+                _cell = <td key={key}>{value.charAt(0).toUpperCase() + value.slice(1).replace('-', ' ')}</td>;
 
             }
             _row.push(_cell);
