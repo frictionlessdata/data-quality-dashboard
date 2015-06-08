@@ -57,11 +57,11 @@ function makeOverview(results, objects, page) {
     if (page === 'main') {
         var values = {
             validPercent: {
-                label: '% valid',
+                label: 'correct (%)',
                 value: CalcUtils.validPercent(results) + ''
             },
             totalScore: {
-                label: '% average score',
+                label: 'average score (%)',
                 value: CalcUtils.totalScore(results) + ''
             },
             publisherCount: {
@@ -76,11 +76,11 @@ function makeOverview(results, objects, page) {
     } else if (page === 'publisher') {
         var values = {
             validPercent: {
-                label: '% valid',
+                label: 'correct (%)',
                 value: CalcUtils.validPercent(results) + ''
             },
             totalScore: {
-                label: '% average score',
+                label: 'average score (%)',
                 value: CalcUtils.totalScore(results) + ''
             },
             sourceCount: {
