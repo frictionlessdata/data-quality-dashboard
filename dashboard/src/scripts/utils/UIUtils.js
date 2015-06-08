@@ -288,15 +288,13 @@ function makeChartData(performance) {
         data = {},
         scores = [],
         valids = [],
-        scores_to_date = [],
-        valids_to_date = [],
         labels = [];
 
     // get performances
     _.forEach(performance, function(obj) {
         var dateParts = obj.period_id.split('-');
         var date = new Date(parseInt(dateParts[0], 10), parseInt(dateParts[1], 10) - 1, parseInt(dateParts[2], 10));
-        performances.push({period_id: obj.period_id, timestamp: date.getTime(), score: obj.score, valid: obj.valid, score_to_date: obj.score_to_date, valid_to_date: obj.valid_to_date});
+        performances.push({period_id: obj.period_id, timestamp: date.getTime(), score: obj.score, valid: obj.valid});
     });
 
     // sort performances by period
@@ -305,12 +303,10 @@ function makeChartData(performance) {
     _.forEach(_sorted, function(obj) {
         scores.push(obj.score);
         valids.push(obj.valid);
-        scores_to_date.push(obj.score_to_date);
-        valids_to_date.push(obj.valid_to_date);
         labels.push(makeLabel(obj.timestamp));
     });
 
-    data = {scores: scores, valids: valids, scores_to_date: scores_to_date, valids_to_date: valids_to_date, labels: labels};
+    data = {scores: scores, valids: valids, labels: labels};
 
     return data;
 }
@@ -319,8 +315,6 @@ function makeScoreLinePayload(results, performance) {
     var chartData = makeChartData(performance),
         scores = chartData.scores,
         valids = chartData.valids,
-        scores_to_date = chartData.scores_to_date,
-        valids_to_date = chartData.valids_to_date,
         labels = chartData.labels;
 
     var data = {
@@ -337,17 +331,7 @@ function makeScoreLinePayload(results, performance) {
                 data: scores
             },
             {
-                label: "Score to date",
-                fillColor: "rgba(70,191,189,0.2)",
-                strokeColor: "rgba(70,191,189,1)",
-                pointColor: "rgba(70,191,189,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(122, 184, 0,1)",
-                data: scores_to_date
-            },
-            {
-                label: "Valid",
+                label: "Correct",
                 fillColor: "rgba(119,119,119,0.2)",
                 strokeColor: "rgba(119,119,119,1)",
                 pointColor: "rgba(119,119,119,1)",
@@ -355,16 +339,6 @@ function makeScoreLinePayload(results, performance) {
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(119,119,119,1)",
                 data: valids
-            },
-            {
-                label: "Valid to date",
-                fillColor: "rgba(247,70,74,0.2)",
-                strokeColor: "rgba(247,70,74,1)",
-                pointColor: "rgba(247,70,74,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(119,119,119,1)",
-                data: valids_to_date
             }
         ]
     };
@@ -416,13 +390,9 @@ function makeLegend() {
         };
 
     var scoreColStyle = _.cloneDeep(colorStyle),
-        scoreDateColStyle = _.cloneDeep(colorStyle),
-        validColStyle = _.cloneDeep(colorStyle),
-        validDateColStyle = _.cloneDeep(colorStyle);
+        validColStyle = _.cloneDeep(colorStyle);
     scoreColStyle.backgroundColor = 'rgba(122, 184, 0,1)';
-    scoreDateColStyle.backgroundColor = 'rgba(70,191,189,1)';
     validColStyle.backgroundColor = 'rgba(119,119,119,1)';
-    validDateColStyle.backgroundColor = 'rgba(247,70,74,1)';
 
     var textStyle = {
             verticalAlign: 'top',
@@ -430,15 +400,11 @@ function makeLegend() {
         };
 
     var score = <li style={liStyle}><span style={scoreColStyle}></span><span style={textStyle}>{'Score (%)'}</span></li>,
-        scoreDate = <li style={liStyle}><span style={scoreDateColStyle}></span><span style={textStyle}>{'Score to date (%)'}</span></li>,
-        valid = <li style={liStyle}><span style={validColStyle}></span><span style={textStyle}>{'Valid (%)'}</span></li>,
-        validDate = <li style={liStyle}><span style={validDateColStyle}></span><span style={textStyle}>{'Valid to date (%)'}</span></li>;
+        valid = <li style={liStyle}><span style={validColStyle}></span><span style={textStyle}>{'Correct (%)'}</span></li>;
 
     var legend = (<ul style={ulStyle}>
             {score}
-            {scoreDate}
             {valid}
-            {validDate}
         </ul>);
 
     return legend;
