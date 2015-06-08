@@ -54,7 +54,7 @@ var Main = React.createClass({
 
     render: function() {
 	var _columns = [{key:'title'}, {key:'type'}, {key:'homepage'},
-                        {key:'contact'}, {key:'email'}, {key:'score'}];
+                        {key:'email'}, {key:'score'}];
         return (
             <div>
                 <HeaderPanel instance={this.state.instance} publishers={this.state.publishers} />
