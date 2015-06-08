@@ -186,7 +186,11 @@ function makeTableRow(obj, options, table) {
 
             } else if (key === 'email') {
 
-                _cell = <td key={key}><a href={'mailto:' + value}><span className="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></td>;
+                if (value) {
+                    _cell = <td key={key}><a href={'mailto:' + value}><span className="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></td>;
+                } else {
+                    _cell = <td key={key}><span className="glyphicon glyphicon-envelope text-muted" aria-hidden="true"></span></td>;
+                }
 
             } else if (key === 'score') {
 
