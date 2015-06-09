@@ -131,11 +131,12 @@ function makeTableBody(objects, results, options) {
         // for each publisher, get its score from results and return a new array of publishers with scores
         _unsorted = _.map(objects, function(obj) {
             var _publisherScore = CalcUtils.publisherScore(obj.id, results);
-            var _lastFileDate = CalcUtils.lastFileDate(obj.id, results);
+            var _lastFile = CalcUtils.lastFile(obj.id, results);
             var _objWithScore = _.cloneDeep(obj);
             _objWithScore.completelyCorrect = _publisherScore.amountCorrect;
             _objWithScore.score = _publisherScore.score;
-            _objWithScore.lastFileDate = _lastFileDate;
+            _objWithScore.lastFileDate = _lastFile.period;
+            _objWithScore.lastFileScore = _lastFile.score;
             return _objWithScore;
         });
     } else if (options.route === 'data files') {
@@ -195,7 +196,7 @@ function makeTableRow(obj, options, table) {
                     _cell = <td key={key}><span className="glyphicon glyphicon-envelope text-muted" aria-hidden="true"></span></td>;
                 }
 
-            } else if (key === 'score') {
+            } else if (key === 'score' || key === 'lastFileScore') {
 
                 var _c;
                 if (value <= 49) {

@@ -66,7 +66,7 @@ function publisherScore(publisher, results) {
 }
 
 // return last publication date for a give publisher
-function lastFileDate(publisher, results) {
+function lastFile(publisher, results) {
     var publication = _.max(results, function(obj) {
         if (obj.publisher_id === publisher) {
             // we're after the timestamp of the publisher
@@ -77,11 +77,17 @@ function lastFileDate(publisher, results) {
         }
     });
 
-    if(publication && publication.period_id) {
-        return new Date(_.last(publication.period_id.split('/')));
-    } else {
-        return 0;
+    var lastFile = {period: 0, score: 0};
+    if (publication) {
+        if (publication.period_id) {
+            lastFile.period = new Date(
+                _.last(publication.period_id.split('/')));
+        }
+        if (publication.score) {
+            lastFile.score = parseInt(publication.score) * 10;
+        }
     }
+    return lastFile;
 }
 
 // return the latest score for a source and its timestamp from results
@@ -114,5 +120,5 @@ module.exports = {
     totalScore: totalScore,
     publisherScore: publisherScore,
     sourceScore: sourceScore,
-    lastFileDate: lastFileDate
+    lastFile: lastFile
 };

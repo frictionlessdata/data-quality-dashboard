@@ -57,7 +57,8 @@ var Main = React.createClass({
                         {key:'email'},
                         {key:'completelyCorrect', label:'100% correct'},
                         {key:'score'},
-                        {key:'lastFileDate', label:'last file'}];
+                        {key:'lastFileDate', label:'last file'},
+                        {key:'lastFileScore', label:'last score'}];
         return (
             <div>
                 <HeaderPanel instance={this.state.instance} publishers={this.state.publishers} />
