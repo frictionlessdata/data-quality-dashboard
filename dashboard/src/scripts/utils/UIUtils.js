@@ -173,119 +173,102 @@ function makeTableBody(objects, results, options) {
     return _body;
 }
 
+function formatCell(key, value, obj, options) {
+    var _cell;
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    switch (key) {
+        case "title":
+            if (options.route) {
+                _cell = <td key={key}><Link to={options.route} params={{lookup: obj.id}}>{value}</Link></td>;
+            } else {
+                _cell = <td key={key}>{value}</td>;
+            }
+            break;
+        case 'homepage':
+            _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
+            break;
+        case 'email':
+            if (value) {
+                _cell = <td key={key}><a href={'mailto:' + value}><span className="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></td>;
+            } else {
+                _cell = <td key={key}><span className="glyphicon glyphicon-envelope text-muted" aria-hidden="true"></span></td>;
+            }
+            break;
+        case 'score':
+        case 'lastFileScore':
+            var _c;
+            if (value <= 49) {
+                _c = 'danger';
+            } else if (value <= 99) {
+                _c = 'warning';
+            } else {
+                _c = 'success';
+            }
+            _cell = <td key={key} className={'score ' + _c}>{value + ' %'}</td>;
+            break;
+        case 'lastFileDate':
+            var displayed_period = 'No publications';
+            if (value) {
+                var date = new Date(value);
+                var month = months[date.getMonth()];
+                var year = date.getFullYear();
+
+                displayed_period = month + ' ' + year;
+            }
+
+            _cell = <td key={key}>{displayed_period}</td>;
+            break;
+        case 'type':
+            _cell = <td key={key}>{value.charAt(0).toUpperCase() + value.slice(1).replace('-', ' ')}</td>;
+            break;
+        case 'data':
+            _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
+            break;
+        case 'period_id':
+            if (value) {
+                var period = value.split('/');
+                if (period.length === 1) {
+                    var elements = period[0].split('-');
+                    var month = months[elements[1] - 1];
+                    var year = elements[0];
+                    var displayed_period = month + ' ' + year;
+                _cell = <td key={key}>{displayed_period}</td>;
+                } else if (period.length === 2) {
+                    var elements_start = period[0].split('-');
+                    var elements_end = period[1].split('-');
+                    var month_start = months[elements_start[1] - 1];
+                    var month_end = months[elements_end[1] - 1];
+                    var year_start = elements_start[0];
+                    var year_end = elements_end[0];
+                    var displayed_period = month_start + ' ' + year_start + ' to ' + month_end + ' ' + year_end;
+                    _cell = <td key={key}>{displayed_period}</td>;
+                }
+            } else {
+                _cell = <td key={key}>{}</td>;
+            }
+            break;
+        case 'schema':
+            _cell = <td key="report"><a href={'http://goodtables.okfnlabs.org/reports?data_url=' + obj.data + '&format=' + obj.format + '&encoding=&schema_url=' + value}>{'What needs fixing'}</a></td>;
+            break;
+        default:
+            _cell = <td key={key}>{value}</td>;
+    }
+
+    return _cell;
+}
+
 function makeTableRow(obj, options, table) {
     var _row = [];
-    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     if (table === 'publishers') {
-        _.forEach(obj, function(value, key) {
-            var _cell;
-
-            if (key === 'title') {
-
-		 _cell = <td key={key}><Link to={options.route} params={{lookup: obj.id}}>{value}</Link></td>;
-
-            } else if (key === 'homepage') {
-
-                _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
-
-            } else if (key === 'email') {
-
-                if (value) {
-                    _cell = <td key={key}><a href={'mailto:' + value}><span className="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></td>;
-                } else {
-                    _cell = <td key={key}><span className="glyphicon glyphicon-envelope text-muted" aria-hidden="true"></span></td>;
-                }
-
-            } else if (key === 'score' || key === 'lastFileScore') {
-
-                var _c;
-                if (value <= 49) {
-                    _c = 'danger';
-                } else if (value <= 99) {
-                    _c = 'warning';
-                } else {
-                    _c = 'success';
-                }
-                _cell = <td key={key} className={'score ' + _c}>{value + ' %'}</td>;
-            } else if (key === 'lastFileDate') {
-
-                var displayed_period = 'No publications';
-
-                if (value) {
-                    var date = new Date(value);
-
-                    var month = months[date.getMonth()];
-                    var year = date.getFullYear();
-
-                    displayed_period = month + ' ' + year;
-                }
-
-                _cell = <td key={key}>{displayed_period}</td>;
-            } else if (key === 'completelyCorrect') {
-
-                _cell = <td key={key}>{value}</td>;
-
-            } else if (key === 'type') {
-
-                _cell = <td key={key}>{value.charAt(0).toUpperCase() + value.slice(1).replace('-', ' ')}</td>;
-
-            }
-            _row.push(_cell);
-        });
+        _.forEach(options.columns, function(column) {
+            var _cell = formatCell(column.key, obj[column.key], obj, options);
+            if (_cell) { _row.push(_cell); }
+	});
     } else if (table === 'data files') {
-        _.forEach(obj, function(value, key) {
-            var _cell;
-
-            if (key === 'data') {
-
-                _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
-
-            } else if (key === 'score') {
-
-                var _c;
-                if (value <= 49) {
-                    _c = 'danger';
-                } else if (value <= 99) {
-                    _c = 'warning';
-                } else {
-                    _c = 'success';
-                }
-                _cell = <td key={key} className={'score ' + _c}>{value + ' %'}</td>;
-
-            } else if (key === 'title' || key === 'format') {
-
-                _cell = <td key={key}>{value}</td>;
-
-            } else if (key === 'period_id') {
-
-                if (value) {
-                    var period = value.split('/');
-                    if (period.length === 1) {
-                        var elements = period[0].split('-');
-                        var month = months[elements[1] - 1];
-                        var year = elements[0];
-                        var displayed_period = month + ' ' + year;
-                        _cell = <td key={key}>{displayed_period}</td>;
-                    } else if (period.length === 2) {
-                        var elements_start = period[0].split('-');
-                        var elements_end = period[1].split('-');
-                        var month_start = months[elements_start[1] - 1];
-                        var month_end = months[elements_end[1] - 1];
-                        var year_start = elements_start[0];
-                        var year_end = elements_end[0];
-                        var displayed_period = month_start + ' ' + year_start + ' to ' + month_end + ' ' + year_end;
-                        _cell = <td key={key}>{displayed_period}</td>;
-                    }
-                } else {
-                    _cell = <td key={key}>{}</td>;
-                }
-
-            } else if ( key === 'schema') {
-
-                _cell = <td key="report"><a href={'http://goodtables.okfnlabs.org/reports?data_url=' + obj.data + '&format=' + obj.format + '&encoding=&schema_url=' + value}>{'What needs fixing'}</a></td>;
-
-            }
-            _row.push(_cell);
+        _.forEach(options.columns, function(column) {
+            var _cell = formatCell(column.key, obj[column.key], obj, {});
+            if (_cell) { _row.push(_cell); }
         });
     }
     return _row;
