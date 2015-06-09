@@ -75,13 +75,13 @@ function makeOverview(results, objects, page) {
         };
     } else if (page === 'publisher') {
         var values = {
-            validPercent: {
-                label: 'correct (%)',
-                value: CalcUtils.validPercent(results) + ''
-            },
             totalScore: {
                 label: 'score (%)',
                 value: CalcUtils.totalScore(results) + ''
+            },
+            validPercent: {
+                label: 'correct (%)',
+                value: CalcUtils.validPercent(results) + ''
             },
             sourceCount: {
                 label: 'data files',
