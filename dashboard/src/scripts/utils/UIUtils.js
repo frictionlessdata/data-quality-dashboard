@@ -133,7 +133,8 @@ function makeTableBody(objects, results, options) {
             var _publisherScore = CalcUtils.publisherScore(obj.id, results);
             var _lastFileDate = CalcUtils.lastFileDate(obj.id, results);
             var _objWithScore = _.cloneDeep(obj);
-            _objWithScore.score = _publisherScore;
+            _objWithScore.completelyCorrect = _publisherScore.amountCorrect;
+            _objWithScore.score = _publisherScore.score;
             _objWithScore.lastFileDate = _lastFileDate;
             return _objWithScore;
         });
@@ -219,6 +220,9 @@ function makeTableRow(obj, options, table) {
                 }
 
                 _cell = <td key={key}>{displayed_period}</td>;
+            } else if (key === 'completelyCorrect') {
+
+                _cell = <td key={key}>{value}</td>;
 
             } else if (key === 'type') {
 

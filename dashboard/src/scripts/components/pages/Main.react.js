@@ -54,7 +54,9 @@ var Main = React.createClass({
 
     render: function() {
 	var _columns = [{key:'title'}, {key:'type'}, {key:'homepage'},
-                        {key:'email'}, {key:'score'},
+                        {key:'email'},
+                        {key:'completelyCorrect', label:'100% correct'},
+                        {key:'score'},
                         {key:'lastFileDate', label:'last file'}];
         return (
             <div>

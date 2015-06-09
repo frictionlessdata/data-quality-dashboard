@@ -46,19 +46,23 @@ function totalScore(results) {
 
 function publisherScore(publisher, results) {
     var scores = [],
+        countCorrect = 0,
         publisherScore = 0;
     // get all scores for this publisher from results
     _.forEach(results, function(obj) {
         if (obj.publisher_id === publisher) {
-            var score = obj.score ? obj.score : 0;
-            scores.push(parseInt(score));
+            var score = obj.score ? parseInt(obj.score) : 0;
+            scores.push(score);
+            if (score === 10) {
+                countCorrect += 1;
+            }
         }
     });
     // set the publisher score to: sum of scores / number of scores * 10 (to have a percentage)
     if (scores.length > 0) {
         publisherScore = Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / scores.length * 10);
     }
-    return publisherScore;
+    return {'score': publisherScore, 'amountCorrect': countCorrect};
 }
 
 // return last publication date for a give publisher
