@@ -72,7 +72,12 @@ function lastFileDate(publisher, results) {
             return 0;
         }
     });
-    return new Date(_.last(publication.period_id.split('/')));
+
+    if(publication && publication.period_id) {
+        return new Date(_.last(publication.period_id.split('/')));
+    } else {
+        return 0;
+    }
 }
 
 // return the latest score for a source and its timestamp from results
