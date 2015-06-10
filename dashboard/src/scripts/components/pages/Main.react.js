@@ -58,7 +58,8 @@ var Main = React.createClass({
                         {key:'completelyCorrect', label:'100% correct'},
                         {key:'score', label:'score (all time)'},
                         {key:'lastFileDate', label:'last file'},
-                        {key:'lastFileScore', label:'score'}];
+                        {key:'lastFileScore', label:'score',
+			 help:'% correct (no errors)'}];
         return (
             <div>
                 <HeaderPanel instance={this.state.instance} publishers={this.state.publishers} />

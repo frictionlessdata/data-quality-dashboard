@@ -27,7 +27,7 @@ function makeOverviewNumber(number, digitWidth) {
     return spans;
 }
 
-function makeOverviewCounter(label, number, counterPadding, digitWidth) {
+function makeOverviewCounter(label, number, help, counterPadding, digitWidth) {
     if (counterPadding > 0) {
         var digitCount = number.length;
         var counterWidth = (digitCount * (digitWidth + 6)) + (2 * counterPadding);
@@ -43,7 +43,11 @@ function makeOverviewCounter(label, number, counterPadding, digitWidth) {
             paddingRight: '0'
         };
     }
-    return <li className="counter" style={counterStyle}><span className="value">{makeOverviewNumber(number, digitWidth)}</span> <span className="label">{label}</span></li>;
+    var tooltip = '';
+    if (help) {
+        tooltip = <span className="small glyphicon glyphicon-question-sign" title={help}></span>;
+    }
+    return <li className="counter" style={counterStyle}><span className="value">{makeOverviewNumber(number, digitWidth)}</span> <span className="label">{label} {tooltip}</span></li>;
 }
 
 function makeOverview(results, objects, page) {
@@ -62,6 +66,7 @@ function makeOverview(results, objects, page) {
             },
             totalScore: {
                 label: 'score (%)',
+                help: 'average % correct (no errors)',
                 value: CalcUtils.totalScore(results) + ''
             },
             publisherCount: {
@@ -77,6 +82,7 @@ function makeOverview(results, objects, page) {
         var values = {
             totalScore: {
                 label: 'score (%)',
+                help: 'average % correct (no errors)',
                 value: CalcUtils.totalScore(results) + ''
             },
             validPercent: {
@@ -107,7 +113,7 @@ function makeOverview(results, objects, page) {
         allDigitWidth = digitCount * (digitWidth + digitMargins);
         counterPadding = (availableWidth - allDigitWidth) / 8;
         _.forEach(values, function(obj) {
-            counters.push(makeOverviewCounter(obj.label, obj.value, counterPadding, digitWidth));
+            counters.push(makeOverviewCounter(obj.label, obj.value, obj.help, counterPadding, digitWidth));
         });
     } else {
         _.forEach(values, function(obj) {
@@ -117,7 +123,7 @@ function makeOverview(results, objects, page) {
             digitWidth = digitMaxWidth >= 80 ? 80 : digitMaxWidth;
             allDigitWidth = digitCount * (digitWidth + digitMargins);
             counterPadding = 0;
-            counters.push(makeOverviewCounter(obj.label, obj.value, counterPadding, digitWidth));
+            counters.push(makeOverviewCounter(obj.label, obj.value, obj.help, counterPadding, digitWidth));
         });
     }
 
