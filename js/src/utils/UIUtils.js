@@ -27,7 +27,7 @@ function makeOverviewNumber(number, digitWidth) {
     return spans;
 }
 
-function makeOverviewCounter(label, number, counterPadding, digitWidth) {
+function makeOverviewCounter(label, number, help, counterPadding, digitWidth) {
     if (counterPadding > 0) {
         var digitCount = number.length;
         var counterWidth = (digitCount * (digitWidth + 6)) + (2 * counterPadding);
@@ -43,7 +43,11 @@ function makeOverviewCounter(label, number, counterPadding, digitWidth) {
             paddingRight: '0'
         };
     }
-    return <li className="counter" style={counterStyle}><span className="value">{makeOverviewNumber(number, digitWidth)}</span> <span className="label">{label}</span></li>;
+    var tooltip = '';
+    if (help) {
+        tooltip = <span className="small glyphicon glyphicon-question-sign" title={help}></span>;
+    }
+    return <li className="counter" style={counterStyle}><span className="value">{makeOverviewNumber(number, digitWidth)}</span> <span className="label">{label} {tooltip}</span></li>;
 }
 
 function makeOverview(results, objects, page) {
@@ -56,6 +60,15 @@ function makeOverview(results, objects, page) {
 
     if (page === 'main') {
         var values = {
+            validPercent: {
+                label: 'correct (%)',
+                value: CalcUtils.validPercent(results) + ''
+            },
+            totalScore: {
+                label: 'score (%)',
+                help: 'average % correct (no errors)',
+                value: CalcUtils.totalScore(results) + ''
+            },
             publisherCount: {
                 label: 'publishers',
                 value: CalcUtils.publisherCount(objects) + ''
@@ -63,29 +76,22 @@ function makeOverview(results, objects, page) {
             sourceCount: {
                 label: 'data files',
                 value: CalcUtils.sourceCount(results) + ''
-            },
-            validPercent: {
-                label: '% valid',
-                value: CalcUtils.validPercent(results) + ''
-            },
-            totalScore: {
-                label: '% average score',
-                value: CalcUtils.totalScore(results) + ''
             }
         };
     } else if (page === 'publisher') {
         var values = {
+            totalScore: {
+                label: 'score (%)',
+                help: 'average % correct (no errors)',
+                value: CalcUtils.totalScore(results) + ''
+            },
+            validPercent: {
+                label: 'correct (%)',
+                value: CalcUtils.validPercent(results) + ''
+            },
             sourceCount: {
                 label: 'data files',
                 value: CalcUtils.sourceCount(results) + ''
-            },
-            validPercent: {
-                label: '% valid',
-                value: CalcUtils.validPercent(results) + ''
-            },
-            totalScore: {
-                label: '% average score',
-                value: CalcUtils.totalScore(results) + ''
             }
         };
     }
@@ -107,7 +113,7 @@ function makeOverview(results, objects, page) {
         allDigitWidth = digitCount * (digitWidth + digitMargins);
         counterPadding = (availableWidth - allDigitWidth) / 8;
         _.forEach(values, function(obj) {
-            counters.push(makeOverviewCounter(obj.label, obj.value, counterPadding, digitWidth));
+            counters.push(makeOverviewCounter(obj.label, obj.value, obj.help, counterPadding, digitWidth));
         });
     } else {
         _.forEach(values, function(obj) {
@@ -117,7 +123,7 @@ function makeOverview(results, objects, page) {
             digitWidth = digitMaxWidth >= 80 ? 80 : digitMaxWidth;
             allDigitWidth = digitCount * (digitWidth + digitMargins);
             counterPadding = 0;
-            counters.push(makeOverviewCounter(obj.label, obj.value, counterPadding, digitWidth));
+            counters.push(makeOverviewCounter(obj.label, obj.value, obj.help, counterPadding, digitWidth));
         });
     }
 
@@ -131,8 +137,12 @@ function makeTableBody(objects, results, options) {
         // for each publisher, get its score from results and return a new array of publishers with scores
         _unsorted = _.map(objects, function(obj) {
             var _publisherScore = CalcUtils.publisherScore(obj.id, results);
+            var _lastFile = CalcUtils.lastFile(obj.id, results);
             var _objWithScore = _.cloneDeep(obj);
-            _objWithScore.score = _publisherScore;
+            _objWithScore.completelyCorrect = _publisherScore.amountCorrect;
+            _objWithScore.score = _publisherScore.score;
+            _objWithScore.lastFileDate = _lastFile.period;
+            _objWithScore.lastFileScore = _lastFile.score;
             return _objWithScore;
         });
     } else if (options.route === 'data files') {
@@ -169,102 +179,102 @@ function makeTableBody(objects, results, options) {
     return _body;
 }
 
+function formatCell(key, value, obj, options) {
+    var _cell;
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    switch (key) {
+        case "title":
+            if (options.route) {
+                _cell = <td key={key}><Link to={options.route} params={{lookup: obj.id}}>{value}</Link></td>;
+            } else {
+                _cell = <td key={key}>{value}</td>;
+            }
+            break;
+        case 'homepage':
+            _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
+            break;
+        case 'email':
+            if (value) {
+                _cell = <td key={key}><a href={'mailto:' + value}><span className="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></td>;
+            } else {
+                _cell = <td key={key}><span className="glyphicon glyphicon-envelope text-muted" aria-hidden="true"></span></td>;
+            }
+            break;
+        case 'score':
+        case 'lastFileScore':
+            var _c;
+            if (value <= 49) {
+                _c = 'danger';
+            } else if (value <= 99) {
+                _c = 'warning';
+            } else {
+                _c = 'success';
+            }
+            _cell = <td key={key} className={'score ' + _c}>{value + ' %'}</td>;
+            break;
+        case 'lastFileDate':
+            var displayed_period = 'No publications';
+            if (value) {
+                var date = new Date(value);
+                var month = months[date.getMonth()];
+                var year = date.getFullYear();
+
+                displayed_period = month + ' ' + year;
+            }
+
+            _cell = <td key={key}>{displayed_period}</td>;
+            break;
+        case 'type':
+            _cell = <td key={key}>{value.charAt(0).toUpperCase() + value.slice(1).replace('-', ' ')}</td>;
+            break;
+        case 'data':
+            _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
+            break;
+        case 'period_id':
+            if (value) {
+                var period = value.split('/');
+                if (period.length === 1) {
+                    var elements = period[0].split('-');
+                    var month = months[elements[1] - 1];
+                    var year = elements[0];
+                    var displayed_period = month + ' ' + year;
+                _cell = <td key={key}>{displayed_period}</td>;
+                } else if (period.length === 2) {
+                    var elements_start = period[0].split('-');
+                    var elements_end = period[1].split('-');
+                    var month_start = months[elements_start[1] - 1];
+                    var month_end = months[elements_end[1] - 1];
+                    var year_start = elements_start[0];
+                    var year_end = elements_end[0];
+                    var displayed_period = month_start + ' ' + year_start + ' to ' + month_end + ' ' + year_end;
+                    _cell = <td key={key}>{displayed_period}</td>;
+                }
+            } else {
+                _cell = <td key={key}>{}</td>;
+            }
+            break;
+        case 'schema':
+            _cell = <td key="report"><a href={'http://goodtables.okfnlabs.org/reports?data_url=' + obj.data + '&format=' + obj.format + '&encoding=&schema_url=' + value}>{'What needs fixing'}</a></td>;
+            break;
+        default:
+            _cell = <td key={key}>{value}</td>;
+    }
+
+    return _cell;
+}
+
 function makeTableRow(obj, options, table) {
     var _row = [];
-    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     if (table === 'publishers') {
-        _.forEach(obj, function(value, key) {
-            var _cell;
-
-            if (key === 'title') {
-
-		 _cell = <td key={key}><Link to={options.route} params={{lookup: obj.id}}>{value}</Link></td>;
-
-            } else if (key === 'homepage') {
-
-                _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
-
-            } else if (key === 'email') {
-
-                _cell = <td key={key}><a href={'mailto:' + value}><span className="glyphicon glyphicon-envelope" aria-hidden="true"></span></a></td>;
-
-            } else if (key === 'score') {
-
-                var _c;
-                if (value <= 49) {
-                    _c = 'danger';
-                } else if (value <= 99) {
-                    _c = 'warning';
-                } else {
-                    _c = 'success';
-                }
-                _cell = <td key={key} className={'score ' + _c}>{value + ' %'}</td>;
-
-            } else if (key === 'type') {
-
-                _cell = <td key={key}>{value.charAt(0).toUpperCase() + value.slice(1).replace('-', ' ')}</td>
-
-            } else if (key == 'contact') {
-
-                _cell = <td key={key}>{value}</td>;
-
-            }
-            _row.push(_cell);
-        });
+        _.forEach(options.columns, function(column) {
+            var _cell = formatCell(column.key, obj[column.key], obj, options);
+            if (_cell) { _row.push(_cell); }
+	});
     } else if (table === 'data files') {
-        _.forEach(obj, function(value, key) {
-            var _cell;
-
-            if (key === 'data') {
-
-                _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>;
-
-            } else if (key === 'score') {
-
-                var _c;
-                if (value <= 49) {
-                    _c = 'danger';
-                } else if (value <= 99) {
-                    _c = 'warning';
-                } else {
-                    _c = 'success';
-                }
-                _cell = <td key={key} className={'score ' + _c}>{value + ' %'}</td>;
-
-            } else if (key === 'title' || key === 'format') {
-
-                _cell = <td key={key}>{value}</td>;
-
-            } else if (key === 'period_id') {
-
-                if (value) {
-                    var period = value.split('/');
-                    if (period.length === 1) {
-                        var elements = period[0].split('-');
-                        var month = months[elements[1] - 1];
-                        var year = elements[0];
-                        var displayed_period = month + ' ' + year;
-                        _cell = <td key={key}>{displayed_period}</td>;
-                    } else if (period.length === 2) {
-                        var elements_start = period[0].split('-');
-                        var elements_end = period[1].split('-');
-                        var month_start = months[elements_start[1] - 1];
-                        var month_end = months[elements_end[1] - 1];
-                        var year_start = elements_start[0];
-                        var year_end = elements_end[0];
-                        var displayed_period = month_start + ' ' + year_start + ' to ' + month_end + ' ' + year_end;
-                        _cell = <td key={key}>{displayed_period}</td>;
-                    }
-                } else {
-                    _cell = <td key={key}>{}</td>;
-                }
-
-            } else if ( key === 'schema') {
-
-                _cell = <td key="report"><a href={'http://goodtables.okfnlabs.org/reports?data_url=' + obj.data + '&format=' + obj.format + '&encoding=&schema_url=' + value}>{'What needs fixing'}</a></td>;
-
-            }
-            _row.push(_cell);
+        _.forEach(options.columns, function(column) {
+            var _cell = formatCell(column.key, obj[column.key], obj, {});
+            if (_cell) { _row.push(_cell); }
         });
     }
     return _row;
@@ -288,15 +298,13 @@ function makeChartData(performance) {
         data = {},
         scores = [],
         valids = [],
-        scores_to_date = [],
-        valids_to_date = [],
         labels = [];
 
     // get performances
     _.forEach(performance, function(obj) {
         var dateParts = obj.period_id.split('-');
         var date = new Date(parseInt(dateParts[0], 10), parseInt(dateParts[1], 10) - 1, parseInt(dateParts[2], 10));
-        performances.push({period_id: obj.period_id, timestamp: date.getTime(), score: obj.score, valid: obj.valid, score_to_date: obj.score_to_date, valid_to_date: obj.valid_to_date});
+        performances.push({period_id: obj.period_id, timestamp: date.getTime(), score: obj.score, valid: obj.valid});
     });
 
     // sort performances by period
@@ -305,12 +313,10 @@ function makeChartData(performance) {
     _.forEach(_sorted, function(obj) {
         scores.push(obj.score);
         valids.push(obj.valid);
-        scores_to_date.push(obj.score_to_date);
-        valids_to_date.push(obj.valid_to_date);
         labels.push(makeLabel(obj.timestamp));
     });
 
-    data = {scores: scores, valids: valids, scores_to_date: scores_to_date, valids_to_date: valids_to_date, labels: labels};
+    data = {scores: scores, valids: valids, labels: labels};
 
     return data;
 }
@@ -319,8 +325,6 @@ function makeScoreLinePayload(results, performance) {
     var chartData = makeChartData(performance),
         scores = chartData.scores,
         valids = chartData.valids,
-        scores_to_date = chartData.scores_to_date,
-        valids_to_date = chartData.valids_to_date,
         labels = chartData.labels;
 
     var data = {
@@ -337,17 +341,7 @@ function makeScoreLinePayload(results, performance) {
                 data: scores
             },
             {
-                label: "Score to date",
-                fillColor: "rgba(70,191,189,0.2)",
-                strokeColor: "rgba(70,191,189,1)",
-                pointColor: "rgba(70,191,189,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(122, 184, 0,1)",
-                data: scores_to_date
-            },
-            {
-                label: "Valid",
+                label: "Correct",
                 fillColor: "rgba(119,119,119,0.2)",
                 strokeColor: "rgba(119,119,119,1)",
                 pointColor: "rgba(119,119,119,1)",
@@ -355,16 +349,6 @@ function makeScoreLinePayload(results, performance) {
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(119,119,119,1)",
                 data: valids
-            },
-            {
-                label: "Valid to date",
-                fillColor: "rgba(247,70,74,0.2)",
-                strokeColor: "rgba(247,70,74,1)",
-                pointColor: "rgba(247,70,74,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(119,119,119,1)",
-                data: valids_to_date
             }
         ]
     };
@@ -416,13 +400,9 @@ function makeLegend() {
         };
 
     var scoreColStyle = _.cloneDeep(colorStyle),
-        scoreDateColStyle = _.cloneDeep(colorStyle),
-        validColStyle = _.cloneDeep(colorStyle),
-        validDateColStyle = _.cloneDeep(colorStyle);
+        validColStyle = _.cloneDeep(colorStyle);
     scoreColStyle.backgroundColor = 'rgba(122, 184, 0,1)';
-    scoreDateColStyle.backgroundColor = 'rgba(70,191,189,1)';
     validColStyle.backgroundColor = 'rgba(119,119,119,1)';
-    validDateColStyle.backgroundColor = 'rgba(247,70,74,1)';
 
     var textStyle = {
             verticalAlign: 'top',
@@ -430,15 +410,11 @@ function makeLegend() {
         };
 
     var score = <li style={liStyle}><span style={scoreColStyle}></span><span style={textStyle}>{'Score (%)'}</span></li>,
-        scoreDate = <li style={liStyle}><span style={scoreDateColStyle}></span><span style={textStyle}>{'Score to date (%)'}</span></li>,
-        valid = <li style={liStyle}><span style={validColStyle}></span><span style={textStyle}>{'Valid (%)'}</span></li>,
-        validDate = <li style={liStyle}><span style={validDateColStyle}></span><span style={textStyle}>{'Valid to date (%)'}</span></li>;
+        valid = <li style={liStyle}><span style={validColStyle}></span><span style={textStyle}>{'Correct (%)'}</span></li>;
 
     var legend = (<ul style={ulStyle}>
             {score}
-            {scoreDate}
             {valid}
-            {validDate}
         </ul>);
 
     return legend;

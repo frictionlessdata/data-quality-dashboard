@@ -26,7 +26,7 @@ var SortableTable = React.createClass({
 	this.setState({sort: sortState});
     },
     render: function() {
-	var _columns = this.props.columns;
+	var columns = this.props.columns;
         var sortFunction = this.reSort;
         return (
             <div className="container">
@@ -41,13 +41,13 @@ var SortableTable = React.createClass({
                 <Table className="table">
                     <thead>
                         <tr>
-                            {_columns.map(function(column) {
+                            {columns.map(function(column) {
                                 return <TableHead key={column.key} column={column} sortFunction={sortFunction} />;
                             })}
                         </tr>
                     </thead>
                     <tbody>
-                        {UIUtils.makeTableBody(this.props.rows, this.props.results, {'route': this.props.title, 'sort': this.state.sort})}
+                        {UIUtils.makeTableBody(this.props.rows, this.props.results, {'route': this.props.title, 'sort': this.state.sort, 'columns':columns })}
                     </tbody>
                 </Table>
             </div>

@@ -46,19 +46,48 @@ function totalScore(results) {
 
 function publisherScore(publisher, results) {
     var scores = [],
+        countCorrect = 0,
         publisherScore = 0;
     // get all scores for this publisher from results
     _.forEach(results, function(obj) {
         if (obj.publisher_id === publisher) {
-            var score = obj.score ? obj.score : 0;
-            scores.push(parseInt(score));
+            var score = obj.score ? parseInt(obj.score) : 0;
+            scores.push(score);
+            if (score === 10) {
+                countCorrect += 1;
+            }
         }
     });
     // set the publisher score to: sum of scores / number of scores * 10 (to have a percentage)
     if (scores.length > 0) {
         publisherScore = Math.round(_.reduce(scores, function(sum, n) {return sum + n;}) / scores.length * 10);
     }
-    return publisherScore;
+    return {'score': publisherScore, 'amountCorrect': countCorrect};
+}
+
+// return last publication date for a give publisher
+function lastFile(publisher, results) {
+    var publication = _.max(results, function(obj) {
+        if (obj.publisher_id === publisher) {
+            // we're after the timestamp of the publisher
+            return new Date(_.last(obj.period_id.split('/')));
+        } else {
+            // if this is not the publisher we want, we return empty string
+            return 0;
+        }
+    });
+
+    var lastFile = {period: 0, score: 0};
+    if (publication) {
+        if (publication.period_id) {
+            lastFile.period = new Date(
+                _.last(publication.period_id.split('/')));
+        }
+        if (publication.score) {
+            lastFile.score = parseInt(publication.score) * 10;
+        }
+    }
+    return lastFile;
 }
 
 // return the latest score for a source and its timestamp from results
@@ -90,5 +119,6 @@ module.exports = {
     validPercent: validPercent,
     totalScore: totalScore,
     publisherScore: publisherScore,
-    sourceScore: sourceScore
+    sourceScore: sourceScore,
+    lastFile: lastFile
 };

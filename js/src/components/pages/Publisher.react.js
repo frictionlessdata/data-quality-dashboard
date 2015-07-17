@@ -50,10 +50,10 @@ var Publisher = React.createClass({
     },
 
     render: function() {
-        var _columns = [{key:'title'}, {key:'data', label:'URL'},
-			{key:'format'},
-			{key:'periodTimestamp', label:'period'},
-			{key:'report', label:'Error details'},
+        var _columns = [{key:'period_id', label:'period'},
+                        {key:'title'}, {key:'data', label:'URL'},
+                        {key:'format'},
+			{key:'schema', label:'Error details'},
 			{key:'score'}];
         return (
                 <div className="dashboard">

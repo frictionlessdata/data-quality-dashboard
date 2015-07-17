@@ -52,7 +52,12 @@ var Main = React.createClass({
 
     render: function() {
 	var _columns = [{key:'title'}, {key:'type'}, {key:'homepage'},
-                        {key:'contact'}, {key:'email'}, {key:'score'}];
+                        {key:'email'},
+                        {key:'completelyCorrect', label:'100% correct'},
+                        {key:'score', label:'score (all time)'},
+                        {key:'lastFileDate', label:'last file'},
+                        {key:'lastFileScore', label:'score',
+			 help:'% correct (no errors)'}];
         return (
             <div>
                 <div className="dashboard">
