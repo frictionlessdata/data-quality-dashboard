@@ -62,6 +62,7 @@ function makeOverview(results, objects, page) {
         var values = {
             validPercent: {
                 label: 'correct (%)',
+		help: 'percentage of valid files (rounded)',
                 value: CalcUtils.validPercent(results) + ''
             },
             totalScore: {
@@ -87,6 +88,7 @@ function makeOverview(results, objects, page) {
             },
             validPercent: {
                 label: 'correct (%)',
+		help: 'percentage of valid files (rounded)',
                 value: CalcUtils.validPercent(results) + ''
             },
             sourceCount: {
