@@ -68,7 +68,7 @@ var Main = React.createClass({
                         <MainChart results={this.state.results} performance={this.state.performance} />
                     </div>
                     <section className="publishers">
-                        <SortableTable title={'publishers'} rows={this.state.publishers} results={this.state.results} columns={_columns} sort={[['score', false], ['title', true]]} />
+                        <SortableTable title={'publishers'} rows={this.state.publishers} results={this.state.results} columns={_columns} sort={[['lastFileScore', false], ['title', true]]} />
                     </section>
                 </div>
             </div>
