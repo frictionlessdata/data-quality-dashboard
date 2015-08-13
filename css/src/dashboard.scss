@@ -102,14 +102,14 @@
       .score {
         text-align:center;
       }
-      td.success.score {
+      td.success.score, td.success.date {
         background-color:$brand-success;
         color:#fff;
       }
-      td.warning.score {
+      td.warning.score, td.warning.date {
         background-color:$brand-warning;
       }
-      td.danger.score {
+      td.danger.score, td.danger.date {
         background-color:$brand-danger;
         color:#fff;
       }

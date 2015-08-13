@@ -217,15 +217,28 @@ function formatCell(key, value, obj, options) {
             break;
         case 'lastFileDate':
             var displayed_period = 'No publications';
+            var _c = 'danger';
+
+            var today = new Date();
+            var three_months_ago = new Date(today.getFullYear(),
+                                            today.getMonth()-3);
+            var one_year_ago = new Date(today.getFullYear()-1,
+                                        today.getMonth());
             if (value) {
                 var date = new Date(value);
                 var month = months[date.getMonth()];
                 var year = date.getFullYear();
 
+                if (date > three_months_ago) {
+                    _c = 'success';
+                } else if (date > one_year_ago) {
+                    _c = 'warning';
+                }
+
                 displayed_period = month + ' ' + year;
             }
 
-            _cell = <td key={key}>{displayed_period}</td>;
+            _cell = <td key={key} className={'date ' + _c}>{displayed_period}</td>;
             break;
         case 'type':
             _cell = <td key={key}>{value.charAt(0).toUpperCase() + value.slice(1).replace('-', ' ')}</td>;
