@@ -13,6 +13,8 @@ var reload = browserSync.reload;
 var historyApiFallback = require('connect-history-api-fallback');
 var sass = require('gulp-sass');
 
+var stylesDir = './css/src';
+var stylesOutput = './css';
 var scriptsDir = './js/src';
 
 
@@ -52,4 +54,12 @@ gulp.task('scripts', function() {
       .pipe(reload({stream:true}));
 });
 
-gulp.task('default', ['scripts']);
+gulp.task('styles', function () {
+    gulp.src(stylesDir + '/app.scss')
+        .pipe(sass())
+        .pipe(minifyCss({compatibility: 'ie8'}))
+        .pipe(rename('app.min.css'))
+        .pipe(gulp.dest(stylesOutput));
+});
+
+gulp.task('default', ['scripts', 'styles']);

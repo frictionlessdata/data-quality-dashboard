@@ -1,9 +1,5 @@
----
-# Front matter comment to ensure Jekyll properly reads file.
----
-
 @import "variables";
-@import "bootstrap/mixins";
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 //spend publishing dashboard
 
 .dashboard {

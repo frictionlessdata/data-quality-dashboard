@@ -1,6 +1,2 @@
 title: UK Spend Publishing Dashboard
-
-sass:
-  sass_dir: css/_sass
-
-exclude: [node_modules/]
+exclude: [node_modules/, css/src/, js/src/]
