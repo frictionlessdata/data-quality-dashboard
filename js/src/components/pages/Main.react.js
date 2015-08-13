@@ -53,7 +53,8 @@ var Main = React.createClass({
     render: function() {
 	var _columns = [{key:'title'}, {key:'type'}, {key:'homepage'},
                         {key:'email'},
-                        {key:'completelyCorrect', label:'100% correct'},
+                        {key:'completelyCorrect', label:'Correct',
+			 help:'number of files with no errors at all'},
                         {key:'score', label:'score (all time)'},
                         {key:'lastFileDate', label:'last file'},
                         {key:'lastFileScore', label:'score',
