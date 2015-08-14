@@ -70,5 +70,4 @@ Yes, all the data we have produced including a database of all spending files an
 
 We intend to cover local authorities spend data publication. However, unlike departmental spending which is centralized on data.gov.uk and easily locatable due to consistent tagging, local authority spending is spread across hundreds of local authority websites in the UK. Tracking down the thousands of different data files ultimately has proved too resource intensive for our limited funding. However, it is something we are focused on for the future.
 
-### How does scoring work?
 
