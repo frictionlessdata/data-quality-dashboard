@@ -1,5 +1,6 @@
 ---
-layout: default
+layout: page
+title: About
 ---
 
 The Spend Publishing Dashboard tracks the timeliness and quality of the spend data published by UK Government Departments and Local Authorities as part of their transparency commitments.
