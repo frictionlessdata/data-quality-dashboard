@@ -48,7 +48,7 @@ function makeOverviewCounter(label, number, help, counterPadding, digitWidth) {
     var tooltip = '';
     if (help) {
         tooltip = (
-            <OverlayTrigger trigger="click" overlay={<Popover>{_.capitalize(help)}</Popover>}>
+            <OverlayTrigger trigger="click" placement="top" overlay={<Popover>{_.capitalize(help)}</Popover>}>
                 <span className="small glyphicon glyphicon-question-sign"></span>
             </OverlayTrigger>
         );
