@@ -56,13 +56,13 @@ Like all good simple visual representations it is based on large amounts of behi
 
 
 
-## FAQs
+## FAQs
 
 ### Is the project free/open-source
 
 Yes, all code is free/open-source software and is published 
 
-### Is the data open?
+### Is the data open?
 
 Yes, all the data we have produced including a database of all spending files and their quality is open and published online.
 
