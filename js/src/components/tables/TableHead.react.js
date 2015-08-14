@@ -1,4 +1,6 @@
 var React = require('react');
+var Popover = require('react-bootstrap').Popover;
+var OverlayTrigger = require('react-bootstrap').OverlayTrigger;
 
 
 var TableHead = React.createClass({
@@ -8,11 +10,15 @@ var TableHead = React.createClass({
     render: function() {
         var tooltip = '';
         if (this.props.column.help) {
-            tooltip = <span className="glyphicon glyphicon-question-sign" title={this.props.column.help}></span>;
+            tooltip = (
+		<OverlayTrigger trigger="click" placement="top" overlay={<Popover>{_.capitalize(this.props.column.help)}</Popover>}>
+                    <span className="glyphicon glyphicon-question-sign"></span>
+		</OverlayTrigger>
+            );
         }
         return (
-            <th onClick={this.onClick}>
-                {_.capitalize(this.props.column.label || this.props.column.key)} {tooltip}
+            <th>
+                <span onClick={this.onClick}>{_.capitalize(this.props.column.label || this.props.column.key)}</span> {tooltip}
             </th>
         );
     }

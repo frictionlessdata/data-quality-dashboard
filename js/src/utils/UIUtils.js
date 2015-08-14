@@ -1,5 +1,7 @@
 var React = require('react');
 var _ = require('lodash');
+var Popover = require('react-bootstrap').Popover;
+var OverlayTrigger = require('react-bootstrap').OverlayTrigger;
 var Router = require('react-router');
 var Link = Router.Link;
 var CalcUtils = require('./CalcUtils.js');
@@ -45,7 +47,11 @@ function makeOverviewCounter(label, number, help, counterPadding, digitWidth) {
     }
     var tooltip = '';
     if (help) {
-        tooltip = <span className="small glyphicon glyphicon-question-sign" title={help}></span>;
+        tooltip = (
+            <OverlayTrigger trigger="click" overlay={<Popover>{_.capitalize(help)}</Popover>}>
+                <span className="small glyphicon glyphicon-question-sign"></span>
+            </OverlayTrigger>
+        );
     }
     return <li className="counter" style={counterStyle}><span className="value">{makeOverviewNumber(number, digitWidth)}</span> <span className="label">{label} {tooltip}</span></li>;
 }
