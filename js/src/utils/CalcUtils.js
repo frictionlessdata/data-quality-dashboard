@@ -9,6 +9,30 @@ function sourceCount(results) {
     return _.uniq(results, 'source_id').length;
 }
 
+function recentPeriodResults(results) {
+    var today = new Date();
+    var three_months_ago = new Date(today.getFullYear(),
+                                    today.getMonth()-3);
+
+    var recentPeriodOnly = _.filter(results, function(obj) {
+	var periodTimeStamp = undefined;
+	if (obj.period_id) {
+            var period = obj.period_id.split('/');
+            if (period.length === 1) {
+                periodTimestamp = Date.parse(period[0]);
+            } else if (period.length === 2) {
+                periodTimestamp = Date.parse(period[1]);
+            }
+	}
+	if (periodTimeStamp !== undefined &&
+	    periodTimeStamp > three_months_ago) {
+		return obj;
+	}
+    });
+
+    return recentPeriodOnly;
+}
+
 function timelyPercent(results) {
     var valid = _.filter(results, function(obj) {
         if (obj.score >= 9) {
@@ -115,6 +139,7 @@ function sourceScore(source, results) {
 module.exports = {
     publisherCount: publisherCount,
     sourceCount: sourceCount,
+    recentPeriodResults: recentPeriodResults,
     timelyPercent: timelyPercent,
     validPercent: validPercent,
     totalScore: totalScore,

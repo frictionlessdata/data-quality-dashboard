@@ -64,17 +64,18 @@ function makeOverview(results, objects, page) {
         digitCount = 0,
         spacePerDigit, digitMaxWidth, digitWidth, counterPadding;
 
+    var recents = CalcUtils.recentPeriodResults(results);
     if (page === 'main') {
         var values = {
             validPercent: {
                 label: 'correct (%)',
-		help: 'percentage of valid files (rounded)',
-                value: CalcUtils.validPercent(results) + ''
+		help: 'percentage of valid files (rounded) published over the last three months',
+                value: CalcUtils.validPercent(recents) + ''
             },
             totalScore: {
                 label: 'score (%)',
-                help: 'average % correct (no errors)',
-                value: CalcUtils.totalScore(results) + ''
+                help: 'average % correct (no errors) published over the last three months',
+                value: CalcUtils.totalScore(recents) + ''
             },
             publisherCount: {
                 label: 'publishers',
@@ -89,13 +90,13 @@ function makeOverview(results, objects, page) {
         var values = {
             totalScore: {
                 label: 'score (%)',
-                help: 'average % correct (no errors)',
-                value: CalcUtils.totalScore(results) + ''
+                help: 'average % correct (no errors) published over the last three months',
+                value: CalcUtils.totalScore(recents) + ''
             },
             validPercent: {
                 label: 'correct (%)',
-		help: 'percentage of valid files (rounded)',
-                value: CalcUtils.validPercent(results) + ''
+		help: 'percentage of valid files (rounded) published over the last three months',
+                value: CalcUtils.validPercent(recents) + ''
             },
             sourceCount: {
                 label: 'data files',
