@@ -1,0 +1,128 @@
+@import "variables";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+//spend publishing dashboard
+
+.dashboard {
+  .overview {
+    @include make-row();
+    padding:0;
+    text-align:center;
+
+    li {
+      //@include make-md-column(3);
+      display:block;
+      text-align:center;
+
+      @media (min-width: $screen-md-min) {
+        display: inline-block;
+      }
+
+      .value {
+        display:block;
+      }
+    }
+  }
+
+  .line-chart {
+    padding-bottom:30px;
+
+    .intro {
+      @include make-row();
+      position:relative;
+
+      .text {
+        @include make-md-column(8);
+      }
+
+      .more {
+        @include make-md-column(4);
+
+        @media (min-width: $screen-md-min) {
+          text-align:right;
+          position:absolute;
+          bottom:20px;
+          right:0;
+        }
+      }
+    }
+
+    #lineChart {
+      width: 100% !important;
+      max-width: 1140px !important;
+      height: 300px !important;
+    }
+  }
+
+  .publishers {
+    background-color:$gray-lighter;
+    padding-top:30px;
+
+    .intro {
+      @include make-row();
+      padding-bottom:10px;
+      position:relative;
+
+      .text {
+        @include make-md-column(8);
+      }
+
+      .more {
+        @include make-md-column(4);
+
+        @media (min-width: $screen-md-min) {
+          text-align:right;
+          position:absolute;
+          bottom:20px;
+          right:0;
+        }
+
+        .download {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    table {
+      background-color:#fff;
+      margin-bottom:0;
+      overflow:hidden;
+      border-radius:$border-radius-base $border-radius-base 0 0;
+
+      & > thead > tr > th:first-child {
+        border-radius:$border-radius-base 0 0 0;
+      }
+      & > thead > tr > th:last-child {
+        border-radius:0 $border-radius-base 0 0;
+      }
+
+      & > tbody > tr > td,
+      & > tbody > tr > th {
+        background-color:transparent;
+      }
+      .score {
+        text-align:center;
+      }
+      td.success.score, td.success.date {
+        background-color:$brand-success;
+        color:#fff;
+      }
+      td.warning.score, td.warning.date {
+        background-color:$brand-warning;
+      }
+      td.danger.score, td.danger.date {
+        background-color:$brand-danger;
+        color:#fff;
+      }
+      .glyphicon {
+        color:$gray-lighter;
+      }
+      a .glyphicon {
+        color:$gray-dark;
+      }
+    }
+  }
+
+  .glyphicon.glyphicon-question-sign {
+    cursor: help;
+  }
+}
