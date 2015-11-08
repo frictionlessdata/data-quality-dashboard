@@ -22,12 +22,11 @@ gulp.task('scripts', function() {
   // Transforms scripts into a bundle for the browser
   var bundler = browserify({
     entries: [scriptsDir + '/index.js'],
-    transform: [babelify],
     debug: true,
     cache: {},
     packageCache: {},
     fullPaths: true
-  });
+  }).transform('babelify', {presets: ["es2015", "react"]});
   var watcher  = watchify(bundler);
 
   return watcher

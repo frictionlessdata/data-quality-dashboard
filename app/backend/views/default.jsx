@@ -1,17 +1,20 @@
-var React = require('react');
+'use strict';
 
-module.exports = React.createClass({
-  render: function() {
+import React from 'react';
+
+let DefaultView = React.createClass({
+  render() {
+    const { children, instance } = this.props;
     return (
       <html>
         <head>
           <meta charSet='utf-8' />
           <base href='/' />
           <meta httpEquiv='x-ua-compatible' content='ie=edge' />
-          <meta name='description' content={this.props.instance.description} />
+          <meta name='description' content={instance.description} />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <title>
-            {this.props.instance.name} | {this.props.instance.organization}
+            {instance.name} | {instance.organization}
           </title>
           <link rel='apple-touch-icon' href='images/apple-touch-icon.png' />
           <link rel='stylesheet' href='//okfnlabs.org/ok-panel/assets/css/frontend.css' />
@@ -45,7 +48,7 @@ module.exports = React.createClass({
                   <a className='navbar-brand has-icon' href='./'>
                     <span className='glyphicon glyphicon-ok'
                       aria-hidden='true'></span>
-                    <span className='text'>{this.props.instance.name}</span>
+                    <span className='text'>{instance.name}</span>
                   </a>
                 </div>
                 <div id='navbar' className='collapse navbar-collapse'>
@@ -59,7 +62,7 @@ module.exports = React.createClass({
             </nav>
           </div>
 
-          {this.props.children}
+          {children}
 
           <footer className='site-footer'>
             <div className='container'>
@@ -102,15 +105,18 @@ module.exports = React.createClass({
             </div>
           </footer>
 
-    <script src='//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js'></script>
-    <script src='/scripts/jquery-1.11.3.min.js'></script>
-    <script src='/scripts/bootstrap.min.js'></script>
-    <script src='/scripts/plugins.js'></script>
-    <script src='/scripts/main.js'></script>
-<script src='//okfnlabs.org/ok-panel/assets/js/frontend.js' type='text/javascript'></script>
+          <script src='//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js'></script>
+          <script src='/scripts/jquery-1.11.3.min.js'></script>
+          <script src='/scripts/bootstrap.min.js'></script>
+          <script src='/scripts/plugins.js'></script>
+          <script src='/scripts/main.js'></script>
+          <script src='//okfnlabs.org/ok-panel/assets/js/frontend.js' type='text/javascript'></script>
           <script src='/scripts/app.min.js'></script>
+
         </body>
       </html>
     );
   }
 });
+
+export default DefaultView;

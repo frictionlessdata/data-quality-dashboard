@@ -1,12 +1,17 @@
-var React = require('react');
-var DefaultLayout = require('./default');
+'use strict';
 
-module.exports = React.createClass({
-  render: function() {
+import React from 'react';
+import DefaultView from './default';
+
+let DashboardView = React.createClass({
+  render() {
+    const { instance } = this.props;
     return (
-      <DefaultLayout instance={this.props.instance}>
+      <DefaultView instance={instance}>
         <section id='application'></section>
-      </DefaultLayout>
+      </DefaultView>
     );
   }
 });
+
+export default DashboardView;

@@ -9,7 +9,10 @@
     "open knowledge"
   ],
   "dependencies": {
-    "babel-core": "5.8.25",
+    "babel-core": "^6.1.2",
+    "babel-polyfill": "^6.0.16",
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-react": "^6.1.2",
     "bluebird": "2.9.24",
     "bootstrap-sass": "3.3.4",
     "chart.js": "1.0.2",
@@ -17,7 +20,7 @@
     "express": "4.13.3",
     "express-react-views": "0.9.0",
     "history": "1.12.5",
-    "isomorphic-fetch": "2.1.1",
+    "isomorphic-fetch": "^2.1.1",
     "lodash": "3.9.2",
     "marked": "0.3.5",
     "nconf": "0.8.2",
@@ -28,7 +31,7 @@
     "react-chartjs": "0.6.0",
     "react-dom": "0.14.0",
     "react-redux": "3.1.0",
-    "react-router": "1.0.0-rc3",
+    "react-router": "^1.0.0-rc3",
     "react-tools": "0.13.3",
     "redux": "3.0.2",
     "redux-logger": "2.0.4",
@@ -36,34 +39,37 @@
     "throng": "1.0.1"
   },
   "devDependencies": {
-    "babelify": "6.3.0",
+    "babelify": "^7.2.0",
     "browserify": "8.1.3",
+    "chai": "^3.4.0",
     "gulp": "3.9.0",
     "gulp-concat": "2.4.3",
     "gulp-gh-pages": "0.5.1",
     "gulp-minify-css": "1.0.0",
     "gulp-rename": "1.2.2",
-    "gulp-sass": "1.3.3",
+    "gulp-sass": "^2.1.0",
     "gulp-sourcemaps": "1.5.2",
     "gulp-uglify": "1.1.0",
+    "mocha": "^2.3.3",
     "redux-devtools": "2.1.5",
     "statics": "0.1.0",
     "uglify-js": "2.4.16",
     "vinyl-source-stream": "1.0.0",
     "watchify": "2.3.0"
+    "zombie": "^4.2.1"
   },
   "engines": {
-    "node": "^4.1.0",
-    "npm": "^2.14.0"
+    "node": "5.0.0",
+    "npm": "3.39.0"
   },
   "scripts": {
-    "build": "gulp scripts",
+    "build": "gulp",
     "config": "less config.json",
     "coverage": "istanbul cover _mocha -- tests --recursive --reporter=xunit-file",
     "develop": "WATCH=true gulp & npm start",
     "review": "jscs app",
     "start": "node server.js",
-    "test": "mocha --recursive tests"
+    "test": "mocha --require babel-core/register tests/"
   },
   "author": {
     "name": "Open Knowledge",

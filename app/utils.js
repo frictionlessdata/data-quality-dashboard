@@ -1,8 +1,9 @@
 'use strict';
 
-var Promise = require('bluebird');
-var csv = require('csv');
-var request = require('superagent-bluebird-promise');
+import Promise from 'bluebird';
+import csv from 'csv';
+import request from 'superagent-bluebird-promise';
+
 var csvParser = Promise.promisify(csv.parse);
 
 function getBackend() {
@@ -15,12 +16,12 @@ function getBackend() {
   var performanceTable = process.env.PERFORMANCE_TABLE || 'performance.csv';
   var instanceTable = process.env.INSTANCE_TABLE || 'instance.json';
   return {
-    publishers: '{DB}/{FILE}'.replace('{DB}', db).replace('{FILE}', publisherTable),
-    sources: '{DB}/{FILE}'.replace('{DB}', db).replace('{FILE}', sourceTable),
-    results: '{DB}/{FILE}'.replace('{DB}', db).replace('{FILE}', resultTable),
-    runs: '{DB}/{FILE}'.replace('{DB}', db).replace('{FILE}', runTable),
-    performance: '{DB}/{FILE}'.replace('{DB}', db).replace('{FILE}', performanceTable),
-    instance: '{DB}/{FILE}'.replace('{DB}', db).replace('{FILE}', instanceTable)
+    publishers: `${db}/${publisherTable}`,
+    sources: `${db}/${sourceTable}`,
+    results: `${db}/${resultTable}`,
+    runs: `${db}/${runTable}`,
+    performance: `${db}/${performanceTable}`,
+    instance: `${db}/${instanceTable}`
   };
 }
 
@@ -45,8 +46,4 @@ function getCSVEndpoint(endpoint, name) {
     .catch(console.trace.bind(console));
 }
 
-module.exports = {
-  getBackend: getBackend,
-  getJSONEndpoint: getJSONEndpoint,
-  getCSVEndpoint: getCSVEndpoint
-};
+export default { getBackend, getJSONEndpoint, getCSVEndpoint };

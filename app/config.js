@@ -1,9 +1,9 @@
 'use strict';
 
-var _ = require('lodash');
-var path = require('path');
-var nconf = require('nconf');
-var utils = require('./utils');
+import _ from 'lodash';
+import path from 'path';
+import nconf from 'nconf';
+import utils from './utils';
 
 nconf.file({
   file: path.join(path.dirname(__dirname), 'settings.json')
@@ -16,4 +16,4 @@ nconf.defaults({
   contentDir: process.env.CONTENT_DIR || path.join(__dirname, 'content')
 });
 
-module.exports = nconf;
+export default nconf;

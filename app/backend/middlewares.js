@@ -1,7 +1,7 @@
 'use strict';
 
-var _ = require('lodash');
-var services = require('./services');
+import _ from 'lodash';
+import services from './services';
 
 function getInstance(req, res, next) {
   var cacheData = req.app.get('config').get('cacheData');
@@ -38,8 +38,4 @@ function setLocals(req, res, next) {
   return next();
 };
 
-module.exports = {
-  getInstance: getInstance,
-  getDB: getDB,
-  setLocals: setLocals
-};
+export default { getInstance, getDB, setLocals };

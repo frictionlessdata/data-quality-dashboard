@@ -1,16 +1,26 @@
-var React = require('react');
-var marked = require('marked');
-var DefaultLayout = require('./default');
+'use strict';
 
-module.exports = React.createClass({
-  safe: function(content) {
+import React from 'react';
+import marked from 'marked';
+import DefaultView from './default';
+
+let PageView = React.createClass({
+  safe(content) {
     return { __html: marked(content, {sanitize: true}) };
   },
-  render: function() {
+  render() {
+    const { instance, title, content } = this.props;
     return (
-      <DefaultLayout instance={this.props.instance}>
-        <div dangerouslySetInnerHTML={this.safe(this.props.content)} />
-      </DefaultLayout>
+      <DefaultView instance={instance}>
+        <div className="jumbotron inverse">
+          <div className="container">
+            <h1>{title}</h1>
+          </div>
+        </div>
+        <div dangerouslySetInnerHTML={this.safe(content)} />
+      </DefaultView>
     );
   }
 });
+
+export default PageView;

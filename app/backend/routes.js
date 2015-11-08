@@ -1,9 +1,11 @@
 'use strict';
 
-var router = require('express').Router();
-var controllers = require('./controllers');
+import { Router } from 'express';
+import controllers from './controllers';
 
-module.exports = function routes() {
+let router = Router();
+
+export default function routes() {
   router.get('/about', controllers.about);
   router.get('/faq', controllers.faq);
   router.get('/pricing', controllers.pricing);

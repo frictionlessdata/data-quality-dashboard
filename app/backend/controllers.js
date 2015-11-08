@@ -1,16 +1,19 @@
 'use strict';
 
-var Promise = require('bluebird');
-var path = require('path');
-var fs = Promise.promisifyAll(require('fs'));
+import Promise from 'bluebird';
+import path from 'path';
+import fs from 'fs';
 
-function makePage(filename) {
+Promise.promisifyAll(fs);
+
+function makePage(filename, title) {
   return function(req, res) {
     var filepath = path.join(req.app.get('config').get('contentDir'), filename);
     fs.readFileAsync(filepath, 'utf8')
       .then(function(content) {
         return res.render('page', {
-          content: content
+          content: content,
+          title: title
         });
       })
       .catch(console.trace.bind(console));
@@ -26,10 +29,10 @@ function api(req, res) {
   return res.json(db);
 }
 
-module.exports = {
-  about: makePage('about.md'),
-  faq: makePage('faq.md'),
-  pricing: makePage('pricing.md'),
-  dashboard: dashboard,
-  api: api
+export default {
+  about: makePage('about.md', 'About'),
+  faq: makePage('faq.md', 'FAQ'),
+  pricing: makePage('pricing.md', 'Pricing'),
+  dashboard,
+  api
 };

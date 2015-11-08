@@ -1,8 +1,8 @@
 'use strict';
 
-module.exports = {
-  controllers: require('./controllers'),
-  middlewares: require('./middlewares'),
-  routes: require('./routes'),
-  services: require('./services')
-};
+import controllers from './controllers';
+import middlewares from './middlewares';
+import routes from './routes';
+import services from './services';
+
+export { controllers, middlewares, routes, services };

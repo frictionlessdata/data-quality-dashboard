@@ -1,9 +1,9 @@
 'use strict';
 
-var Promise = require('bluebird');
-var _ = require('lodash');
-var config = require('../config');
-var utils = require('../utils');
+import Promise from 'bluebird';
+import _ from 'lodash';
+import config from '../config';
+import utils from '../utils';
 
 function getInstance() {
   return utils.getJSONEndpoint(config.get('backend').instance);
@@ -30,13 +30,14 @@ function getPerformanceData() {
 }
 
 function makeDB() {
-  return Promise.join(getPublisherData(), getSourceData(), getResultData(),
+  return Promise.join(getInstance(), getPublisherData(), getSourceData(), getResultData(),
     getRunData(), getPerformanceData(), processData);
 }
 
-function processData(publishers, sources, results, runs, performance) {
+function processData(instance, publishers, sources, results, runs, performance) {
   return {
     data: {
+      instance: instance,
       publishers: publishers,
       sources: sources,
       results: results,
@@ -46,7 +47,4 @@ function processData(publishers, sources, results, runs, performance) {
   };
 }
 
-module.exports = {
-  getInstance: getInstance,
-  makeDB: makeDB
-};
+export default { getInstance, makeDB };
