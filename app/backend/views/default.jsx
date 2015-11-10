@@ -1,10 +1,10 @@
-'use strict';
+'use strict'
 
-import React from 'react';
+import React from 'react'
 
 let DefaultView = React.createClass({
   render() {
-    const { children, instance } = this.props;
+    const { children, instance } = this.props
     return (
       <html>
         <head>
@@ -115,8 +115,8 @@ let DefaultView = React.createClass({
 
         </body>
       </html>
-    );
+    )
   }
-});
+})
 
-export default DefaultView;
+export default DefaultView
