@@ -8,10 +8,8 @@ import { Main as Overview } from '../components/overviews'
 
 class Main extends Component {
   componentDidMount() {
-    const { dispatch, data } = this.props
+    const { dispatch } = this.props
     dispatch(fetchDataIfNeeded())
-  }
-  componentWillReceiveProps(nextProps) {
   }
   render() {
     const { ui, data } = this.props

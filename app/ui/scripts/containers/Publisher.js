@@ -2,41 +2,42 @@
 
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { selectPublisher, fetchDataIfNeeded } from '../actions'
+import { getActivePublisherIfNeeded, fetchDataIfNeeded } from '../actions'
 import { Table } from '../components/tables'
 import { Publisher as Overview } from '../components/overviews'
 import { Publisher as Chart } from '../components/charts'
 
 class Publisher extends Component {
   componentDidMount() {
-    const { dispatch, data } = this.props
+    const { dispatch } = this.props
+    const lookup = this.props.params.lookup
     dispatch(fetchDataIfNeeded())
-  }
-  componentWillReceiveProps(nextProps) {
+    dispatch(getActivePublisherIfNeeded(lookup))
   }
   render() {
     const { ui, data } = this.props
+    const activePublisher = data.activePublisher
     return (
       <div>
-      {data.isFetching &&
+      {ui.isFetching &&
         <div className='is-fetching'>
           <div>Loading data..</div>
         </div>
       }
-      {!data.isFetching &&
+      {!ui.isFetching &&
         <div>
           <div className="dashboard">
             <div className="jumbotron">
-              <Overview publisher={data.activePublisher}
-                results={data.results} />
+              <Overview publisher={activePublisher}
+                results={activePublisher.results} />
             </div>
             <div className="container">
-              <Chart results={data.results} publisher={data.activePublisher}
+              <Chart results={activePublisher.results} publisher={activePublisher}
                 performance={data.performance} />
             </div>
             <section className="publishers">
-              <Table title={'data files'} rows={data.sources}
-                results={data.results}
+              <Table title={'data files'} rows={activePublisher.sources}
+                results={activePublisher.results}
                 columns={ui.tableHeaders.publisher}
                 sort={ui.tableSorters.publisher} />
             </section>

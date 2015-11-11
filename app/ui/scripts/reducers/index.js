@@ -2,7 +2,13 @@
 
 import { combineReducers } from 'redux'
 import { routerStateReducer } from 'redux-router'
-import { REQUEST_DATA, RECEIVE_DATA } from '../actions'
+import { data as dataUtils } from '../utils'
+import {
+  REQUEST_DATA,
+  RECEIVE_DATA,
+  RECEIVE_ACTIVE_PUBLISHER,
+  REQUEST_ACTIVE_PUBLISHER
+} from '../actions'
 
 function ui(state = {
   isFetching: false,
@@ -40,11 +46,19 @@ function ui(state = {
   switch (action.type) {
     case REQUEST_DATA:
       return Object.assign({}, state, {
-        isFetching: true,
+        isFetching: true
+      })
+    case REQUEST_ACTIVE_PUBLISHER:
+      return Object.assign({}, state, {
+        isFetching: true
       })
     case RECEIVE_DATA:
       return Object.assign({}, state, {
-        isFetching: false,
+        isFetching: false
+      })
+    case RECEIVE_ACTIVE_PUBLISHER:
+      return Object.assign({}, state, {
+        isFetching: false
       })
     default:
       return state
@@ -52,25 +66,20 @@ function ui(state = {
 }
 
 function data(state = {
+  isEmpty: true,
   instance: {},
   publishers: [],
   sources: [],
   results: [],
   runs: [],
   performance: [],
-  activePublisher: {},
-  activeSource: {}
+  activePublisher: {}
 }, action) {
   switch (action.type) {
     case RECEIVE_DATA:
-      return Object.assign({}, state, {
-        instance: action.payload.instance,
-        publishers: action.payload.publishers,
-        sources: action.payload.sources,
-        results: action.payload.results,
-        runs: action.payload.runs,
-        performance: action.payload.performance,
-      })
+      return Object.assign({}, state, action.payload, { isEmpty: false })
+    case RECEIVE_ACTIVE_PUBLISHER:
+      return Object.assign({}, state, action.payload, { isEmpty: false })
     default:
       return state
   }
