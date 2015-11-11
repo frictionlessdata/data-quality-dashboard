@@ -104,15 +104,11 @@ let DefaultView = React.createClass({
               <p>Open Knowledge Foundation is incorporated in England and Wales as a company Limited by guarantee. Company no. 05133759. Registered address: St. John’s Innovation Centre, Cowley Road, Cambridge, CB4 0WS, UK. VAT Registration no. GB 984404989.</p>
             </div>
           </footer>
-
-          <script src='//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js'></script>
-          <script src='/scripts/jquery-1.11.3.min.js'></script>
+          <script src="/scripts/jquery.min.js"></script>
           <script src='/scripts/bootstrap.min.js'></script>
-          <script src='/scripts/plugins.js'></script>
-          <script src='/scripts/main.js'></script>
-          <script src='//okfnlabs.org/ok-panel/assets/js/frontend.js' type='text/javascript'></script>
+          <script src="/scripts/Chart.min.js"></script>
           <script src='/scripts/app.min.js'></script>
-
+          <script src='//okfnlabs.org/ok-panel/assets/js/frontend.js'></script>
         </body>
       </html>
     )
