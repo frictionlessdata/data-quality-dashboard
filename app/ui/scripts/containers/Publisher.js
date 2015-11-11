@@ -20,7 +20,7 @@ class Publisher extends Component {
       <div>
       {data.isFetching &&
         <div className='is-fetching'>
-          <div className='glyphicon glyphicon-off'></div>
+          <div>Loading data..</div>
         </div>
       }
       {!data.isFetching &&

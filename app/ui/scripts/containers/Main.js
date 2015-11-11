@@ -19,7 +19,7 @@ class Main extends Component {
       <div>
       {ui.isFetching &&
         <div className='is-fetching'>
-          <div className='glyphicon glyphicon-off'></div>
+          <div>Loading data..</div>
         </div>
       }
       {!ui.isFetching &&
