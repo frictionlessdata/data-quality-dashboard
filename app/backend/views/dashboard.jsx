@@ -1,6 +1,6 @@
 'use strict'
 
-import React from 'react'
+import React, { Component } from 'react'
 import DefaultView from './default'
 
 class DashboardView extends Component {
