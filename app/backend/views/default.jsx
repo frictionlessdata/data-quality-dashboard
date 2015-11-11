@@ -1,8 +1,8 @@
 'use strict'
 
-import React from 'react'
+import React, { Component } from 'react'
 
-let DefaultView = React.createClass({
+class DefaultView extends Component {
   render() {
     const { children, instance } = this.props
     return (
@@ -113,6 +113,6 @@ let DefaultView = React.createClass({
       </html>
     )
   }
-})
+}
 
 export default DefaultView

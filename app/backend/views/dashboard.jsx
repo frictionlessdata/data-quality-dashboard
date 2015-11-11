@@ -3,7 +3,7 @@
 import React from 'react'
 import DefaultView from './default'
 
-let DashboardView = React.createClass({
+class DashboardView extends Component {
   render() {
     const { instance } = this.props
     return (
@@ -12,6 +12,6 @@ let DashboardView = React.createClass({
       </DefaultView>
     )
   }
-})
+}
 
 export default DashboardView

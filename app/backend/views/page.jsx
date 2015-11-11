@@ -1,13 +1,13 @@
 'use strict'
 
-import React from 'react'
+import React, { Component } from 'react'
 import marked from 'marked'
 import DefaultView from './default'
 
-let PageView = React.createClass({
+class PageView extends Component {
   safe(content) {
     return { __html: marked(content) }
-  },
+  }
   render() {
     const { instance, title, content } = this.props
     return (
@@ -23,6 +23,6 @@ let PageView = React.createClass({
       </DefaultView>
     )
   }
-})
+}
 
 export default PageView
