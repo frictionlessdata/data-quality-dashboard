@@ -36,12 +36,17 @@ function receiveActivePublisher(data) {
   }
 }
 
-function fetchData() {
+function fetchData(lookup) {
   return dispatch => {
     dispatch(requestData())
-    return fetch('/api')
+    let promises = fetch('/api')
       .then(response => response.json())
       .then(json => dispatch(receiveData(json)))
+    if (lookup) {
+      promises = promises
+      .then(data => dispatch(getActivePublisherIfNeeded(lookup)))
+    }
+    return promises
   }
 }
 
@@ -88,11 +93,24 @@ export function getActivePublisherIfNeeded(lookup) {
   }
 }
 
-export function fetchDataIfNeeded() {
+export function fetchDataIfNeeded(lookup) {
   return (dispatch, getState) => {
     const currentState = getState()
+    let needData, needActivePublisher
     if (shouldFetchData(currentState)) {
+      needData = true
+    }
+    if (shouldGetActivePublisher(currentState, lookup)) {
+      needActivePublisher = true
+    }
+    if (needData && !needActivePublisher) {
       return dispatch(fetchData())
+    }
+    if (needActivePublisher && !needData) {
+      return dispatch(getActivePublisher(currentState.data, lookup))
+    }
+    if (needData && needActivePublisher) {
+      return dispatch(fetchData(lookup))
     }
   }
 }

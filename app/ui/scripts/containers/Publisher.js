@@ -11,8 +11,7 @@ class Publisher extends Component {
   componentDidMount() {
     const { dispatch } = this.props
     const lookup = this.props.params.lookup
-    dispatch(fetchDataIfNeeded())
-    dispatch(getActivePublisherIfNeeded(lookup))
+    dispatch(fetchDataIfNeeded(lookup))
   }
   render() {
     const { ui, data } = this.props
