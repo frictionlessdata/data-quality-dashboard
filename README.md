@@ -5,14 +5,6 @@ a collection of published data. This collection of data is logically related:
 for example, data published by a single government department, or a group
 of departments.
 
-## Demo
-
-We have an example dashboard deployed with dummy data:
-
-[Example Spend Publishing Dashboard](http://example.dashboards.okfnlabs.org/)
-
-[This is the data repository](https://github.com/okfn/spd-data-example) for the example dashboard.
-
 ## Get started
 
 ```
