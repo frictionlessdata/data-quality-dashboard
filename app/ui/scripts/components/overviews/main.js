@@ -10,7 +10,8 @@ class MainOverview extends Component {
       <div className='container'>
         <h2>{instance.name}</h2>
         <p>
-          {instance.openStatement}
+          How are government departments living up to their commitments to
+          publish timely, high quality data on spending?
         </p>
         <ul className='overview'>
           {UIUtils.makeOverview(results, publishers, 'main')}
