@@ -32,7 +32,7 @@ class Publisher extends Component {
             </div>
             <div className="container">
               <Chart results={activePublisher.results} publisher={activePublisher}
-                performance={data.performance} />
+                performance={activePublisher.performance} />
             </div>
             <section className="publishers">
               <Table title={'data files'} rows={activePublisher.sources}
