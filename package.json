@@ -65,7 +65,7 @@
   },
   "engines": {
     "node": "5.0.0",
-    "npm": "3.39.0"
+    "npm": "3.4.0"
   },
   "scripts": {
     "build": "gulp",
