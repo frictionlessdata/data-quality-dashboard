@@ -58,6 +58,7 @@
     "redux-devtools": "^2.1.5",
     "statics": "0.1.0",
     "uglify-js": "2.4.16",
+    "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "1.0.0",
     "watchify": "2.3.0",
     "zombie": "^4.2.1"
@@ -68,11 +69,12 @@
   },
   "scripts": {
     "build": "gulp",
-    "config": "less config.json",
+    "watch": "WATCH=true npm run build",
     "coverage": "istanbul cover _mocha -- tests --recursive --reporter=xunit-file",
-    "develop": "WATCH=true gulp & npm start",
+    "develop": "WATCH=true npm run build & npm run start",
     "review": "jscs app",
     "start": "node server.js",
+    "postinstall": "npm run build",
     "test": "mocha --require babel-core/register tests/"
   },
   "author": {
