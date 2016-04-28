@@ -247,7 +247,12 @@ function formatCell(key, value, obj, options) {
       _cell = <td key={key}>{value.charAt(0).toUpperCase() + value.slice(1).replace('-', ' ')}</td>
       break
     case 'data':
-      _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>
+      if (value) {
+        let data_file_name = _.last(value.split('/'))
+        _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span>{data_file_name}</a></td>
+      } else {
+        _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>
+      }
       break
     case 'period_id':
       if (value) {
