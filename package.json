@@ -57,7 +57,8 @@
     "uglify-js": "2.4.16",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "1.0.0",
-    "watchify": "2.3.0"
+    "watchify": "2.3.0",
+    "node-cache": "3.2.1"
   },
   "devDependencies": {
     "babelify": "^7.2.0",

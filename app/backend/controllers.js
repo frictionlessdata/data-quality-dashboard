@@ -25,7 +25,7 @@ function dashboard(req, res) {
 }
 
 function api(req, res) {
-  var db = req.app.get('db')
+  var db = req.app.get('cache').get('db')
   return res.json(db)
 }
 

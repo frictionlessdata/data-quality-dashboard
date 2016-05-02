@@ -87,6 +87,7 @@ A single object with the following fields:
 * `name`: The name of this dashboard
 * `admin`: The email address of the administrator of this dashboard
 * `validator_url`: The URL to a GoodTables API endpoint (eg: `https://goodtables.okfnlabs.org/api/run`)
+* `last_modified`: Time when the data was last modified. Should be updated before each deploy.
 
 ### sources.csv
 
