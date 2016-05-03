@@ -66,6 +66,7 @@ class DefaultView extends Component {
 
           <footer className='site-footer'>
             <div className='container'>
+              <p>The database was last updated at {instance.last_modified}</p>
               <a className='footer-logo' href='https://okfn.org/'>
                 <img src='https://bytebucket.org/okfn/assets.okfn.org/raw/88b24904b8ecded5e6d530739743162d1c5b3d93/p/okfn/img/okfn-logo-landscape-white.png' alt='Open Knowledge' />
               </a>
