@@ -28,8 +28,9 @@ function ui(state = {
       {key:'period_id', label:'period'},
       {key:'title'}, {key:'data', label:'URL'},
       {key:'format'},
-      {key:'schema', label:'Error details'},
-      {key:'score'}
+      {key:'report', label:'Error details'},
+      {key:'score'},
+      {key:'schema'}
     ]
   },
   tableSorters: {
