@@ -9,25 +9,30 @@
   position:relative;
   z-index:99;
   color:$footer-color;
-  
+
   .container {
-    padding: $base-spacing * 2 $base-spacing;
+    // padding: $base-spacing * 2 $base-spacing;
+    padding: 0.5 * $base-spacing $base-spacing 2 * $base-spacing $base-spacing;
+
+    .database-version {
+      padding: $base-spacing 0px;
+    }
 
     .footer-logo {
       margin-right: 1em;
       margin-bottom: 1em;
       margin-top:-4px;
-  
+
       @media (min-width: $screen-sm-min) {
         float: left;
         margin-bottom: 0;
       }
     }
-  
+
     .footer-logo img {
       height: 2em;
-    } 
-  
+    }
+
     ul {
       margin-bottom: 1em;
       @media (min-width: $screen-sm-min) {
@@ -36,64 +41,64 @@
         margin-bottom: 0;
       }
     }
-  
+
     ul li {
       padding-right: 1em;
-  
+
       @media (min-width: $screen-sm-min) {
         display: inline;
         text-align: left;
       }
     }
-  
+
     a {
       color: $footer-link-color;
-  
+
       &:hover {
         color: transparentize($footer-color, 0);
       }
-      
+
       &[rel~="external"]:after {
         display:none;
       }
     }
-  
+
     .footer-links {
-      
+
       @media (min-width: $screen-sm-min) {
         float: right;
       }
-  
+
       li {
         font-size: .8em;
         font-weight: 400;
       }
-  
+
       ul.footer-social {
         margin-top: 1em;
-  
+
         @media (min-width: $screen-sm-min) {
           float: right;
           margin-top: 0;
         }
-  
+
         li {
           float: left;
           font-size: 1em;
           padding-right: .7em;
           display:block;
           margin-bottom:$base-spacing;
-  
+
           &:last-child {
             padding-right: 0;
           }
         }
-  
+
         img {
           opacity: .7;
           height: 1.6em;
           padding: 1px;
-  
+
           &:hover {
             opacity: 1;
           }
@@ -101,13 +106,13 @@
       }
     }
   }
-  
+
   hr {
     clear:both;
     border-color:$footer-disclaimer-color;
     margin-bottom:$base-spacing;
   }
-  
+
   p {
     clear:both;
     font-size:12px;

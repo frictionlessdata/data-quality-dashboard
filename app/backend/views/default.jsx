@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 
 class DefaultView extends Component {
   render() {
-    const { children, instance } = this.props
+    const { children, instance, embed } = this.props
     return (
       <html>
         <head>
@@ -21,7 +21,7 @@ class DefaultView extends Component {
           <link rel='stylesheet' type='text/css' href='/styles/app.min.css' />
         </head>
         <body>
-          <div>
+          <div className={embed ? 'hidden' : null}>
             <div id='ok-panel' className='closed'>
               <iframe src='//assets.okfn.org/themes/okfn/okf-panel.html'
                 scrolling='no'>
@@ -64,9 +64,9 @@ class DefaultView extends Component {
 
           {children}
 
-          <footer className='site-footer'>
+          <footer className={embed ? 'hidden' : 'site-footer'}>
             <div className='container'>
-              <p>The database was last updated at {instance.last_modified}</p>
+              <p className='database-version'>The database was last updated at {instance.last_modified}</p>
               <a className='footer-logo' href='https://okfn.org/'>
                 <img src='https://bytebucket.org/okfn/assets.okfn.org/raw/88b24904b8ecded5e6d530739743162d1c5b3d93/p/okfn/img/okfn-logo-landscape-white.png' alt='Open Knowledge' />
               </a>
