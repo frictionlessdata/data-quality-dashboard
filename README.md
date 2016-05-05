@@ -7,7 +7,7 @@ of departments.
 
 The Data Quality Dashboard has been developed in order to display data quality information on the 25K spend data published by the UK Government. The Dashboard can be used for any published collection of data by following a few key steps.
 
-## Get started
+## Local development
 
 ```
 # Get the code
@@ -29,21 +29,19 @@ npm run start
 open http://localhost:3000/
 ```
 
+See the `scripts` section in `package.json` for more available commands.
+
 Read on for details.
 
 ## Application
 
 The Data Quality Dashboard is a Node.js application written in ES6, largely using Express and React.
 
-Th `app.backend` module renders the basic views (using React on the server) and is responsible for preparing the data as JSON by parsing the CSV database. It also provides some simple routes for standard pages like FAQ and About.
+The `app.backend` module renders the basic views (using React on the server) and is responsible for preparing the data as JSON by parsing the CSV database. It also provides some simple routes for standard pages like FAQ and About.
 
 The `app.ui` module is a React-Redux application for displaying the data to the user.
 
 The codebase is written in Node.js-style CommonJS, using ES6 syntax. The `app.ui` code is bundled by Browserify, and `app.backend` is transformed using Babel at runtime.
-
-### Local development
-
-See `npm.scripts` to manage your local workflow.
 
 ### Remote deployment
 
@@ -59,13 +57,13 @@ As GitHub does not support CORS, we then use a proxy that does - [RawGit](https:
 
 When the application loads, it reads the data from the database, parses the content to JSON, and stores the new data representation as JSON. This JSON representation is accessible via an API endpoint that the frontend app uses.
 
-To configure the database, the application need to know the base path as a URL.
+To configure the database, the application needs to know the base path as a URL.
 
 For example:
 
 * `https://rawgit.com/okfn/uk-expenditure-files/master/data`
 
-And, the application expects to find at that base the following files:
+By default, the application expects to find at that base the following files:
 
 * `instance.json`: Basic metadata for the instance
 * `sources.csv`: The list of data sources that are assessed for quality
@@ -75,6 +73,8 @@ And, the application expects to find at that base the following files:
 * `runs.csv`: A log of the results run against these resources
 
 Of course, each of these files must conform to a certain datastructure - think of them as tables in a database. As long as you conform to the structure and expected data within that structure, it does not matter how the database is actually produced.
+
+For how to change the database see the [Configure database](#configure-database) section.
 
 ## Schema
 
@@ -87,7 +87,7 @@ A single object with the following fields:
 * `name`: The name of this dashboard
 * `admin`: The email address of the administrator of this dashboard
 * `validator_url`: The URL to a GoodTables API endpoint (eg: `https://goodtables.okfnlabs.org/api/run`)
-* `last_modified`: Time when the data was last modified. Should be updated before each deploy.
+* `last_modified`: Time when the data was last modified. Should be updated before each database deploy.
 
 ### sources.csv
 
@@ -128,20 +128,20 @@ A CSV with the following columns:
 * `summary`: A summary of this result.
 * `run_id`: The identifier of the run in which this result was generated.
 * `timestamp`: The timestamp for this result.
-* `report`:
+* `report`: The base URL to a more detailed report
 
 ### performance.csv
 
 A CSV with the following columns:
 
 * `publisher_id`: The identifier for the publisher.
-* `period_id`:
-* `files_count`:
-* `score`:
-* `valid`:
-* `files_count_to_date`:
-* `score_to_date`:
-* `valid_to_date`:
+* `period_id`: The time span for the analysis.
+* `files_count`: Number of files published during the above mentioned time span.
+* `score`: Score for the above mentioned files.
+* `valid`: How many of the above mentioned files are valid.
+* `files_count_to_date`: Total number of files published up to this period.
+* `score_to_date`: Score of all the files published up to this period.
+* `valid_to_date`: Number of valid files from all published up to this period.
 
 ### runs.csv
 
@@ -150,6 +150,16 @@ A CSV with the following columns:
 * `id`
 * `timestamp`
 * `total_score`
+
+
+## Configure database
+
+The database can be configured through the following environment variables:
+
+* `DATABASE_LOCATION`: Base URL for the files.
+* `PUBLISHER_TABLE`: Name of the file containing the publishers (relative to the DATABASE_LOCATION).
+
+Following this pattern, you can also configure `SOURCE_TABLE`, `RUN_TABLE`, `PERFORMANCE_TABLE` and `INSTANCE_TABLE`.
 
 ## Tooling
 

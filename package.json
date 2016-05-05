@@ -1,5 +1,5 @@
 {
-  "name": "spend-publishing-dashboard",
+  "name": "data-quality-dashboard",
   "version": "0.1.0",
   "description": "A dashboard for tracking and displaying open data publication quality.",
   "main": "server.js",
@@ -95,40 +95,24 @@
     "postinstall": "npm run build",
     "test": "mocha --require babel-core/register tests/"
   },
-  "author": {
-    "name": "Open Knowledge",
-    "email": "info@okfn.org",
-    "url": "https://okfn.org/"
-  },
+  "author": "Open Knowledge <info@okfn.org> (https://okfn.org/)",
   "contributors": [
-    {
-      "name": "Paul Walsh",
-      "email": "paulywalsh@gmail.com",
-      "url": "http://pwalsh.me/"
-    },
-    {
-      "name": "Tryggvi Bjorgvinsson",
-      "email": "tryggvi.bjorgvinsson@okfn.org"
-    },
-    {
-      "name": "Helene Durand"
-    },
-    {
-      "name": "Dan Fowler",
-      "email": "daniel.fowler@okfn.org",
-      "url": "http://www.danfowler.net"
-    },
-    {
-      "name": "Rufus Pollock",
-      "email": "rufus@rufuspollock.org",
-      "url": "http://rufuspollock.org/"
-    }
+    "Paul Walsh <paulywalsh@gmail.com> (http://pwalsh.me/)",
+    "Tryggvi Bjorgvinsson <tryggvi.bjorgvinsson@okfn.org>",
+    "Helene Durand",
+    "Dan Fowler <daniel.fowler@okfn.org> (http://www.danfowler.net)",
+    "Rufus Pollock <rufus@rufuspollock.org> (http://rufuspollock.org/)"
   ],
   "homepage": "https://github.com/okfn/spend-publishing-dashboard",
-  "bugs": "https://github.com/okfn/spend-publishing-dashboard/issues",
+  "bugs": {
+    "url": "https://github.com/okfn/spend-publishing-dashboard/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/okfn/spend-publishing-dashboard.git"
+    "url": "git+https://github.com/okfn/data-quality-dashboard.git"
   },
-  "license": "AGPL-3.0"
+  "license": "AGPL-3.0",
+  "directories": {
+    "test": "tests"
+  }
 }
