@@ -6,7 +6,9 @@
   "keywords": [
     "open data",
     "open spending",
-    "open knowledge"
+    "open knowledge",
+    "data packages",
+    "frictionless data"
   ],
   "dependencies": {
     "babel-core": "^6.1.2",
@@ -82,8 +84,8 @@
     "zombie": "^4.2.1"
   },
   "engines": {
-    "node": "5.0.0",
-    "npm": "3.4.0"
+    "node": "6.1.0",
+    "npm": "3.8.6"
   },
   "scripts": {
     "build": "gulp",
@@ -101,11 +103,12 @@
     "Tryggvi Bjorgvinsson <tryggvi.bjorgvinsson@okfn.org>",
     "Helene Durand",
     "Dan Fowler <daniel.fowler@okfn.org> (http://www.danfowler.net)",
-    "Rufus Pollock <rufus@rufuspollock.org> (http://rufuspollock.org/)"
+    "Rufus Pollock <rufus@rufuspollock.org> (http://rufuspollock.org/)",
+    "Goergiana Bere <bere.georgi@gmail.com>"
   ],
-  "homepage": "https://github.com/okfn/spend-publishing-dashboard",
+  "homepage": "https://github.com/okfn/data-quality-dashboard",
   "bugs": {
-    "url": "https://github.com/okfn/spend-publishing-dashboard/issues"
+    "url": "https://github.com/okfn/data-quality-dashboard/issues"
   },
   "repository": {
     "type": "git",
