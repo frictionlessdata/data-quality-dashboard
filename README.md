@@ -1,9 +1,6 @@
 # Data Quality Dashboard
 
-Data Quality Dashboard provides access to, and displays statistics on,
-a collection of published data. This collection of data is logically related:
-for example, data published by a single government department, or a group
-of departments.
+Data Quality Dashboard provides access to, and displays statistics on, a collection of published data. This collection of data is logically related: for example, data published by a single government department, or a group of departments.
 
 The Data Quality Dashboard has been developed in order to display data quality information on the 25K spend data published by the UK Government. The Dashboard can be used for any published collection of data by following a few key steps.
 
@@ -11,7 +8,7 @@ The Data Quality Dashboard has been developed in order to display data quality i
 
 ```
 # Get the code
-git clone https://github.com/okfn/spend-publishing-dashboard.git .
+git clone https://github.com/okfn/data-quality-dashboard.git
 
 # Install the dependencies
 npm install
@@ -61,7 +58,7 @@ To configure the database, the application needs to know the base path as a URL.
 
 For example:
 
-* `https://rawgit.com/okfn/uk-expenditure-files/master/data`
+* `https://rawgit.com/okfn/data-quality-uk-25k-spend/master/data`
 
 By default, the application expects to find at that base the following files:
 
