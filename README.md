@@ -8,7 +8,6 @@ The Data Quality Dashboard has been developed in order to display data quality i
 
 ```
 # Get the code
-<<<<<<< HEAD
 git clone https://github.com/okfn/data-quality-dashboard.git
 
 # Install the dependencies
