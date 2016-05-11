@@ -18,6 +18,8 @@ class App extends Component {
           <ReduxRouter>
             <Route path='publishers/:lookup' component={Publisher} />
             <Route path='/' component={Main} />
+            <Route path='embed/publishers/:lookup' component={Publisher} />
+            <Route path='embed' component={Main} />
           </ReduxRouter>
         </Provider>
       </div>

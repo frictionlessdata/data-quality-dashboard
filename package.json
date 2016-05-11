@@ -1,12 +1,14 @@
 {
-  "name": "spend-publishing-dashboard",
+  "name": "data-quality-dashboard",
   "version": "0.1.0",
   "description": "A dashboard for tracking and displaying open data publication quality.",
   "main": "server.js",
   "keywords": [
     "open data",
     "open spending",
-    "open knowledge"
+    "open knowledge",
+    "data packages",
+    "frictionless data"
   ],
   "dependencies": {
     "babel-core": "^6.1.2",
@@ -42,7 +44,6 @@
     "redux-router": "^1.0.0-beta3",
     "redux-thunk": "^1.0.0",
     "throng": "1.0.1",
-
     "babelify": "^7.2.0",
     "browserify": "8.1.3",
     "gulp": "3.9.0",
@@ -58,7 +59,8 @@
     "uglify-js": "2.4.16",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "1.0.0",
-    "watchify": "2.3.0"
+    "watchify": "2.3.0",
+    "node-cache": "3.2.1"
   },
   "devDependencies": {
     "babelify": "^7.2.0",
@@ -82,8 +84,8 @@
     "zombie": "^4.2.1"
   },
   "engines": {
-    "node": "5.0.0",
-    "npm": "3.4.0"
+    "node": "6.1.0",
+    "npm": "3.8.6"
   },
   "scripts": {
     "build": "gulp",
@@ -95,40 +97,25 @@
     "postinstall": "npm run build",
     "test": "mocha --require babel-core/register tests/"
   },
-  "author": {
-    "name": "Open Knowledge",
-    "email": "info@okfn.org",
-    "url": "https://okfn.org/"
-  },
+  "author": "Open Knowledge <info@okfn.org> (https://okfn.org/)",
   "contributors": [
-    {
-      "name": "Paul Walsh",
-      "email": "paulywalsh@gmail.com",
-      "url": "http://pwalsh.me/"
-    },
-    {
-      "name": "Tryggvi Bjorgvinsson",
-      "email": "tryggvi.bjorgvinsson@okfn.org"
-    },
-    {
-      "name": "Helene Durand"
-    },
-    {
-      "name": "Dan Fowler",
-      "email": "daniel.fowler@okfn.org",
-      "url": "http://www.danfowler.net"
-    },
-    {
-      "name": "Rufus Pollock",
-      "email": "rufus@rufuspollock.org",
-      "url": "http://rufuspollock.org/"
-    }
+    "Paul Walsh <paulywalsh@gmail.com> (http://pwalsh.me/)",
+    "Tryggvi Bjorgvinsson <tryggvi.bjorgvinsson@okfn.org>",
+    "Helene Durand",
+    "Dan Fowler <daniel.fowler@okfn.org> (http://www.danfowler.net)",
+    "Rufus Pollock <rufus@rufuspollock.org> (http://rufuspollock.org/)",
+    "Goergiana Bere <bere.georgi@gmail.com>"
   ],
-  "homepage": "https://github.com/okfn/spend-publishing-dashboard",
-  "bugs": "https://github.com/okfn/spend-publishing-dashboard/issues",
+  "homepage": "https://github.com/okfn/data-quality-dashboard",
+  "bugs": {
+    "url": "https://github.com/okfn/data-quality-dashboard/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/okfn/spend-publishing-dashboard.git"
+    "url": "git+https://github.com/okfn/data-quality-dashboard.git"
   },
-  "license": "AGPL-3.0"
+  "license": "AGPL-3.0",
+  "directories": {
+    "test": "tests"
+  }
 }

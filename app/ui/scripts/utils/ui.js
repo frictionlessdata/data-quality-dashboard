@@ -247,7 +247,12 @@ function formatCell(key, value, obj, options) {
       _cell = <td key={key}>{value.charAt(0).toUpperCase() + value.slice(1).replace('-', ' ')}</td>
       break
     case 'data':
-      _cell = <td key={key}><a href={value}><span className="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>
+      if (value) {
+        let data_file_name = _.last(value.split('/'))
+        _cell = <td key={key}><a href={value}>{data_file_name}</a></td>
+      } else {
+        _cell = <td key={key}></td>
+      }
       break
     case 'period_id':
       if (value) {
@@ -272,8 +277,15 @@ function formatCell(key, value, obj, options) {
         _cell = <td key={key}>{}</td>
       }
       break
+    case 'report':
+      _cell = <td key="report"><a href={'http://goodtables.okfnlabs.org/reports?data_url=' + obj.data + '&format=' + obj.format + '&encoding=&schema_url=' + obj.schema}>{'Details'}</a></td>
+      break
     case 'schema':
-      _cell = <td key="report"><a href={'http://goodtables.okfnlabs.org/reports?data_url=' + obj.data + '&format=' + obj.format + '&encoding=&schema_url=' + value}>{'Details'}</a></td>
+      if (value) {
+        _cell = <td key={key}><a href={value}>See schema</a></td>
+      } else {
+        _cell = <td key={key}>Schema unavailable</td>
+      }
       break
     default:
       _cell = <td key={key}>{value}</td>

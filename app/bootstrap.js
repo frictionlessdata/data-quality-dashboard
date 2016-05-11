@@ -4,6 +4,7 @@ import { createEngine } from 'express-react-views'
 import path from 'path'
 import config from './config'
 import _ from 'lodash'
+import NodeCache from 'node-cache'
 import { middlewares, routes } from './backend'
 
 export default function bootstrap(app, express) {
@@ -13,9 +14,11 @@ export default function bootstrap(app, express) {
   // false due to some weirdness in express-react-views
   // https://github.com/reactjs/express-react-views/issues/40
   let viewEngine = createEngine({transformViews: false})
+  let backendCache = new NodeCache()
 
   app.set('config', config)
   app.set('port', config.get('port'))
+  app.set('cache', backendCache)
   app.set('views', viewPath)
   app.set('view engine', 'jsx')
   app.engine('jsx', viewEngine)

@@ -21,11 +21,15 @@ function makePage(filename, title) {
 }
 
 function dashboard(req, res) {
-  return res.render('dashboard')
+  return res.render('dashboard', {embed: false})
+}
+
+function embed(req, res) {
+  return res.render('dashboard', {embed: true})
 }
 
 function api(req, res) {
-  var db = req.app.get('db')
+  var db = req.app.get('cache').get('db')
   return res.json(db)
 }
 
@@ -34,5 +38,6 @@ export default {
   faq: makePage('faq.md', 'FAQ'),
   pricing: makePage('pricing.md', 'Pricing'),
   dashboard,
+  embed,
   api
 }
