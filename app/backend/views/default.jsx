@@ -17,24 +17,16 @@ class DefaultView extends Component {
             {instance.name} | {instance.organization}
           </title>
           <link rel='apple-touch-icon' href='images/apple-touch-icon.png' />
-          <link rel='stylesheet' href='//okfnlabs.org/ok-panel/assets/css/frontend.css' />
           <link rel='stylesheet' type='text/css' href='/styles/app.min.css' />
+          <link rel="stylesheet" href='//a.okfn.org/html/oki/panel/assets/css/frontend.css' />
         </head>
         <body>
           <div className={embed ? 'hidden' : null}>
-            <div id='ok-panel' className='closed'>
-              <iframe src='//assets.okfn.org/themes/okfn/okf-panel.html'
-                scrolling='no'>
-              </iframe>
+            <div className='fixed-ok-panel'><div id='ok-panel' className='closed'><div className='container'><iframe src='//a.okfn.org/html/oki/panel/panel.html' scrolling='no'></iframe></div></div><a className='black ok-ribbon' href='//okfn.org/'><img src='//a.okfn.org/html/oki/panel/assets/images/oki-ribbon.png' alt='Open Knowledge' /></a></div>
 
-              </div>
             <nav className='navbar navbar-static-top'>
               <div className='container'>
                 <div className='navbar-right'>
-                  <a className='ok-ribbon' href='https://okfn.org/'>
-                    <img src='//okfnlabs.org/ok-panel/assets/images/ok-ribbon.png'
-                      alt='Open Knowledge'/>
-                    </a>
                 </div>
                 <div className='navbar-header'>
                   <button type='button' className='navbar-toggle collapsed'
@@ -109,7 +101,7 @@ class DefaultView extends Component {
           <script src='/scripts/bootstrap.min.js'></script>
           <script src="/scripts/Chart.min.js"></script>
           <script src='/scripts/app.min.js'></script>
-          <script src='//okfnlabs.org/ok-panel/assets/js/frontend.js'></script>
+          <script src='//a.okfn.org/html/oki/panel/assets/js/frontend.js' type='text/javascript'></script>
         </body>
       </html>
     )
