@@ -198,7 +198,8 @@ function formatCell(key, value, obj, options) {
   switch (key) {
     case "title":
       if (options.route) {
-        _cell = <td key={key}><Link to={`/${options.route}/${obj.id}`}>{value}</Link></td>
+        let path = (options.parentRoute == '/' ? '' : options.parentRoute)
+        _cell = <td key={key}><Link to={`${path}/${options.route}/${obj.id}`}>{value}</Link></td>
       } else {
         _cell = <td key={key}>{value}</td>
       }

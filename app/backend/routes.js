@@ -11,6 +11,7 @@ export default function routes() {
   router.get('/pricing', controllers.pricing)
   router.get('/api', controllers.api)
   router.get('/embed', controllers.embed)
+  router.get(/^(\/embed)\/.*/, controllers.embed)
   router.get('*', controllers.dashboard)
   return router
 }
