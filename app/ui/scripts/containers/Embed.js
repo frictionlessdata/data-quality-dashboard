@@ -6,7 +6,7 @@ import { selectPublisher, fetchDataIfNeeded } from '../actions'
 import { Table } from '../components/tables'
 import { Main as Overview } from '../components/overviews'
 
-class Main extends Component {
+class Embed extends Component {
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(fetchDataIfNeeded())
@@ -41,7 +41,7 @@ class Main extends Component {
   }
 }
 
-Main.propTypes = {
+Embed.propTypes = {
   data: PropTypes.object.isRequired,
   ui: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired
@@ -52,4 +52,4 @@ function mapStateToProps(state) {
   return { ui, data }
 }
 
-export default connect(mapStateToProps)(Main)
+export default connect(mapStateToProps)(Embed)

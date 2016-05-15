@@ -14,7 +14,7 @@ class Publisher extends Component {
     dispatch(fetchDataIfNeeded(lookup))
   }
   render() {
-    const { ui, data } = this.props
+    const { ui, data, route } = this.props
     const activePublisher = data.activePublisher
     return (
       <div>
@@ -38,7 +38,7 @@ class Publisher extends Component {
               <Table title={'data files'} rows={activePublisher.sources}
                 results={activePublisher.results}
                 columns={ui.tableHeaders.publisher}
-                sort={ui.tableSorters.publisher} />
+                sort={ui.tableSorters.publisher} parentRoute={route.path} />
             </section>
           </div>
         </div>
