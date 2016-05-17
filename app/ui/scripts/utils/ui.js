@@ -72,13 +72,13 @@ function makeOverview(results, objects, page) {
     values = {
       validPercent: {
         label: 'correct (%)',
-        help: 'percentage of valid files (rounded) published over the last three months',
+        help: 'percentage of valid files (no errors) published over the last three months',
         value: CalcUtils.validPercent(recents) + ''
       },
       totalScore: {
         label: 'score (%)',
-        help: 'average % correct (no errors) published over the last three months',
-        value: CalcUtils.totalScore(recents) + ''
+        help: 'average score (percent of correctness) for files published over the last three months',
+        value: CalcUtils.totalScore(recents, CalcUtils.publisherCount(objects), 3) + ''
       },
       publisherCount: {
         label: 'publishers',
@@ -94,7 +94,7 @@ function makeOverview(results, objects, page) {
       totalScore: {
         label: 'score (%)',
         help: 'average % correct (no errors) published over the last three months',
-        value: CalcUtils.totalScore(recents) + ''
+        value: CalcUtils.totalScore(recents, 1, 3) + ''
       },
       validPercent: {
         label: 'correct (%)',

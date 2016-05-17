@@ -55,15 +55,16 @@ function validPercent(results) {
   return validPercent
 }
 
-function totalScore(results) {
+function totalScore(results, numberOfPublishers, numberOfTimeUnits) {
   let scores = []
   let score = 0
+  let expectedResults = numberOfPublishers * numberOfTimeUnits
   _.forEach(results, function(obj) {
    scores.push(parseInt(obj.score))
   })
   if (scores.length > 0) {
     score = Math.round(
-      _.reduce(scores, function(sum, n) {return sum + n}) / results.length * 10)
+      _.reduce(scores, function(sum, n) {return sum + n}) / expectedResults * 10)
   }
   return score
 }
