@@ -18,12 +18,11 @@ class DefaultView extends Component {
           </title>
           <link rel='apple-touch-icon' href='images/apple-touch-icon.png' />
           <link rel='stylesheet' type='text/css' href='/styles/app.min.css' />
-          <link rel="stylesheet" href='//a.okfn.org/html/oki/panel/assets/css/frontend.css' />
+          <link rel="stylesheet" type='text/css' href='//a.okfn.org/html/oki/panel/assets/css/frontend.css' />
         </head>
         <body>
-          <div className={embed ? 'hidden' : null}>
-            <div className='fixed-ok-panel'><div id='ok-panel' className='closed'><div className='container'><iframe src='//a.okfn.org/html/oki/panel/panel.html' scrolling='no'></iframe></div></div><a className='black ok-ribbon' href='//okfn.org/'><img src='//a.okfn.org/html/oki/panel/assets/images/oki-ribbon.png' alt='Open Knowledge' /></a></div>
-
+          <div className={embed ? 'hidden' : null}
+            <div id='ok-panel-wrapper' className='fixed-ok-panel'><div id='ok-panel' className='closed'><div className='container'><iframe src='//a.okfn.org/html/oki/panel/panel.html' scrolling='no'></iframe></div></div><a className='black ok-ribbon' href='//okfn.org/'><img src='//a.okfn.org/html/oki/panel/assets/images/oki-ribbon.png' alt='Open Knowledge' /></a></div>
             <nav className='navbar navbar-static-top'>
               <div className='container'>
                 <div className='navbar-right'>
@@ -97,11 +96,8 @@ class DefaultView extends Component {
               <p>Open Knowledge Foundation is incorporated in England and Wales as a company Limited by guarantee. Company no. 05133759. Registered address: St. John’s Innovation Centre, Cowley Road, Cambridge, CB4 0WS, UK. VAT Registration no. GB 984404989.</p>
             </div>
           </footer>
-          <script src="/scripts/jquery.min.js"></script>
-          <script src='/scripts/bootstrap.min.js'></script>
-          <script src="/scripts/Chart.min.js"></script>
           <script src='/scripts/app.min.js'></script>
-          <script src='//a.okfn.org/html/oki/panel/assets/js/frontend.js' type='text/javascript'></script>
+          <script src='//a.okfn.org/html/oki/panel/assets/js/frontend.js'></script>
         </body>
       </html>
     )
