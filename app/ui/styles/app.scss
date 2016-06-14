@@ -91,3 +91,16 @@ $header-gradient: radial-gradient(circle at 50% top, rgba($green,0.6) 0%,rgba($g
 .dashboard .publishers {
   padding-bottom: 30px;
 }
+
+.ok-ribbon {
+  position: absolute !important;
+}
+
+.navbar .container .navbar-nav {
+  margin-right: 140px;
+}
+
+.jumbotron.inverse {
+  background-color: #69b93b;
+  background-image: none;
+}

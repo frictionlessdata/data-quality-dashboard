@@ -19,11 +19,11 @@ $green: rgb(122, 184, 0); // #7ab800
 $red: rgb(255, 0, 0);
 $blue: rgb(0, 165, 224);
 
-$brand-primary:         $green !default; 
-$brand-success:         #8acd00 !default;
+$brand-primary:         $gray-darker !default;
+$brand-success:         rgba(85, 205, 40, 0.88) !default;
 $brand-info:            $blue !default;
-$brand-warning:         #E9D046 !default;
-$brand-danger:          #cd0000 !default;
+$brand-warning:         rgba(243, 217, 73, 0.79) !default;
+$brand-danger:          rgba(255, 0, 0, 0.7) !default;
 
 
 //== Scaffolding
@@ -36,7 +36,7 @@ $body-bg:               #fff !default;
 $text-color:            $gray-dark !default;
 
 // ** Global textual link color.
-$link-color:            $brand-primary !default;
+$link-color:            $blue !default;
 // ** Link hover color set via `darken()` function.
 $link-hover-color:      darken($link-color, 15%) !default;
 // ** Link hover decoration.
