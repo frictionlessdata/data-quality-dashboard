@@ -82,3 +82,12 @@ $header-gradient: radial-gradient(circle at 50% top, rgba($green,0.6) 0%,rgba($g
   min-height: 500px;
   background-color: #eee;
 }
+
+.explanation p, .explanation ul {
+  font-size: 18px !important;
+  font-weight: 300;
+}
+
+.dashboard .publishers {
+  padding-bottom: 30px;
+}

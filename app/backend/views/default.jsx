@@ -21,7 +21,7 @@ class DefaultView extends Component {
           <link rel="stylesheet" type='text/css' href='//a.okfn.org/html/oki/panel/assets/css/frontend.css' />
         </head>
         <body>
-          <div className={embed ? 'hidden' : null}
+          <div className={embed ? 'hidden' : null}>
             <div id='ok-panel-wrapper' className='fixed-ok-panel'><div id='ok-panel' className='closed'><div className='container'><iframe src='//a.okfn.org/html/oki/panel/panel.html' scrolling='no'></iframe></div></div><a className='black ok-ribbon' href='//okfn.org/'><img src='//a.okfn.org/html/oki/panel/assets/images/oki-ribbon.png' alt='Open Knowledge' /></a></div>
             <nav className='navbar navbar-static-top'>
               <div className='container'>

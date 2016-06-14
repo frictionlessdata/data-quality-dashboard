@@ -1,6 +1,7 @@
 'use strict'
 
 import React, { Component, PropTypes } from 'react'
+import marked from 'marked'
 import { connect } from 'react-redux'
 import { selectPublisher, fetchDataIfNeeded } from '../actions'
 import { Table } from '../components/tables'
@@ -10,6 +11,9 @@ class Main extends Component {
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(fetchDataIfNeeded())
+  }
+  safe(content) {
+    return { __html: marked(content) }
   }
   render() {
     const { ui, data, route } = this.props
@@ -27,12 +31,20 @@ class Main extends Component {
               <Overview instance={data.instance}
                 results={data.results} publishers={data.publishers} />
             </div>
-            <div className='container'></div>
             <section className='publishers'>
               <Table title={'publishers'} rows={data.publishers}
                 results={data.results} columns={ui.tableHeaders.main}
                 sort={ui.tableSorters.main} parentRoute={route.path} />
             </section>
+            {data.instance.context &&
+            <section className='context'>
+              <div className='container'>
+                <h2>What's this all about?</h2>
+                <div className='explanation col-md-12'
+                     dangerouslySetInnerHTML={this.safe(data.instance.context || '')} />
+              </div>
+            </section>
+            }
           </div>
         </div>
       }
