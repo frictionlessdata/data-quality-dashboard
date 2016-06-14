@@ -18,11 +18,11 @@ function ui(state = {
       {key: 'type'},
       {key: 'homepage'},
       {key: 'email'},
-      {key: 'completelyCorrect', label: 'Correct',
+      {key: 'completelyCorrect', label: 'Valid files',
       help: 'number of files with no errors at all'},
-      {key: 'score', label: 'score (all time)'},
+      {key: 'score', label: 'All-time Score'},
       {key: 'lastFileDate', label: 'last file'},
-      {key: 'lastFileScore', label: 'score', help: '% correct (no errors)'}
+      {key: 'lastFileScore', label: 'Current Score', help: 'Average score (percent of correctness) for files published over the last three months'}
     ],
     publisher: [
       {key:'period_id', label:'period'},

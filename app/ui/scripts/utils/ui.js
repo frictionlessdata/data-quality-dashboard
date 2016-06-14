@@ -71,7 +71,7 @@ function makeOverview(results, objects, page) {
   if (page === 'main') {
     values = {
       validPercent: {
-        label: 'correct (%)',
+        label: 'valid (%)',
         help: 'percentage of valid files (no errors) published over the last three months',
         value: CalcUtils.validPercent(recents) + ''
       },
