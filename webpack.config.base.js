@@ -1,4 +1,5 @@
 'use strict'
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry:  './app/ui/scripts',
@@ -7,7 +8,7 @@ module.exports = {
     loaders: [
       { test: /\.js$/, loaders: [ 'babel-loader' ], exclude: /node_modules/ },
       { test: /\.html$/, loader: 'raw' },
-      { test: /\.css$/, loader: "style!css" }
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass')  }
     ]
   },
   output: { library: 'dq', libraryTarget: 'umd' }

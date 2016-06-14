@@ -3,13 +3,15 @@
 var _ = require('lodash')
 var webpack = require('webpack')
 var baseConfig = require('./webpack.config.base')
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var productionConfig = {
   output: {
-    filename: 'app.min.js',
-    path: './public/scripts'
+    filename: 'scripts/app.min.js',
+    path: './public'
   },
   plugins:  [
+    new ExtractTextPlugin('styles/app.min.css'),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
