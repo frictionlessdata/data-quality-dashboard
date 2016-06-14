@@ -42,7 +42,7 @@ The codebase is written in Node.js-style CommonJS, using ES6 syntax. The `app.ui
 
 ### Remote deployment
 
-We push to Heroku, and a `postinstall` script ensures that `app.ui` is bundled before the app is served.
+We push to Heroku, and a `postinstall` script ensures that `app.ui` is bundled before the app is served. Make sure you set `NPM_CONFIG_PRODUCTION=false` to include `devDependencies` on Heroku.
 
 ## Data
 
