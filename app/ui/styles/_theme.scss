@@ -34,14 +34,14 @@ a.navbar-brand.has-icon {
     .dropdown-menu > li > a {
       color:$navbar-inverse-bg;
     }
-    
+
     .form-control,
     .btn {
       border-color:$navbar-inverse-bg;
       color:$navbar-inverse-bg;
       @include placeholder(rgba($green,0.5));
     }
-    
+
     .btn-primary {
       background-color:#fff;
     }
@@ -49,18 +49,18 @@ a.navbar-brand.has-icon {
       color:#fff;
       border-color:$gray-dark;
     }
-    
+
     .well {
       background-color: rgba(0,0,0,0.03);
       border-color: darken($navbar-inverse-bg, 2);
       box-shadow: none;
     }
-    
+
     .counter {
       @extend .counter.inverse;
     }
   }
-  
+
   &.danger {
     background-color:$brand-danger;
     color:#fff;
@@ -99,7 +99,7 @@ html {
     border-radius:1px;
     position:relative;
     color:#fff;
-    
+
     &:after {
       content:'';
       width: 100%;
@@ -111,7 +111,7 @@ html {
       background-color:#fff;
     }
   }
-  
+
   .label {
     color:$gray-dark;
     font-size:20px;
@@ -121,18 +121,18 @@ html {
     display:block;
     padding:0;
   }
- 
+
   &.inverse {
     background-color:#FF0004;
     .value > span {
       background-color:#fff;
       color:$navbar-inverse-bg;
-      
+
       &:after {
         background-color:$navbar-inverse-bg;
       }
     }
-    
+
     .label {
       color:#fff;
     }
@@ -159,24 +159,24 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-stacked > li {
   background-color:$gray-lighter;
-  
+
   & + li {
     margin:0;
   }
-  
+
   &:first-child {
     border-top:solid 15px $gray-lighter;
   }
-  
+
   &:last-child {
     border-bottom:solid 15px $gray-lighter;
   }
-  
+
   & > a:hover,
   & > a:focus {
     background-color: rgba(255,255,255,0.50);
   }
-  
+
   &.active a {
     background-color:$brand-primary;
     color:#fff;
@@ -185,14 +185,14 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .navbar-brand {
-  
+
   .text {
     font-weight:900;
     text-transform:uppercase;
     letter-spacing:1px;
     position:relative;
     display:block;
-    
+
     &:before {
       content:'Open Knowledge International';
       display:block;
@@ -203,11 +203,11 @@ h1, h2, h3, h4, h5, h6 {
       letter-spacing:2px;
     }
   }
-  
+
   .glyphicon {
     $icon-colour:$gray;
     $icon-shadow: darken($icon-colour, 2);
-    
+
     float:left;
     background-color:$icon-colour;
     border-radius:50%;
@@ -233,12 +233,12 @@ h1, h2, h3, h4, h5, h6 {
                   $icon-shadow 12px 12px;
     overflow:hidden;
     display:none;
-    
+
     @media (min-width: $screen-sm-min) {
       display:block;
     }
   }
-  
+
   &.has-icon {
     .text {
       @media (min-width: $screen-sm-min) {
@@ -246,7 +246,7 @@ h1, h2, h3, h4, h5, h6 {
       }
     }
   }
-  
+
   &:hover {
     color:$brand-primary;
   }
@@ -254,7 +254,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-header {
   position:relative;
-  
+
   .release.badge {
     position:absolute;
     left:100%;
@@ -266,7 +266,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 2px 4px;
     opacity:0.3;
     display:none;
-    
+
     @media (min-width: $grid-float-breakpoint) {
       display:block;
     }
@@ -275,34 +275,34 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-toggle {
   background-color:$brand-primary;
-  
+
   .icon-bar {
     background-color:#fff;
   }
 }
-  
+
 .navbar {
   .container {
     position:relative;
-    
+
     //nav
     .navbar-nav {
-      
+
       & > .active > a,
       & > .active > a:hover,
       & > .active > a:focus {
         background-color: $brand-primary;
         color: #fff;
       }
-      
+
       @media (min-width: $screen-sm-min) {
         float:right;
         font-size:16px;
-        
+
         & > li > a {
           $vert-padding: 4px;
           $vert-margin: (($navbar-height - 20px) / 2) - $vert-padding;
-          
+
           margin-bottom: $vert-margin;
           margin-top: $vert-margin;
           padding-top:$vert-padding;
@@ -312,41 +312,41 @@ h1, h2, h3, h4, h5, h6 {
       }
     }
   }
-  
+
   &.navbar-inverse {
     background-image: $header-gradient;
-    
+
     .navbar-brand {
       color:#fff;
-      
+
       .text {
         &:before {
           color:#fff;
         }
       }
-      
+
       .glyphicon {
         background-color:#fff;
         text-shadow: none;
         color:$navbar-inverse-bg;
       }
     }
-    
+
     .release.badge {
       background-color:#fff;
       color:$navbar-inverse-bg;
       opacity:0.6;
     }
-    
+
     .open-knowledge {
       background-position:center -200px;
       border-bottom-color:#2D2D2D;
-      
+
       &:before {
         border-bottom-color:#000;
       }
     }
-    
+
     .navbar-nav {
       & > .active > a,
       & > .active > a:hover,
@@ -355,7 +355,7 @@ h1, h2, h3, h4, h5, h6 {
         color: $navbar-inverse-link-active-color;
       }
     }
-    
+
     & + div .jumbotron:first-child {
       @extend .jumbotron.inverse;
     }
@@ -365,16 +365,16 @@ h1, h2, h3, h4, h5, h6 {
 //Docs
 .docs {
   padding-bottom:20px;
-  
+
   & > .container > .wrapper {
     @include make-row();
-  
+
     & > .nav {
       @include make-sm-column(3);
-      
+
       & + .page-content {
         @include make-sm-column(9);
-        
+
         .embed-responsive {
           margin-bottom:20px;
         }
@@ -382,49 +382,5 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 }
-
-
-//Pricing
-
-.two-pricing-panels > .pricing-panel {
-  @include make-md-column(6);
-}
-.three-pricing-panels > .pricing-panel {
-  @include make-md-column(4);
-}
-.four-pricing-panels > .pricing-panel {
-  @include make-md-column(3);
-}
-
-.two-pricing-panels,
-.three-pricing-panels,
-.four-pricing-panels {
-  @include make-row();
-}
-
-.pricing-panel {
-  & > div:first-child {
-    @extend .panel;
-    @extend .panel-default;
-    
-    & > h1,
-    & > h2,
-    & > h3,
-    & > h4,
-    & > h5,
-    & > h6 {
-      @extend .panel-heading;
-      
-      & + div {
-        @extend .panel-body;
-      }
-    }
-    footer {
-      @extend .panel-footer;
-      background-color:#fff;
-    }
-  }
-}
-
 
 @import "footer";

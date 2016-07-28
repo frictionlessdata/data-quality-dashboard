@@ -15,13 +15,21 @@ function getBackend() {
   var runTable = process.env.RUN_TABLE || 'runs.csv'
   var performanceTable = process.env.PERFORMANCE_TABLE || 'performance.csv'
   var instanceTable = process.env.INSTANCE_TABLE || 'instance.json'
+  var showPricing = process.env.SHOW_PRICING_IN_MENU || false
+  showPricing === 'true' ? showPricing = true : showPricing = false
+  var pricingPageUrl = process.env.PRICING_PAGE_URL || ''
+  if (showPricing && !pricingPageUrl) {
+    throw Error('Please provide PRICING_PAGE_URL if you want to show pricing.');
+  }
   return {
     publishers: `${db}/${publisherTable}`,
     sources: `${db}/${sourceTable}`,
     results: `${db}/${resultTable}`,
     runs: `${db}/${runTable}`,
     performance: `${db}/${performanceTable}`,
-    instance: `${db}/${instanceTable}`
+    instance: `${db}/${instanceTable}`,
+    pricingPageUrl: pricingPageUrl,
+    showPricing: showPricing
   }
 }
 

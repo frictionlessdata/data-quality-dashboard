@@ -9,9 +9,9 @@ class PageView extends Component {
     return { __html: marked(content) }
   }
   render() {
-    const { instance, title, content } = this.props
+    const { instance, title, content, showPricing } = this.props
     return (
-      <DefaultView instance={instance}>
+      <DefaultView instance={instance} showPricing={showPricing}>
         <div className='jumbotron inverse'>
           <div className='container'>
             <h1>{title}</h1>

@@ -5,9 +5,9 @@ import DefaultView from './default'
 
 class DashboardView extends Component {
   render() {
-    const { instance, embed } = this.props
+    const { instance, embed, showPricing} = this.props
     return (
-      <DefaultView instance={instance} embed={embed}>
+      <DefaultView instance={instance} embed={embed} showPricing={showPricing}>
         <section id='application'></section>
       </DefaultView>
     )
