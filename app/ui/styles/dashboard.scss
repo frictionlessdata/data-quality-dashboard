@@ -104,14 +104,24 @@
       }
       td.success.score, td.success.date {
         background-color:$brand-success;
-        color:#fff;
       }
-      td.warning.score, td.warning.date {
+      td.score-99p.score {
+        background-color: #86D522;
+      }
+      td.score-80p.score {
+        background-color: #C0DD1C;
+      }
+      td.score-60p.score, td.warning.date {
         background-color:$brand-warning;
+      }
+      td.score-40p.score {
+        background-color: #FF9D19;
+      }
+      td.score-20p.score {
+        background-color: #FF6D33;
       }
       td.danger.score, td.danger.date {
         background-color:$brand-danger;
-        color:#fff;
       }
       .glyphicon {
         color:$gray-lighter;

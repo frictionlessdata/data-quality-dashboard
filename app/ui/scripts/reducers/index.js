@@ -25,7 +25,7 @@ function ui(state = {
       {key: 'lastFileScore', label: 'Current Score', help: 'Average score (percent of correctness) for files published over the last three months'}
     ],
     publisher: [
-      {key:'period_id', label:'period'},
+      {key:'period', label:'period'},
       {key:'title'}, {key:'data', label:'URL'},
       {key:'format'},
       {key:'report', label:'Error details'},
@@ -35,12 +35,12 @@ function ui(state = {
   },
   tableSorters: {
     main: [
-      ['lastFileScore', false],
-      ['title', true]
+      ['lastFileScore', 'desc'],
+      ['title', 'asc']
     ],
     publisher: [
-      ['periodTimestamp', false],
-      ['score', false]
+      ['period', 'desc'],
+      ['score', 'desc']
     ]
   }
 }, action) {

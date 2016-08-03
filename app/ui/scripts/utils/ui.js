@@ -6,6 +6,7 @@ import { Popover } from 'react-bootstrap'
 import { OverlayTrigger } from 'react-bootstrap'
 import { Link } from 'react-router'
 import CalcUtils from './calc'
+import moment from 'moment'
 
 function searchIn(objects, field, query) {
   let lookup = _.map(objects, field)
@@ -67,7 +68,8 @@ function makeOverview(results, objects, page) {
   let digitCount = 0
   let values, allDigitWidth, spacePerDigit, digitMaxWidth, digitWidth,
   counterPadding
-  let recents = CalcUtils.recentPeriodResults(results)
+  let latestResults = CalcUtils.latestResults(results)
+  let recents = CalcUtils.recentPeriodResults(latestResults)
   if (page === 'main') {
     values = {
       validPercent: {
@@ -86,7 +88,7 @@ function makeOverview(results, objects, page) {
       },
       sourceCount: {
         label: 'data files',
-        value: CalcUtils.sourceCount(results) + ''
+        value: latestResults.length + ''
       }
     }
   } else if (page === 'publisher') {
@@ -103,7 +105,7 @@ function makeOverview(results, objects, page) {
       },
       sourceCount: {
         label: 'data files',
-        value: CalcUtils.sourceCount(results) + ''
+        value: latestResults.length + ''
       }
     }
   }
@@ -144,11 +146,13 @@ function makeOverview(results, objects, page) {
 function makeTableBody(objects, results, options) {
   let _body = []
   let _unsorted = []
+  let latestResults = CalcUtils.latestResults(results)
+
   if (options.route === 'publishers') {
     // for each publisher, get its score from results and return a new array of publishers with scores
     _unsorted = _.map(objects, function(obj) {
-      let _publisherScore = CalcUtils.publisherScore(obj.id, results)
-      let _lastFile = CalcUtils.lastFile(obj.id, results)
+      let _publisherScore = CalcUtils.publisherScore(obj.id, latestResults)
+      let _lastFile = CalcUtils.lastFile(obj.id, latestResults)
       let _objWithScore = _.cloneDeep(obj)
       _objWithScore.completelyCorrect = _publisherScore.amountCorrect
       _objWithScore.score = _publisherScore.score
@@ -159,29 +163,18 @@ function makeTableBody(objects, results, options) {
   } else if (options.route === 'data files') {
     // for each source, get its score and timestamp from results and return a new array of sources with scores and timestamps
     _unsorted = _.map(objects, function(obj) {
-      let _sourceData = CalcUtils.sourceScore(obj.id, results)
+      let _sourceData = CalcUtils.sourceData(obj.id, latestResults)
       let _objWithScore = _.cloneDeep(obj)
       _objWithScore.score = _sourceData.score
       _objWithScore.timestamp = _sourceData.timestamp
-      // get period timestamp
-      if (obj.period_id) {
-        let period = obj.period_id.split('/')
-        if (period.length === 1) {
-          var periodTimestamp = Date.parse(period[0])
-        } else if (period.length === 2) {
-          var periodTimestamp = Date.parse(period[1])
-        }
-        } else {
-          var periodTimestamp = 0
-        }
-      _objWithScore.periodTimestamp = periodTimestamp
+      _objWithScore.period = _sourceData.publicationDate
       return _objWithScore
     })
   }
 
   // sort
   let sorters = _.unzip(options.sort)
-  _body = _.sortByOrder(_unsorted, sorters[0], sorters[1])
+  _body = _.orderBy(_unsorted, sorters[0], sorters[1])
   // for each data item, return a table row
   _body = _.map(_body, function(obj) {
     return <tr key={obj.id}>{makeTableRow(obj, options, options.route)}</tr>
@@ -216,10 +209,18 @@ function formatCell(key, value, obj, options) {
       break
     case 'score':
     case 'lastFileScore':
-      if (value <= 49) {
+      if (value == 0) {
         _c = 'danger'
-      } else if (value <= 99) {
-        _c = 'warning'
+      } else if (value >= 1 && value <= 20) {
+        _c = 'score-20p'
+      } else if (value >= 21 && value <= 40) {
+        _c = 'score-40p'
+      } else if (value >= 41 && value <= 60) {
+        _c = 'score-60p'
+      } else if (value >= 61 && value <= 80) {
+        _c = 'score-80p'
+      } else if (value >= 81 && value <= 99) {
+        _c = 'score-99p'
       } else {
         _c = 'success'
       }
@@ -255,25 +256,12 @@ function formatCell(key, value, obj, options) {
         _cell = <td key={key}></td>
       }
       break
-    case 'period_id':
+    case 'period':
       if (value) {
-        let period = value.split('/')
-        if (period.length === 1) {
-          let elements = period[0].split('-')
-          let month = months[elements[1] - 1]
-          let year = elements[0]
-          let displayed_period = month + ' ' + year
-          _cell = <td key={key}>{displayed_period}</td>
-        } else if (period.length === 2) {
-          let elements_start = period[0].split('-')
-          let elements_end = period[1].split('-')
-          let month_start = months[elements_start[1] - 1]
-          let month_end = months[elements_end[1] - 1]
-          let year_start = elements_start[0]
-          let year_end = elements_end[0]
-          let displayed_period = month_start + ' ' + year_start + ' to ' + month_end + ' ' + year_end
-          _cell = <td key={key}>{displayed_period}</td>
-        }
+        let month = months[value.getMonth()]
+        let year = value.getFullYear()
+        let displayed_period = month + ' ' + year
+        _cell = <td key={key}>{displayed_period}</td>
       } else {
         _cell = <td key={key}>{}</td>
       }
@@ -330,10 +318,10 @@ function makeChartData(performance) {
 
   // get performances
   _.forEach(performance, function(obj) {
-    let dateParts = obj.period_id.split('-')
+    let dateParts = obj.month_of_creation.split('-')
     let date = new Date(parseInt(dateParts[0], 10),
     parseInt(dateParts[1], 10) - 1, parseInt(dateParts[2], 10))
-    performances.push({period_id: obj.period_id, timestamp: date.getTime(),
+    performances.push({creation_id: obj.month_of_creation, timestamp: date.getTime(),
       score: obj.score, valid: obj.valid})
   })
 

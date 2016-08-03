@@ -8,7 +8,7 @@ let csvParser = Promise.promisify(csv.parse)
 
 function getBackend() {
   var db = process.env.DATABASE_LOCATION ||
-        'https://rawgit.com/okfn/data-quality-uk-25k-spend/master/data'
+        'https://rawgit.com/georgiana-b/data-quality-uk-25k-spend/feature/scoring-by-occurrences/data'
   var publisherTable = process.env.PUBLISHER_TABLE || 'publishers.csv'
   var sourceTable = process.env.SOURCE_TABLE || 'sources.csv'
   var resultTable = process.env.RESULT_TABLE || 'results.csv'
