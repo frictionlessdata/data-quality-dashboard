@@ -42,8 +42,9 @@ function totalScore(results, numberOfPublishers, numberOfTimeUnits) {
    scores.push(parseInt(obj.score))
   })
   if (scores.length > 0) {
-    score = Math.round(
-      _.reduce(scores, function(sum, n) {return sum + n}) / expectedResults)
+    let sumScores =  _.reduce(scores, function(sum, n) {return sum + n})
+    if (scores.length > expectedResults) { expectedResults = scores.length }
+    score = Math.round(sumScores / expectedResults)
   }
   return score
 }
