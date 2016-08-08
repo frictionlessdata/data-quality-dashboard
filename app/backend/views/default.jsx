@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 
 class DefaultView extends Component {
   render() {
-    const { children, instance, embed } = this.props
+    const { children, instance, embed, showPricing } = this.props
     return (
       <html>
         <head>
@@ -45,7 +45,7 @@ class DefaultView extends Component {
                 <div id='navbar' className='collapse navbar-collapse'>
                   <ul className='nav navbar-nav'>
                     <li><a href='/about'>About</a></li>
-                    <li><a href='/pricing'>Pricing</a></li>
+                    <li className={showPricing ? 'visible' : 'hidden'}><a href='/pricing'>Pricing</a></li>
                     <li><a href='/faq'>FAQ</a></li>
                   </ul>
                 </div>

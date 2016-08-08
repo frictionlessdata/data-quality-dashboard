@@ -11,3 +11,6 @@ node_modules/*
 .publish/
 .sass-cache
 _site/*
+.vscode/*
+jsconfig.json
+npm-debug.log
