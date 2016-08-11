@@ -73,14 +73,12 @@ function publisherScore(publisher, results) {
 
 // return last publication date for a give publisher
 function lastFile(publisher, results) {
-  let publication = _.maxBy(results, function(obj) {
-    if (obj.publisher_id === publisher) {
-      // we're after the timestamp of the publisher
-      return  moment(obj.created_at, 'YYYY-MM-DD', true).utc().toDate()
-    } else {
-      // if this is not the publisher we want, we return empty string
-      return 0
-    }
+
+  let publisherFiles = _.filter(results, function(obj) {
+    return obj.publisher_id === publisher
+  })
+  let publication =  _.maxBy(publisherFiles, function(obj) {
+    return  moment(obj.created_at, 'YYYY-MM-DD', true).utc().toDate()
   })
 
   let lastFile = {period: 0, score: 0}
