@@ -9,6 +9,10 @@ import TableHead from './head'
 class TableComponent extends Component {
   render() {
     const {columns, rows, results, sort, title, parentRoute } = this.props
+    const rowKeys =  _.keys(_.castArray(rows)[0])
+    const existingColumns = _.filter(columns, function(obj) {
+      return (obj.mandatory || _.indexOf(rowKeys, obj.key) !== -1)
+    })
     return (
       <div className='container'>
         <div className='intro'>
@@ -19,7 +23,7 @@ class TableComponent extends Component {
         <Table className='table'>
           <thead>
             <tr>
-              {columns.map(function(column) {
+              {existingColumns.map(function(column) {
                 return <TableHead key={column.key} column={column}
                   sort={sort} />
               })}
@@ -27,7 +31,7 @@ class TableComponent extends Component {
           </thead>
           <tbody>
             {UIUtils.makeTableBody(rows, results,
-              {'route': title, 'sort': sort, 'columns': columns, 'parentRoute': parentRoute})}
+              {'route': title, 'sort': sort, 'columns': existingColumns, 'parentRoute': parentRoute})}
           </tbody>
         </Table>
       </div>
