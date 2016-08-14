@@ -267,6 +267,7 @@ function formatCell(key, value, obj, options) {
       }
       break
     case 'report':
+      if (!obj.schema) { obj.schema = ''}
       _cell = <td key="report"><a href={'http://goodtables.okfnlabs.org/reports?data_url=' + obj.data + '&format=' + obj.format + '&encoding=&schema_url=' + obj.schema}>{'Details'}</a></td>
       break
     case 'schema':
