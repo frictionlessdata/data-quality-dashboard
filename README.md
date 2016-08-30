@@ -35,7 +35,7 @@ The `app.backend` module renders the basic views (using React on the server) and
 
 The `app.ui` module is a React-Redux application for displaying the data to the user.
 
-The codebase is written in Node.js-style CommonJS, using ES6 syntax. The `app.ui` code is bundled by Browserify, and `app.backend` is transformed using Babel at runtime.
+The codebase is written in Node.js-style CommonJS, using ES6 syntax. The `app.ui` code is bundled by (Webpack)[http://webpack.github.io/], and `app.backend` is transformed using Babel at runtime.
 
 ### Remote deployment
 
