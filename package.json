@@ -12,7 +12,8 @@
     "prepublish": "npm run build",
     "postinstall": "npm run build",
     "review": "jscs lib test",
-    "fix": "jscs lib test --fix"
+    "fix": "jscs lib test --fix",
+    "watch": "webpack --watch --config webpack.config.production.js"
   },
   "keywords": [
     "open data",
