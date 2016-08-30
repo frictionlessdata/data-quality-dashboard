@@ -13,9 +13,6 @@ git clone https://github.com/okfn/data-quality-dashboard.git
 # Install the dependencies
 npm install
 
-# Build the sources and run the server
-npm run develop
-
 # Just build the sources
 npm run build
 
