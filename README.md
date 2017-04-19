@@ -2,7 +2,9 @@
 
 Data Quality Dashboard provides access to, and displays statistics on, a collection of published data. This collection of data is logically related: for example, data published by a single government department, or a group of departments.
 
-The Data Quality Dashboard has been developed in order to display data quality information on the 25K spend data published by the UK Government. The Dashboard can be used for any published collection of data by following a few key steps.
+The Data Quality Dashboard has been developed in order to display data quality information on the 25K spend data published by the UK Government on [data.gov.uk](https://data.gov.uk/). You can see and interact with this [instance of Data Quality Dashboard here](http://uk-25k.openspending.org/). It is powered by a static database generated with [Data Quality CLI](https://github.com/frictionlessdata/data-quality-cli) that you can find [here](https://github.com/okfn/data-quality-uk-25k-spend).
+
+The Dashboard can be used for any published collection of data by following a few key steps.
 
 ## Local development
 
