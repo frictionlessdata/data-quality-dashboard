@@ -29,7 +29,7 @@
     "babel-preset-react": "^6.1.2",
     "bluebird": "2.9.24",
     "bootstrap": "^3.3.5",
-    "bootstrap-sass": "3.3.4",
+    "bootstrap-sass": "3.4.1",
     "chart.js": "^1.0.2",
     "csv": "0.4.6",
     "express": "4.13.3",
